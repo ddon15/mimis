@@ -7,7 +7,7 @@
     $logRepository = new LogRepository();
     $userRepository = new UserRepository();
 ?>
-<div class="row placeholders manageUser pageContainer">
+<div class="row placeholders manageUser pageContainer hidden">
     <h1 class="pageTitle">User Management</h1>
     <ul class="nav nav-tabs">
         <li role="presentation" class="tab userList active"><a href="#">User list</a></li>
@@ -399,4 +399,4 @@
 </div>
 
  <script src="../../Public/js/app.js"></script>
- <script src="../../Public/js/app.dashboard.js"></script>
+ <!-- <script src="../../Public/js/app.dashboard.js"></script> -->

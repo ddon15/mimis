@@ -16,7 +16,7 @@
       <link href="../../public/lib/search.css" rel="stylesheet" />
       <link href="../../public/lib/mypopup.css" rel="stylesheet" />
   </head>
-  <body>
+  <body class = "admin">
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -47,16 +47,14 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <div class = "profile"><img class = "profilePic" src = "../../Public/images/no-image.jpg"></div>
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#" ><span class = "glyphicon glyphicon-dashboard"></span>Dashboard <span class="sr-only">(current)</span></a></li>
-            <li><a href="#"><span class = "glyphicon glyphicon-globe"></span> Notifications</a></li>
-            <li><a href="#" ><span class = "glyphicon glyphicon-envelope"></span> Reports</a></li>
+            <li class="navDashPage active"><a href="#" ><span class = "glyphicon glyphicon-dashboard"></span> Dashboard <span class="sr-only">(current)</span></a></li>
+            <li class = "navNoti"><a href="#"><span class = "glyphicon glyphicon-globe"></span> Notifications <span class="badge">14</span></a></li>
+            <li  class = "navReports"><a href="#" ><span class = "glyphicon glyphicon-envelope"></span> Reports</a></li>
             <li><a href="#" ><span class = "glyphicon glyphicon-log-in"></span> Logs</a></li>
           </ul>
           <ul class="nav nav-sidebar manageGroup">
             <li class = "navManageUser"><a href="" ><span class = "glyphicon glyphicon-user"></span> Manage User</a></li>
-            <li class = "navManageOT"><a href=""  ><span class = "glyphicon glyphicon-time"></span> Manage OT</a></li>
-            <li class = "navManageLeave"><a href="" ><span class = "glyphicon glyphicon-bed"></span> Manage Leave</a></li>
-            <li class = "navManageAttendance"><a href=""  ><span class = "glyphicon glyphicon-check"></span> Manage Attendance</a></li>
+            <li class = "navManageOT"><a href=""  ><span class = "glyphicon glyphicon-share-alt"></span> Manage Request</a></li>
             <li class = "navManageEmpReq"><a href=""  ><span class = "glyphicon glyphicon-th-list"></span> Manage Employee Requirements</a></li>
           </ul>
           <ul class="nav nav-sidebar">

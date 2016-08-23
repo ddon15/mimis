@@ -26,7 +26,17 @@ class RequestRepository
         $db             = new Database();
         $this->conn     = $db->getConnection();  
     }
-    
+    public function sendLeaveRequest($data){
+            $table = $req->table_names['work_leave'];
+            $query = "INSERT INTO ".$table." SET user_id=:uid, reason=:reason, start_leave=:start_leave, end_leave=:end_leave, leave_type_id=:leave_type_id";
+            $stmt = $this->conn->prepare($query);
+
+            $stmt->bindParam(":uid", $data[4]['value']);
+            $stmt->bindParam(":reason", $data[1]['value']);
+            $stmt->bindParam(":start_leave", $startDate);
+            $stmt->bindParam(":end_leave", $endDate);
+            $stmt->bindParam(":leave_type_id", $data);
+    }
     public function sendOvertimeRequest($data){
 
         if(is_array($data)) {
@@ -70,7 +80,7 @@ class RequestRepository
     public function getLeaveTypes(){
             $query = "SELECT * FROM " .$this->model->table_names['leave_type'];
             $stmt = $this->conn->prepare($query);
-             
+
             return ($stmt->execute()) ? $stmt : false ;
     }
 }

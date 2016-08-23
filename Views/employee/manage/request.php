@@ -73,8 +73,8 @@
                   <div id="leaveContainer" class="tab-pane fade">
                     <h4>Create Leave Schedule</h4>
                     <br>
-                    <div class = "otForm">
-                      <form class="form-ot" method="post" id="ot-form">
+                    <div class = "leaveForm">
+                      <form class="form-leave" method="post" id="leave-form">
                           <div class="auth error-message showError" hidden>
                           </div>
                           <div class="form-group">
@@ -94,7 +94,8 @@
                           </div>
                           <div class="form-group">
                               <label for="comment">Reason:</label>
-                              <textarea class="form-control" rows="5" id="comment"></textarea>
+                               <input type="text" class="form-control" name="user_id" value="<?php echo $_GET['id'];?>" style = "display:none"/>
+                              <textarea class="form-control" rows="5" id="comment" name = "reasonForLeave"></textarea>
                           </div>
                            <label for="starttime">Leave Start Date: &nbsp;&nbsp;&nbsp;Leave End Date</label>
                            <div class="form-group dates">

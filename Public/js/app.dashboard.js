@@ -102,6 +102,40 @@ function showModal(){
         $('.popup').show();
 }
 
+var _requestLeaveForm = $('form#leave-form');
+    _requestLeaveForm.on("submit", function(e){
+        e.preventDefault();
+            console.log("submit is working!");
+        var formDataArray = $(this).serializeArray();
+        console.log(formDataArray);
+        // $.ajax({
+        //             url: baseUriDomain+'/conf/doctrine/request.repositoryManager.php',
+        //             type: 'GET',
+        //             data: {requestData: formDataArray},
+        //             dataType: 'json',
+        //             success: function(response){
+        //                 console.log(response);
+        //             }
+        //         });
+});
+var _requestOTForm = $('form#ot-form');
+_requestOTForm.on("submit", function(e){
+    e.preventDefault();
+
+    var formDataArray = $(this).serializeArray();
+
+    $.ajax({
+                url: baseUriDomain+'/conf/doctrine/request.repositoryManager.php',
+                type: 'GET',
+                data: {requestData: formDataArray},
+                dataType: 'json',
+                success: function(response){
+                    console.log(response);
+                }
+            });
+});
+
+/// EMPLOYEE
 $('.navReq').on("click", function(e){
     e.preventDefault();
     processNavigationOnClick(this);
@@ -170,6 +204,7 @@ function requestTabMenu(element){
     }
 }
 function processNavigationOnClick(element) {
+    console.log(element);
     var clickElements = ["navEmpDashPage", "navReq", "navRequirements", "navNoti", "navReports", "navMyAccount", "navLogout", "navMessages"];
     var pageContainer = ["dashboardContainer", "requestContainer", "requirementsContainer", "notificationContainer", "reportContainer", "accountContainer", "logoutContainer", "messagesContainer"];
 
@@ -191,21 +226,74 @@ function processNavigationOnClick(element) {
     }
 }
 
-var _requestOTForm = $('form#ot-form');
-_requestOTForm.on("submit", function(e){
+//ADmin
+$('.navAdminDashPage').on("click", function(e){
     e.preventDefault();
+    processAdminNavigationOnClick(this);
+    });
+$('.navAdminRequirements').on("click", function(e){
+    e.preventDefault();
+    console.log(this);
+    processAdminNavigationOnClick(this);
+    });
+$('.navAdminReq').on("click", function(e){
+    e.preventDefault();
+     processAdminNavigationOnClick(this);
+    });
 
-    var formDataArray = $(this).serializeArray();
+$('.navAdminUsers').on("click", function(e){
+    e.preventDefault();
+    processAdminNavigationOnClick(this);
+    });
 
-    $.ajax({
-                url: baseUriDomain+'/conf/doctrine/request.repositoryManager.php',
-                type: 'GET',
-                data: {requestData: formDataArray},
-                dataType: 'json',
-                success: function(response){
-                    console.log(response);
-                }
-            });
+$('.navAdminNoti').on("click", function(e){
+    e.preventDefault();
+    processAdminNavigationOnClick(this);
+    });
 
+$('.navAdminReports').on("click", function(e){
+    e.preventDefault();
+    processAdminNavigationOnClick(this);
+    }); 
+$('.navAdminMyAccount').on("click", function(e){
+    e.preventDefault();
+    processAdminNavigationOnClick(this);
+    });
 
-});
+function processAdminNavigationOnClick(element) {
+    var clickElements = [
+                            "navAdminDashPage", 
+                            "navAdminRequirements", 
+                            "navAdminReq", 
+                            "navAdminUsers", 
+                            "navAdminNoti", 
+                            "navAdminReports", 
+                            "navAdminMyAccount"
+                        ];
+    var pageContainer = [
+                            "dashboardContainerAdmin", 
+                            "requirementsContainerAdmin", 
+                            "requestContainerAdmin", 
+                            "userContainerAdmin", 
+                            "notificationContainerAdmin", 
+                            "reportsContainerAdmin", 
+                            "myAccountContainerAdmin"
+                        ];
+
+    var _convertToArrayElement = $(element);
+    var getClassName = _convertToArrayElement[0]['className'];
+
+    var getIndex = clickElements.indexOf(getClassName);
+    // var checkIfExist = (getIndex != -1) ? true : false ;
+
+    for (i = 0; i < pageContainer.length; i++) {
+        if(i != getIndex){
+            $('.'+pageContainer[i]).hide();
+        }else $('.'+pageContainer[i]).show();
+    }
+    for (i = 0; i < clickElements.length; i++) { 
+         if(clickElements[i] != getClassName){
+               $('.'+clickElements[i]).removeClass("active");  
+         }else $('.'+clickElements[i]).addClass("active");  
+    }
+}

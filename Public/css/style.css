@@ -30,11 +30,14 @@ body{ background: none; }
 	margin-top: 0;
 	color: rgb(176, 190, 197);
 }
-.mainContainer.employee .dashboardStatistics .main > div:last-child > .name {
+.mainContainer.employee .dashboardStatistics .main > div:last-child > .name,
+.mainContainer.admin .dashboardStatistics .main > div:last-child > .name {
     margin-bottom: 77px;
 }
 .mainContainer.employee .dashboardStatistics .main > div:last-child > .count > span,
-.mainContainer.employee .dashboardStatistics .main > div:last-child > .name > span {
+.mainContainer.employee .dashboardStatistics .main > div:last-child > .name > span,
+.mainContainer.admin .dashboardStatistics .main > div:last-child > .count > span,
+.mainContainer.admin .dashboardStatistics .main > div:last-child > .name > span {
     float: left;
     width: 45%;
     text-align: center;
@@ -232,14 +235,16 @@ a.label.label-primary.createNewUser {
 }
 
 /* employee dashboard */
-    body.empDashboard .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main {
+    body.empDashboard .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main,
+    body.adminDashboard .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main {
     background: #fff;
         padding: 0;
 }
   .dashboardContainer .header {
     background: none;
 }
-.mainContainer.employee .dashboardStatistics .top, .mainContainer.employee .requestStatistics .top {
+.mainContainer.employee .dashboardStatistics .top, .mainContainer.employee .requestStatistics .top,
+.mainContainer.admin .dashboardStatistics .top, .mainContainer.admin .requestStatistics .top {
 
             border-top: 1px solid gainsboro;
     background: rgb(239, 243, 245);
@@ -247,22 +252,27 @@ a.label.label-primary.createNewUser {
          padding-bottom: 10px;
 
 }
-.mainContainer.employee .requestStatistics .top ul.menu {
+.mainContainer.employee .requestStatistics .top ul.menu,
+.mainContainer.admin .requestStatistics .top ul.menu {
     position: relative;
     top: 10px;
 }
-.mainContainer.employee .requestStatistics .main {
+.mainContainer.employee .requestStatistics .main,
+.mainContainer.admin .requestStatistics .main {
     padding-top: 0;
 }
-.mainContainer.employee .headeremployee {
+.mainContainer.employee .headeremployee,
+.mainContainer.employee .headeradmin {
     padding: 20px 0;
 }
-.mainContainer.employee .dashboardStatistics, .mainContainer.employee .requestStatistics
+.mainContainer.employee .dashboardStatistics, .mainContainer.employee .requestStatistics,
+.mainContainer.admin .dashboardStatistics, .mainContainer.admin .requestStatistics
  {
     /*background: rgb(239, 243, 245);*/
         height: 220px;
 }
-.mainContainer.employee .dashboardStatistics .main > div {
+.mainContainer.employee .dashboardStatistics .main > div ,
+.mainContainer.admin .dashboardStatistics .main > div {
      float: left;
     width: 23%;
     height: 125px;
@@ -271,14 +281,17 @@ a.label.label-primary.createNewUser {
         padding: 5px 10px;
             border-radius: 2px;
 } 
-.mainContainer.employee .dashboardStatistics .main > div .name {
+.mainContainer.employee .dashboardStatistics .main > div .name,
+.mainContainer.admin .dashboardStatistics .main > div .name {
     line-height: 2;
 }
-.mainContainer.employee .dashboardStatistics .main > div .count {
+.mainContainer.employee .dashboardStatistics .main > div .count ,
+.mainContainer.admin .dashboardStatistics .main > div .count {
     font-size: 35px;
     font-weight: 600;
 }
-.mainContainer.employee .dashboardStatistics .main > div .footer {
+.mainContainer.employee .dashboardStatistics .main > div .footer,
+.mainContainer.admin .dashboardStatistics .main > div .footer {
     background: #000;
     opacity: 0.3;
     color: #fff;
@@ -290,30 +303,36 @@ a.label.label-primary.createNewUser {
     text-align: center;
     border-radius: 0 0 2px 2px;
 }
-.mainContainer.employee .dashboardStatistics .main > div .footer {
+.mainContainer.employee .dashboardStatistics .main > div .footer,
+.mainContainer.admin .dashboardStatistics .main > div .footer {
     background: #000;
     opacity: 0.3;
 }
-.mainContainer.employee .dashboardStatistics .main > div:first-child {
+.mainContainer.employee .dashboardStatistics .main > div:first-child,
+.mainContainer.admin .dashboardStatistics .main > div:first-child {
         background: #5fb4ef url('../../Public/images/organization.png') no-repeat 170px 9px;
 }
-.mainContainer.employee .dashboardStatistics .main > div:nth-child(2) {
+.mainContainer.employee .dashboardStatistics .main > div:nth-child(2),
+.mainContainer.admin .dashboardStatistics .main > div:nth-child(2) {
         background: #ff851b url('../../Public/images/regEmployees.png') no-repeat 145px 7px;
 }
-.mainContainer.employee .dashboardStatistics .main > div:nth-child(3) {
+.mainContainer.employee .dashboardStatistics .main > div:nth-child(3),
+.mainContainer.admin .dashboardStatistics .main > div:nth-child(3) {
     background: #A1C435 url('../../Public/images/countUserTypes.png') no-repeat 160px 21px;
 }
-.mainContainer.employee .dashboardStatistics .main > div:last-child {
+.mainContainer.employee .dashboardStatistics .main > div:last-child,
+.mainContainer.admin .dashboardStatistics .main > div:last-child {
     background: #ab7d44  url('../../Public/images/inactiveUser.png') no-repeat 145px 16px;
 }
-.mainContainer.employee .dashboardStatistics .main, .mainContainer.employee .requestStatistics .main {
+.mainContainer.employee .dashboardStatistics .main, .mainContainer.employee .requestStatistics .main,
+.mainContainer.admin .dashboardStatistics .main, .mainContainer.admin .requestStatistics .main {
     padding: 10px;
         background: #fff;
 }
 .mainContainer.employee .requestStatistics .main {
     padding-bottom: 100px;
 }
-.mainContainer.employee .headeremployee {
+.mainContainer.employee .headeremployee, .mainContainer.admin .headeradmin {
     padding-left: 20px;
     padding-bottom: 5px;
     padding-top: 7px;

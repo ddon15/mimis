@@ -19,7 +19,7 @@
 
       <link rel="icon" href="../../Public/images/logo.png">
   </head>
-  <body class = "empDashboard">
+  <body class = "adminDashboard">
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -52,24 +52,24 @@
                      <img class = "profilePic" src = "../../Public/images/no-image.jpg">
                 </div>
                   <ul class="nav nav-sidebar">
-                    <li class="navEmpDashPage active"><a href="#"><span class = "glyphicon glyphicon-tasks"></span> Admin Dashboard<span class="sr-only">(current)</span></a></li>
+                    <li class="navAdminDashPage active"><a href="#"><span class = "glyphicon glyphicon-tasks"></span> Admin Dashboard<span class="sr-only">(current)</span></a></li>
                    
-                    <li class = "navRequirements"><a href="#"><span class = "glyphicon glyphicon-list"></span> Manage Requirements</a></li>
-                    <li class = "navReq"><a href="#"><span class = "glyphicon glyphicon-list"></span> Manage Requests</a></li>
-                     <li class = "navReq"><a href="#"><span class = "glyphicon glyphicon-list"></span> Manage Users</a></li>
-                     <li class = "navNoti"><a href="#"><span class = "glyphicon glyphicon-list"></span> Manage Notifications</a></li>
-                     <li class = "navReports"><a href="" ><span class = "glyphicon glyphicon-list-alt"></span> Monitor Reports</a></li>
+                    <li class = "navAdminRequirements"><a href="#"><span class = "glyphicon glyphicon-list"></span> Manage Requirements</a></li>
+                    <li class = "navAdminReq"><a href="#"><span class = "glyphicon glyphicon-list"></span> Manage Requests</a></li>
+                     <li class = "navAdminUsers"><a href="#"><span class = "glyphicon glyphicon-list"></span> Manage Users</a></li>
+                     <li class = "navAdminNoti"><a href="#"><span class = "glyphicon glyphicon-list"></span> Manage Notifications</a></li>
+                     <li class = "navAdminReports"><a href="" ><span class = "glyphicon glyphicon-list-alt"></span> Monitor Reports</a></li>
                   </ul>
                   <ul class="nav nav-sidebar manageGroup">
                     
-                    <li class = "navMyAccount"><a href="" ><span class = "glyphicon glyphicon-user"></span> My Account</a></li>
-                    <li class = "navLogout"><a href="" ><span class = "glyphicon glyphicon-off"></span> Logout</a></li>
+                    <li class = "navAdminMyAccount"><a href="" ><span class = "glyphicon glyphicon-user"></span> My Account</a></li>
+                    <li class = "navAdminLogout"><a href="" ><span class = "glyphicon glyphicon-off"></span> Logout</a></li>
                   </ul>
             </div>  
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <div class="mainContainer employee">
-                    <div class="dashboardContainer">
-                        <div class="headeremployee">
+                <div class="mainContainer admin">
+                    <div class="dashboardContainerAdmin">
+                        <div class="headeradmin">
                             <div>
                                  <?php
                                       $id = $userRepository->findUserById($_GET['id']);
@@ -163,13 +163,13 @@
                         </div>
                     </div>
                      <?php
-                          // include_once "manage/report.php";
-                          // include_once "monitor/logs.php";
-
-                          // include_once "manage/notifications.php";
-                          // include_once "manage/request.php";
-                          // include_once "manage/requirements.php";
-                          // include_once "manage/account.php";
+                          include_once "manage/report.php";
+                          include_once "monitor/logs.php";
+                          include_once "manage/notification.php";
+                          include_once "manage/request.php";
+                          include_once "manage/requirements.php";
+                          include_once "manage/account.php";
+                          include_once "manage/user.php";
                       ?>
                 </div>
             </div>
