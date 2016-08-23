@@ -1,15 +1,16 @@
 <?php 
     require_once dirname(__FILE__).'\../../../Repository/RequestRepository.php';
-    include_once dirname(__FILE__).'\../../../Repository/LogRepository.php';
+    // include_once dirname(__FILE__).'\../../../Repository/LogRepository.php';
     include_once dirname(__FILE__).'\../../../conf/connection.php';
 
     $db = new Database();
     $conn = $db->getConnection();  
     $requestRepository = new RequestRepository();
-    $logRepository = new LogRepository();
+    // $logRepository = new LogRepository();
     $userRepository = new UserRepository();
 
 ?>
+ <link href="../../Public/lib/mypopup.css" rel="stylesheet" />
 <div class="userContainerAdmin" hidden>
     <div class="headeradmin">
         <div>
@@ -20,14 +21,14 @@
                     }
                ?> 
              <div class="bread-crumb">
-               Dashboard > Request > <span class="breadCrumd">User Management</span>
+               Dashboard > Request > <span class="breadCrumd">Request List</span>
              </div>
         </div>
     </div>
     <div class="requestStatistics">
         <div class="top">
-            <h1>User Management</h1>
-             <ul class="nav nav-tabs">
+            <h1 class="pageTitle">User Management</h1>
+            <ul class="nav nav-tabs menu">
                 <li role="presentation" class="tab userList active"><a href="#">User list</a></li>
                 <li role="presentation" class = "tab userLogs"><a href="#">User logs</a></li>
                 <li role="presentation" class = ""><a href="#">Messages</a></li>
@@ -416,6 +417,7 @@
                 </form>
     </div>
             </div>
-        </div>     
-    </div>
-</div>      
+      </div>     
+</div>
+
+ <script src="../../Public/js/app.js"></script>

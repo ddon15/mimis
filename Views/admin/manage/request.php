@@ -26,7 +26,7 @@
     </div>
     <div class="requestStatistics">
         <div class="top">
-            <h1>Request</h1>
+            <h1>Request Management</h1>
             <ul class="nav nav-tabs menu">
                 <li class="overTimeTabMenu active"><a data-toggle="tab"  href="#">List of Request</a></li>
                 <li class = "leaveTabMenu"><a data-toggle="tab" href="#">Create Message</a></li>
@@ -99,4 +99,3 @@
                 </div>
             </div>     
     </div>
-</div>      

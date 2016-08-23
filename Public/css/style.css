@@ -13,6 +13,9 @@ body{ background: none; }
 	margin-bottom: 5px;
 	border: 2px solid crimson;
 }
+body.adminDashboard {
+    padding-top: 31px;
+}
 .header {
 	align-items: center;
 	background: rgb(52, 73, 94);
@@ -213,16 +216,13 @@ a.glyphicon.glyphicon-level-up.back span {
 }div#personalDetails {
 	display: none;
 }
-h1.pageTitle {
+/*h1.pageTitle {
 	text-align: left;
 	margin-bottom: 50px;
-}
+}*/
 a.label.label-primary.createNewUser {
 	padding: 7px;
 		line-height: 5;
-}
-.row.placeholders.manageUser.pageContainer {
-	text-align: left;
 }
 .userLogsContainer > .media {
 	margin-top: 20px;
