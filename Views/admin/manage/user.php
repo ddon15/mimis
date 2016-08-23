@@ -1,20 +1,40 @@
 <?php 
-    include_once '../../Repository/UserRepository.php';
-    include_once '../../Repository/LogRepository.php';
-    include_once '../../conf/connection.php';
+    require_once dirname(__FILE__).'\../../../Repository/RequestRepository.php';
+    include_once dirname(__FILE__).'\../../../Repository/LogRepository.php';
+    include_once dirname(__FILE__).'\../../../conf/connection.php';
+
     $db = new Database();
     $conn = $db->getConnection();  
+    $requestRepository = new RequestRepository();
     $logRepository = new LogRepository();
     $userRepository = new UserRepository();
+
 ?>
-<div class="row placeholders manageUser pageContainer hidden">
-    <h1 class="pageTitle">User Management</h1>
-    <ul class="nav nav-tabs">
-        <li role="presentation" class="tab userList active"><a href="#">User list</a></li>
-        <li role="presentation" class = "tab userLogs"><a href="#">User logs</a></li>
-        <li role="presentation" class = ""><a href="#">Messages</a></li>
-    </ul>
-    <!-- POP DIV -->
+<div class="userContainerAdmin" hidden>
+    <div class="headeradmin">
+        <div>
+              <?php
+                    $id = $userRepository->findUserById($_GET['id']);
+                    foreach($id as $row){
+                        echo "<h4>Welcome ". $row['firstname']." ".$row['lastname']."!</h4>";
+                    }
+               ?> 
+             <div class="bread-crumb">
+               Dashboard > Request > <span class="breadCrumd">User Management</span>
+             </div>
+        </div>
+    </div>
+    <div class="requestStatistics">
+        <div class="top">
+            <h1>User Management</h1>
+             <ul class="nav nav-tabs">
+                <li role="presentation" class="tab userList active"><a href="#">User list</a></li>
+                <li role="presentation" class = "tab userLogs"><a href="#">User logs</a></li>
+                <li role="presentation" class = ""><a href="#">Messages</a></li>
+            </ul>
+        </div>
+            <div class="main">
+                    <!-- POP DIV -->
     <div id="myPopUpDiv" class = "fade updatePopUpDiv" style = "display:none"></div>
     <div class="popup updateForm">
         <span class="glyphicon glyphicon-remove"></span>
@@ -395,8 +415,7 @@
                     </div> 
                 </form>
     </div>
-
-</div>
-
- <script src="../../Public/js/app.js"></script>
- <!-- <script src="../../Public/js/app.dashboard.js"></script> -->
+            </div>
+        </div>     
+    </div>
+</div>      
