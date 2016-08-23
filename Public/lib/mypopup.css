@@ -1,0 +1,56 @@
+ div.fade{opacity: 0.6;}
+    div#myPopUpDiv {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1050;
+        background: #000;
+        display:none;
+    }
+    .popup{
+      background: #fff;
+        display: none;
+        position: absolute;
+        width: 55%;
+        left: 135px;
+        height: 556px;
+        overflow: scroll;
+        margin: 10px;
+        z-index: 99999;
+        top: 20px;
+        border-radius: 4px;
+        -webkit-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.43);
+        -moz-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.43);
+        box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.43);
+    }
+    .popup span.glyphicon.glyphicon-remove {
+         float: right;
+    padding: 10px;
+    color: #fff;
+    background: #ca4f4f;
+    line-height: 2.4;
+    cursor: pointer;
+    }
+    .popup .title {
+        padding: 10px;
+        font-size: 25px;
+        font-weight: 400;
+        border-bottom: 1px solid #eae3e3;
+    }
+    .popup .content {
+        padding: 30px;
+        padding-top: 20px;
+    }
+    .popup .footer {
+        padding: 15px;
+        text-align: center;
+    }
+    .popup .footer button {
+        width: 100px;
+    }
+    .popup .footer button span:last-child {
+        padding-left: 5px;
+    }
+    .popup.updateForm .footer{display:none;}

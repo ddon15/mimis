@@ -1,0 +1,420 @@
+html {
+	background: rgb(236, 239, 241);
+}
+body{ background: none; }
+.error-message.showError {
+	background: indianred;
+	color: #fff;
+	padding: 5px;
+	padding-left: 15px;
+	border-radius: 3px;
+	font-weight: 100;
+	font-family: serif;
+	margin-bottom: 5px;
+	border: 2px solid crimson;
+}
+.header {
+	align-items: center;
+	background: rgb(52, 73, 94);
+	color: white;
+	content-sizing: padding-box;
+	display: flex;
+	min-height: 56px;
+}
+.header .content h1, a.navbar-brand h1 {
+	-webkit-margin-end: 0;
+	-webkit-margin-start: 24px;
+		font-size: 80%;
+	font-weight: normal;
+	margin-bottom: 0;
+	margin-top: 0;
+	color: rgb(176, 190, 197);
+}
+.mainContainer.employee .dashboardStatistics .main > div:last-child > .name {
+    margin-bottom: 77px;
+}
+.mainContainer.employee .dashboardStatistics .main > div:last-child > .count > span,
+.mainContainer.employee .dashboardStatistics .main > div:last-child > .name > span {
+    float: left;
+    width: 45%;
+    text-align: center;
+}
+.header .content h1 span, a.navbar-brand h1 span {
+	font-weight: 800;
+}
+.register div#mainContainer, .login div#mainContainer {
+	width: 960px;
+	margin: 0 auto;
+}
+.login div#mainContainer{
+	width:600px;
+}
+div#mainContainer > div {
+		/* display: inline-block; */
+	/* width: 49%; */
+}
+/*div#mainContainer > div.logo {
+	line-height: 33;
+}*/
+
+div#mainContainer > div.loginForm {
+	background: #fff;
+		padding: 20px 65px;  /*  position: relative;
+		top: 100px;*/
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .05), 0 1px 4px 0 rgba(0, 0, 0, .08),
+			  0 3px 1px -2px rgba(0, 0, 0, .2);
+}
+button#btn-login, button#btn-register {
+	width: 100%;
+	background: rgb(52, 73, 94);
+	color: #fff;
+}
+.form-group.submit a {
+	text-decoration: none;
+	line-height: 3;
+	color: rgb(52, 73, 94);
+}
+.form-group .form-control, .form-group button {
+	padding: 15px;
+}
+div#mainContainer > div.loginForm h1{
+		margin: 0;
+	font-weight: 600;
+	font-family: fantasy;
+	font-size: 35px;
+		border-bottom: 1px solid #222;
+} 
+div#mainContainer > div.loginForm p  {    margin-top: 35px;}  
+.form-group.submit {
+	padding-top: 15px;
+}
+div#footer .content {
+	text-align: center;
+	line-height: 15;
+	color: gray;
+	font-family: sans-serif;
+}
+
+/*
+	REgister
+*/
+#mainContainer .logo img {
+	width: 200px;
+}
+#mainContainer .logo {
+	   /* position: relative; */
+	/* top: -396px; */
+	padding: 25px;
+	text-align: center;
+}
+.modal-dialog.modal-lg .modal-content {
+	width: 520px;
+	margin: 0 auto;
+	text-align: center;
+	padding: 20px;
+	padding-top: 60px;
+}
+label.adminPasswordLabel {
+	   font-size: 15px;
+	margin-bottom: 20px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	color: #fff;
+	padding: 15px;
+	background: rgb(52, 73, 94);
+	border-radius: 3px 3px 0 0;
+}
+div#modalAdminPassword {
+	top: 80px;
+}
+input.form-control.adminPassword {
+	padding: 20px;
+}
+input.form-control.adminPassword, button#btn-adminPassword {
+	width: 100%;
+}
+.adminPasswordError {
+	display:none;
+	text-align: left;
+	padding: 10px;
+	background: lightcoral;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	font-size: 15px;
+	color: #2f2f2f;
+}
+.profile img.profilePic {
+	height: 105px;
+	margin-bottom: 20px;
+}
+.styled-select {
+   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+   height: 29px;
+   overflow: hidden;
+}
+
+.styled-select select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px; /* If you add too much padding here, the options won't show in IE */
+   width: 105%;
+}
+
+.styled-select.slate {
+   background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;
+   height: 34px;
+}
+
+.styled-select.slate select {
+   border: 1px solid #ccc;
+   font-size: 16px;
+   height: 34px;
+}
+span.forEmploymentDetails, span.forPersonalDetails {
+	font-family: sans-serif;
+	 font-weight: 600;  
+		 font-size: 15px;
+}span.forEmploymentDetails:hover {
+	color: rgb(52, 73, 94);
+   
+}
+.login div#mainContainer > div.loginForm p a {
+	position: relative;
+	/* left: 5px; */
+	left: -50px;
+	color: rgb(52, 73, 94);
+	font-weight: 600;
+	padding: 7px 49px;
+	border-radius: 3px;
+	/* color: rgb(142, 190, 239); */
+	/* background: rgb(52, 73, 94); */
+}
+.register div#mainContainer > div.loginForm p a {
+	position: relative;
+	top: -55px;
+	left: -65px;
+	padding: 12px 25px;
+}
+.glyphicon.glyphicon-object-align-horizontal.employment, .glyphicon.glyphicon-user.personal {
+	width: 100%;
+}
+.fields, #personalDetails {
+	font-family: sans-serif;
+}
+a.glyphicon.glyphicon-level-up.back span {
+	font-family: fantasy;
+}div#personalDetails {
+	display: none;
+}
+h1.pageTitle {
+	text-align: left;
+	margin-bottom: 50px;
+}
+a.label.label-primary.createNewUser {
+	padding: 7px;
+		line-height: 5;
+}
+.row.placeholders.manageUser.pageContainer {
+	text-align: left;
+}
+.userLogsContainer > .media {
+	margin-top: 20px;
+	border-bottom: 1px solid #fff;
+}
+.userLogsContainer p.timelogs {
+	color: gray;
+	font-style: italic;
+	font-size: 12px;
+}
+
+/* employee dashboard */
+    body.empDashboard .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main {
+    background: #fff;
+        padding: 0;
+}
+  .dashboardContainer .header {
+    background: none;
+}
+.mainContainer.employee .dashboardStatistics .top, .mainContainer.employee .requestStatistics .top {
+
+            border-top: 1px solid gainsboro;
+    background: rgb(239, 243, 245);
+     padding-left: 20px;
+         padding-bottom: 10px;
+
+}
+.mainContainer.employee .requestStatistics .top ul.menu {
+    position: relative;
+    top: 10px;
+}
+.mainContainer.employee .requestStatistics .main {
+    padding-top: 0;
+}
+.mainContainer.employee .headeremployee {
+    padding: 20px 0;
+}
+.mainContainer.employee .dashboardStatistics, .mainContainer.employee .requestStatistics
+ {
+    /*background: rgb(239, 243, 245);*/
+        height: 220px;
+}
+.mainContainer.employee .dashboardStatistics .main > div {
+     float: left;
+    width: 23%;
+    height: 125px;
+    margin-right: 20px;
+    color: #fff;
+        padding: 5px 10px;
+            border-radius: 2px;
+} 
+.mainContainer.employee .dashboardStatistics .main > div .name {
+    line-height: 2;
+}
+.mainContainer.employee .dashboardStatistics .main > div .count {
+    font-size: 35px;
+    font-weight: 600;
+}
+.mainContainer.employee .dashboardStatistics .main > div .footer {
+    background: #000;
+    opacity: 0.3;
+    color: #fff;
+    position: relative;
+    padding: 3px;
+    bottom: -17px;
+    width: 108%;
+    left: -10px;
+    text-align: center;
+    border-radius: 0 0 2px 2px;
+}
+.mainContainer.employee .dashboardStatistics .main > div .footer {
+    background: #000;
+    opacity: 0.3;
+}
+.mainContainer.employee .dashboardStatistics .main > div:first-child {
+        background: #5fb4ef url('../../Public/images/organization.png') no-repeat 170px 9px;
+}
+.mainContainer.employee .dashboardStatistics .main > div:nth-child(2) {
+        background: #ff851b url('../../Public/images/regEmployees.png') no-repeat 145px 7px;
+}
+.mainContainer.employee .dashboardStatistics .main > div:nth-child(3) {
+    background: #A1C435 url('../../Public/images/countUserTypes.png') no-repeat 160px 21px;
+}
+.mainContainer.employee .dashboardStatistics .main > div:last-child {
+    background: #ab7d44  url('../../Public/images/inactiveUser.png') no-repeat 145px 16px;
+}
+.mainContainer.employee .dashboardStatistics .main, .mainContainer.employee .requestStatistics .main {
+    padding: 10px;
+        background: #fff;
+}
+.mainContainer.employee .requestStatistics .main {
+    padding-bottom: 100px;
+}
+.mainContainer.employee .headeremployee {
+    padding-left: 20px;
+    padding-bottom: 5px;
+    padding-top: 7px;
+}
+.mainBottom {
+    background: #fff;
+    margin-top: 125px;
+        padding: 10px;
+}
+.mainBottom > div {
+    display: inline-block;
+    width: 47%;
+    margin-right: 25px;
+}
+.mainBottom .headerAct {
+    background-color: rgb(52, 73, 94) !important;
+    color: #fff;
+}	
+.mainBottom ul li{
+	color: #4a3d3d;
+	border: 1px solid #f3f3f3;
+    font-size: 13px;
+}
+.mainBottom ul li span {
+    float: right;
+    color: gray;
+    font-size: 9px;
+    font-style: italic;
+}
+.mainBottom li:nth-child(odd) {
+    background: #f3f3f3;
+}
+.mainBottom .recentActivities {
+    overflow: scroll;
+    height: 273px;
+    overflow-x: hidden;
+}
+#overTimeContainer span#date_time span.time {
+	background: rgb(52, 73, 94);
+    color: #fff;
+    padding: 7px;
+    border-radius: 0 5px 5px 0;
+    position: relative;
+    left: 5px;
+}
+#overTimeContainer span#date_time {
+    color: rgb(52, 73, 94);
+    position: relative;
+    padding: 6px 0;
+    left: 80px;
+    bottom: 28px;
+    border-bottom: 1px solid rgb(52, 73, 94);
+}
+div#overTimeContainer input#estimatedTime, 
+div#overTimeContainer input#startTime, 
+div#overTimeContainer input#endTime {
+    width: 70px;
+}
+div#overTimeContainer input#otdate {
+    width: 170px;
+}
+div#overTimeContainer input#startTime, div#overTimeContainer input#endTime,
+div#overTimeContainer input#otdate {
+    float: left;
+    /*margin-right: 15px;*/
+    margin-right: 105px;
+}
+div#overTimeContainer span {
+    position: absolute;
+    left: 125px;
+}
+.requestContainer form#ot-form .form-group.submit {
+    padding-top: 45px;
+}
+.requestContainer form#ot-form .form-group.submit button#btn-ot,
+.requestContainer button#btn-leave {
+    background: rgb(52, 73, 94);
+    padding: 10px;
+    color: #fff;
+    width: 155px;
+}
+body.admin li.notifications{
+	border-right:3px solid #f13d3d;
+}
+body.admin li.notifications span.badge {
+    background: #f13d3d;
+    float: right;
+    position: relative;
+    left: 15px;
+    font-size: 10px;
+}
+.glyphicon-globe:before, .glyphicon-dashboard:before, .glyphicon-envelope:before, .glyphicon-log-in:before,
+.glyphicon-user:before, .glyphicon-time:before, .glyphicon-bed:before, .glyphicon-check:before,
+.glyphicon-off:before, .glyphicon-th-list:before, .glyphicon-list:before, .glyphicon-list-alt:before, .glyphicon-tasks:before {
+    font-size: 20px;
+}
+div#leaveContainer .form-group.dates > input {
+    float: left;
+    width: 120px;
+    margin-right: 13px;
+}
+div#leaveContainer select#leave {
+    width: 150px;
+}
