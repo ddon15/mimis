@@ -13,8 +13,8 @@ class Request{
 
     public function __construct() {
         $this->table_names = array(
-                'overtime' => 'overtime',
-                'leave' => 'work_leave',
+                'overtime'   => 'overtime',
+                'leave'      => 'work_leave',
                 'leave_type' => 'leave_type',
                 'attendance' => 'attendance'
             );

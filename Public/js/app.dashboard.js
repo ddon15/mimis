@@ -179,7 +179,7 @@ $('.excuseToAbsentTabMenu').on("click", function(e){
     });
 function requestTabMenu(element){
     var menuClass = ["overTimeTabMenu", "leaveTabMenu", "excuseToAbsentTabMenu" ];
-    var tabMenuPages = ["overTimeContainer", "leaveContainer", "excuseToAbsentContainer"];
+    var tabMenuPages = ["overTimeContainer", "leaveContainer", "responseContainer"];
 
     var _convertToArrayElement = $(element);
     var getClassName = _convertToArrayElement[0]['className'];
@@ -204,7 +204,6 @@ function requestTabMenu(element){
     }
 }
 function processNavigationOnClick(element) {
-    console.log(element);
     var clickElements = ["navEmpDashPage", "navReq", "navRequirements", "navNoti", "navReports", "navMyAccount", "navLogout", "navMessages"];
     var pageContainer = ["dashboardContainer", "requestContainer", "requirementsContainer", "notificationContainer", "reportContainer", "accountContainer", "logoutContainer", "messagesContainer"];
 
@@ -233,7 +232,6 @@ $('.navAdminDashPage').on("click", function(e){
     });
 $('.navAdminRequirements').on("click", function(e){
     e.preventDefault();
-    console.log(this);
     processAdminNavigationOnClick(this);
     });
 $('.navAdminReq').on("click", function(e){

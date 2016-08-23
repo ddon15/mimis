@@ -112,9 +112,35 @@
                     </div>
                   </div> 
                   </div>
-                  <div id="excuseToAbsentContainer" class="tab-pane fade">
-                    <h3>List of response</h3>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                  <div id="responseContainer" class="tab-pane fade">
+                     <br>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Request Type</th>
+                                    <th>Responsed by </th>
+                                    <th>Responsed Date</th>
+                                    <th style = 'text-align:right'>action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                             <tr>
+                                    <td>3</td>
+                                    <td>Over Time</td>
+                                    <td>Admin </td>
+                                    <td>23/5/44</td>
+                                    <td style = 'text-align:right'>Remove</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Leave</td>
+                                    <td>Rose</td>
+                                    <td>23/5/44</td>
+                                    <td style = 'text-align:right'>Removed</td>
+                                </tr>
+                            </tbody>
+                        </table>
                   </div>
                 </div>
             </div>     

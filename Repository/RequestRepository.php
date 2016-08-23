@@ -27,7 +27,7 @@ class RequestRepository
         $this->conn     = $db->getConnection();  
     }
     public function sendLeaveRequest($data){
-            $table = $req->table_names['work_leave'];
+            $table = $this->model->table_names['leave'];
             $query = "INSERT INTO ".$table." SET user_id=:uid, reason=:reason, start_leave=:start_leave, end_leave=:end_leave, leave_type_id=:leave_type_id";
             $stmt = $this->conn->prepare($query);
 

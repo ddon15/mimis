@@ -19,7 +19,7 @@
 
       <link rel="icon" href="../../Public/images/logo.png">
   </head>
-  <body class = "adminDashboard">
+  <body class = "adminDashboard">=
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
