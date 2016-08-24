@@ -92,10 +92,6 @@
                     </div>
                   </div> 
                   </div>
-                  <div id="excuseToAbsentContainer" class="tab-pane fade">
-                    <h3>List of response</h3>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-                  </div>
                 </div>
             </div>     
     </div>

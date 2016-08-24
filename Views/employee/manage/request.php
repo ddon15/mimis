@@ -65,7 +65,7 @@
                               <input type="text" name="user_id" value = "<?php echo $_GET['id']; ?>" hidden/>
                             <button type="submit" class="btn btn-default btn-ot" name="btn-ot" id="btn-ot">
                             <span class="glyphicon glyphicon-log-in"></span> &nbsp; Send Request
-                            </button>
+                            </button><img class = "ajaxLoader" src="../../../Public/images/loader.gif"/>
                           </div>  
                         </form>
                     </div>

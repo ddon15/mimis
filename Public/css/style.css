@@ -1,6 +1,9 @@
 html {
 	background: rgb(236, 239, 241);
 }
+body.login .header{
+	display: none;
+}
 body{ background: none; }
 .error-message.showError {
 	background: indianred;
@@ -436,4 +439,10 @@ div#leaveContainer .form-group.dates > input {
 }
 div#leaveContainer select#leave {
     width: 150px;
+}
+img.ajaxLoader {
+    height: 30px;
+    position: relative;
+    left: 10px;
+    display: none;
 }

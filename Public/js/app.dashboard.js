@@ -121,18 +121,21 @@ var _requestLeaveForm = $('form#leave-form');
 var _requestOTForm = $('form#ot-form');
 _requestOTForm.on("submit", function(e){
     e.preventDefault();
-
+    var doctrineConfigurationPath = '/conf/doctrine/';
+    var _loader = $(this).find('.ajaxLoader');
+        _loader.show();
     var formDataArray = $(this).serializeArray();
 
     $.ajax({
-                url: baseUriDomain+'/conf/doctrine/request.repositoryManager.php',
-                type: 'GET',
-                data: {requestData: formDataArray},
-                dataType: 'json',
-                success: function(response){
-                    console.log(response);
-                }
-            });
+        url: baseUriDomain+doctrineConfigurationPath+'request.repositoryManager.php',
+        type: 'GET',
+        data: {requestData: formDataArray},
+        dataType: 'json',
+        success: function(response){
+            console.log(response);
+            _loader.hide();
+        }
+    });
 });
 
 /// EMPLOYEE
