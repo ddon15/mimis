@@ -7,5 +7,9 @@ $requestRepository = new RequestRepository();
 $request = (isset($_GET['requestData']) && !is_null($_GET['requestData'])) ? $_GET['requestData'] : '' ;
 
 $sendOTReq = $requestRepository->sendOvertimeRequest($request);
-// $sendLeaveReq = $requestRepository->sendLeaveRequest($request);
-var_dump($sendOTReq);
+$returnOTResponse = array('request_ot' => $sendOTReq);
+
+$sendLeaveReq = $requestRepository->sendLeaveRequest($request);
+$returnLeaveResponse = array('request_leave' => $sendLeaveReq);
+
+echo json_encode(array($returnOTResponse, $returnLeaveResponse));

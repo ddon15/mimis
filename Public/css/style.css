@@ -446,3 +446,31 @@ img.ajaxLoader {
     left: 10px;
     display: none;
 }
+li.navAdminNoti span.notification {
+    position: relative;
+    left: 20px;
+}
+li.navAdminNoti span.badge {
+    padding: 4px 10px;
+    background-color: #ff3c38;
+}
+
+a.approved {
+    background: #5cb85c;
+}
+a.disapproved {
+    background: #8e4a48;
+}
+a.view {
+    background: #337ab7;
+}
+ table.requestview tr td.action a{
+    color: #fff;
+    border-radius: 3px;
+    padding: 3px 10px;
+    text-decoration: none;
+ }
+ table.table.table-striped.requestview tr, 
+  table.table.table-striped.requestview th {
+    text-align: center;
+}

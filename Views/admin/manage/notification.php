@@ -1,7 +1,7 @@
 <?php 
     require_once dirname(__FILE__).'\../../../Repository/RequestRepository.php';
-    // include_once dirname(__FILE__).'\../../../Repository/LogRepository.php';
     include_once dirname(__FILE__).'\../../../conf/connection.php';
+    include_once dirname(__FILE__).'\../../../Helper/Notification.php';
 
     $db = new Database();
     $conn = $db->getConnection();  
@@ -44,24 +44,44 @@
                               <th>Request Type</th>
                               <th>Requested By</th>
                               <th>Requested Date</th>
+                              <th>Request Status</th>
                               <th style = 'text-align:right'>action</th>
                           </tr>
                       </thead>
                       <tbody>
-                       <tr>
-                              <td>3</td>
-                              <td>Over Time</td>
-                              <td>Mardelences </td>
-                              <td>23/5/44</td>
-                              <td style = 'text-align:right'>approved | disapproved | View Details</td>
-                          </tr>
-                          <tr>
-                              <td>1</td>
-                              <td>Leave</td>
-                              <td>Rose</td>
-                              <td>23/5/44</td>
-                              <td style = 'text-align:right'>approved | disapproved | View Details</td>
-                          </tr>
+                      <?php 
+                           $notification = new Notification();
+                           $list = $notification->getNotificationList();
+                           
+                           foreach ($list as $key => $value) {
+
+                              $name = '';
+                              $queryName = $userRepository->findUserById($value['user_id']);
+                              foreach($queryName as $row){
+                                 $name = $row['firstname']." ".$row['lastname'];
+                              }
+                              $status = '';
+                              if($value['status'] == 3)  {
+                                  $status = "<h6 class='label label-default'>New</h6>";
+                              }else if($value['status'] == 0) {
+                                  $status = "<h6 class='label label-success'>Disappoved</h6>";
+                              }else if($value['status'] == 1) {
+                                  $status = "<h6 class='label label-danger'>Approved</h6>";
+                              }else echo '';
+
+                              echo "
+                                  <tr>
+                                      <td>".$value['id']."</td>
+                                      <td>".$value['table_name']."</td>
+                                      <td>".$name."</td>
+                                      <td>".$value['dateCreated']."</td>
+                                      <td>".$status."</td>
+                                      <td style = 'text-align:right'><a href = '#'>approved</a> | <a href = '#'>disapproved</a> | <a href = '#'>View</a></td>
+                                  </tr>
+                              ";
+                           }
+
+                      ?>
                       </tbody>
                   </table>
                   </div>

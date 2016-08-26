@@ -108,15 +108,15 @@ var _requestLeaveForm = $('form#leave-form');
             console.log("submit is working!");
         var formDataArray = $(this).serializeArray();
         console.log(formDataArray);
-        // $.ajax({
-        //             url: baseUriDomain+'/conf/doctrine/request.repositoryManager.php',
-        //             type: 'GET',
-        //             data: {requestData: formDataArray},
-        //             dataType: 'json',
-        //             success: function(response){
-        //                 console.log(response);
-        //             }
-        //         });
+        $.ajax({
+                    url: baseUriDomain+'/conf/doctrine/request.repositoryManager.php',
+                    type: 'GET',
+                    data: {requestData: formDataArray},
+                    dataType: 'json',
+                    success: function(response){
+                        console.log(response);
+                    }
+                });
 });
 var _requestOTForm = $('form#ot-form');
 _requestOTForm.on("submit", function(e){

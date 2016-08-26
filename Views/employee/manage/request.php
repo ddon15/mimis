@@ -56,7 +56,7 @@
                            <label for="starttime">Start Time: &nbsp;&nbsp;&nbsp;End Time: &nbsp;&nbsp;&nbsp;OT Date:</label>
                            <div class="form-group">
                             <input type="text" class="form-control timepicker" name="startTime" placeholder="0" id="startTime" />  
-                            <!-- <input type="text" class="form-control timepicker" name="endTime" placeholder="0" id="endTime" />   -->
+                            <input type="text" class="form-control" name="toProcess" value = "overtime" style = "display:none;" id="toProcess" />  
                             <span> -- </span>
                             <input type="text" class="form-control datepicker" data-toggle="datepicker" name="otdate" placeholder="mm/dd/YY" id="otdate" />
                           </div>
@@ -101,6 +101,7 @@
                            <div class="form-group dates">
                                <input type="text" class="form-control datepicker" data-toggle="datepicker" name="leavestartdate" placeholder="mm/dd/YY" id="leavestartdate" />
                             <input type="text" class="form-control datepicker" data-toggle="datepicker" name="leaveenddate" placeholder="mm/dd/YY" id="leaveenddate" />
+                            <input type="text" class="form-control" name="toProcess" value = "leave" id="toProcess" style = "display:none"/>  
                           </div>
                        
                           <div class="form-group submit">

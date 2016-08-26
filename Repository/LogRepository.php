@@ -53,4 +53,31 @@ class LogRepository
       
         return ($stmt->execute()) ? $stmt : false ;
     }
+    public function createLogs(array $logDetails){
+        $log = new Log();
+        
+        $query2 = "INSERT INTO log SET activity_log_id=:log_id, user_whoCreate_id=:user_whoCreate_id, dateCreated=:dateCreated, description=:description";
+        $stmt2 = $this->conn->prepare($query2);
+
+        $logGetFunction = '';
+        switch($logDetails['activity']){
+            case $logDetails['activity'] == $log::USER_LOG :
+                $logGetFunction = $log->getUser();
+            break;
+            case $logDetails['activity'] == $log::OVERTIME_LOG :
+                 $logGetFunction = $log->getOvertime();
+            break;
+            case $logDetails['activity'] == $log::LEAVE_LOG :
+                 $logGetFunction = $log->getLeave();
+            break;
+        }
+        $logDescription = $logGetFunction;
+
+        $stmt2->bindParam(":log_id", $logDetails['activity']);
+        $stmt2->bindParam(":user_whoCreate_id",$logDetails['user_id']);
+        $stmt2->bindParam(":dateCreated",$log->getDateTime());
+        $stmt2->bindParam(":description", $logDescription[$logDetails['log_process']]);
+
+        ($stmt2->execute()) ? true : false ;
+    }
 }

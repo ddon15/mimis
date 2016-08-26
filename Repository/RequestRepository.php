@@ -21,60 +21,91 @@ class RequestRepository
         include_once '../../Helper/User.php';
         include_once '../../Helper/Log.php';
         include_once '../../conf/connection.php';
+        include_once 'LogRepository.php';
 
         $this->model    = new Request();
         $db             = new Database();
         $this->conn     = $db->getConnection();  
     }
     public function sendLeaveRequest($data){
-            $table = $this->model->table_names['leave'];
-            $query = "INSERT INTO ".$table." SET user_id=:uid, reason=:reason, start_leave=:start_leave, end_leave=:end_leave, leave_type_id=:leave_type_id";
-            $stmt = $this->conn->prepare($query);
 
-            $stmt->bindParam(":uid", $data[4]['value']);
-            $stmt->bindParam(":reason", $data[1]['value']);
-            $stmt->bindParam(":start_leave", $startDate);
-            $stmt->bindParam(":end_leave", $endDate);
-            $stmt->bindParam(":leave_type_id", $data);
+        foreach ($data as $key => $getNameToProcess) {
+            if ($getNameToProcess['name'] == "toProcess") {
+               if ($getNameToProcess['value'] == "leave") {
+
+                     # initialize helpers
+                    $req = $this->model;
+                    $table = $this->model->table_names['leave'];
+                    $status = $req::REQUEST_NEWLY_SENT;
+
+                    # transforms
+                    $startDate    = $req->dateDataTransformer($data[3]['value']);
+                    $endDate      = $req->dateDataTransformer($data[4]['value']);
+
+                    $query = "INSERT INTO ".$table." SET user_id=:uid, reason=:reason, start_leave=:start_leave, end_leave=:end_leave, leave_type_id=:leave_type_id, status=:status";
+                    $stmt = $this->conn->prepare($query);
+
+                    $stmt->bindParam(":uid", $data[1]['value']);
+                    $stmt->bindParam(":reason", $data[2]['value']);
+                    $stmt->bindParam(":start_leave", $startDate);
+                    $stmt->bindParam(":end_leave", $endDate);
+                    $stmt->bindParam(":leave_type_id", $data[0]['value']);
+                    $stmt->bindParam(":status", $status);
+
+                    $ret = ($stmt->execute()) ? true : false ;
+
+                    $logArray = [
+                            'activity' => LOG::LEAVE_LOG,
+                            'user_id' => $data[1]['value'],
+                            'log_process' => 'send'
+                        ];
+                    $LogRepository = new LogRepository();
+                    $LogRepository->createLogs($logArray);
+
+                    return $ret;
+
+                }else return false;
+            }        
+        }
     }
     public function sendOvertimeRequest($data){
-
-        if(is_array($data)) {
-            $req = $this->model;
-
-            $newDate    = $req->dateDataTransformer($data[3]['value']);
-            $startTime  = $req->timeDataTransformer($data[2]['value']);
-            $status     = $req::OT_NEWLY_SENT;
-      
-            $table = $req->table_names['overtime'];
-
-            $query = "INSERT INTO ".$table." SET user_id=:uid, reason_or_project=:reason_or_project, estimate_time=:estimate_time, date=:date, Overtime_start=:Overtime_start, status=:status";
-            $stmt = $this->conn->prepare($query);
-
-            $stmt->bindParam(":uid", $data[4]['value']);
-            $stmt->bindParam(":reason_or_project", $data[1]['value']);
-            $stmt->bindParam(":estimate_time", $data[0]['value']);
-            $stmt->bindParam(":date", $newDate);
-            $stmt->bindParam(":Overtime_start", $startTime);
-            $stmt->bindParam(":status", $status);
-
-            $ret = ($stmt->execute()) ? true : false ;
             
-            $user = new User();
-            $log = new Log();
-            $query2 = "INSERT INTO log SET activity_log_id=:log_id, user_whoCreate_id=:user_whoCreate_id, dateCreated=:dateCreated, description=:description";
-            $stmt2 = $this->conn->prepare($query2);
+        foreach ($data as $key => $getNameToProcess) {
+            if ($getNameToProcess['name'] == "toProcess") {
+               if ($getNameToProcess['value'] == "overtime") {
 
-            $logDescription = $log->getOvertime();
-            $logId = $log::OVERTIME_LOG;
-            $stmt2->bindParam(":log_id", $logId);
-            $stmt2->bindParam(":user_whoCreate_id",$data[4]['value']);
-            $stmt2->bindParam(":dateCreated",$user->getDateTime());
-            $stmt2->bindParam(":description", $logDescription['send']);
+                        $req = $this->model;
 
-            ($stmt2->execute()) ? true : false ;
+                        $newDate    = $req->dateDataTransformer($data[4]['value']);
+                        $startTime  = $req->timeDataTransformer($data[2]['value']);
+                        $status     = $req::OT_NEWLY_SENT;
+                  
+                        $table = $req->table_names['overtime'];
 
-            return $ret;
+                        $query = "INSERT INTO ".$table." SET user_id=:uid, reason_or_project=:reason_or_project, estimate_time=:estimate_time, date=:date, Overtime_start=:Overtime_start, status=:status";
+                        $stmt = $this->conn->prepare($query);
+
+                        $stmt->bindParam(":uid", $data[5]['value']);
+                        $stmt->bindParam(":reason_or_project", $data[1]['value']);
+                        $stmt->bindParam(":estimate_time", $data[0]['value']);
+                        $stmt->bindParam(":date", $newDate);
+                        $stmt->bindParam(":Overtime_start", $startTime);
+                        $stmt->bindParam(":status", $status);
+
+                        $ret = ($stmt->execute()) ? true : false ;
+
+                        $logArray = [
+                                'activity' => LOG::OVERTIME_LOG,
+                                'user_id' => $data[5]['value'],
+                                'log_process' => 'send'
+                            ];
+                        $LogRepository = new LogRepository();
+                        $LogRepository->createLogs($logArray);
+                        
+                   return $ret;
+
+                }else return false;
+            }        
         }
     }
     public function getLeaveTypes(){

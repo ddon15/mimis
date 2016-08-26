@@ -2,6 +2,7 @@
     include_once '../../Repository/UserRepository.php';
     include_once '../../Repository/LogRepository.php';
     include_once '../../conf/connection.php';
+    include_once '../../Helper/Notification.php';
     $db = new Database();
     $conn = $db->getConnection();  
     $logRepository = new LogRepository();
@@ -57,7 +58,12 @@
                     <li class = "navAdminRequirements"><a href="#"><span class = "glyphicon glyphicon-list"></span> Manage Requirements</a></li>
                     <li class = "navAdminReq"><a href="#"><span class = "glyphicon glyphicon-list"></span> Manage Requests</a></li>
                      <li class = "navAdminUsers"><a href="#"><span class = "glyphicon glyphicon-list"></span> Manage Users</a></li>
-                     <li class = "navAdminNoti"><a href="#"><span class = "glyphicon glyphicon-list"></span> Manage Notifications</a></li>
+                     <li class = "navAdminNoti"><a href="#"><span class = "glyphicon glyphicon-list"></span> Manage Notifications <span class="notification badge">
+                     <?php
+                          $notification = new Notification();
+                          echo $notification->getNotificationCount();
+                     ?> 
+                     </span></a></li>
                      <li class = "navAdminReports"><a href="" ><span class = "glyphicon glyphicon-list-alt"></span> Monitor Reports</a></li>
                   </ul>
                   <ul class="nav nav-sidebar manageGroup">

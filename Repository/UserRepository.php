@@ -72,7 +72,7 @@ class UserRepository
     *  Creating of User(s)     *
     *-------------------------*/
     public function createNewUser($data){
-        if(is_array($data) && is_array($data)){
+        if(is_array($data)){
             $user = $this->model;
 
             $date = $user->getDateTime();

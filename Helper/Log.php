@@ -4,6 +4,7 @@ class Log{
 
     const USER_LOG = 1;
     const OVERTIME_LOG = 2;
+    const LEAVE_LOG = 3;
 
     public $user;
 
@@ -27,6 +28,16 @@ class Log{
 
         return $this->overtime;
     }
+    public function getLeave() {
+        $leave = array(
+                'send' => 'Send leave request to admin.',
+                'approve' => 'approving your leave request.',
+                'remove' => 'disapproved your leave request'
+            );
+        $this->leave = $leave;
+
+        return $this->leave;
+    }
     public function getUser() {
         $user = array(
                 'create' => 'creating a new user.',
@@ -36,5 +47,11 @@ class Log{
         $this->user = $user;
 
         return $this->user;
+    }
+    public function getDateTime(){
+        include_once 'User.php';
+
+               $user = new User();
+        return $user->getDateTime();
     }
 }

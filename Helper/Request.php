@@ -2,9 +2,9 @@
 
 class Request{
 
-	const OT_NEWLY_SENT = 3;
-	const OT_DISAPPROVED = 0;
-	const OT_APPROVED = 1;
+	const REQUEST_NEWLY_SENT = 3;
+	const REQUEST_DISAPPROVED = 0;
+	const REQUEST_APPROVED = 1;
 
     public $table_names;
 

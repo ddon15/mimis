@@ -251,7 +251,7 @@
                         }
                         //end of random string
                         if($value['id'] != $_GET['id']){
-                            $update = "<a href = '' class = 'editUser glyphicon glyphicon-pencil' data-id=".$value['id']."  title = 'Update this user.' ></a> | ";
+                            $update = "<a href = '' class = 'editUser glyphicon glyphicon-edit' data-id=".$value['id']."  title = 'Update this user.' ></a> | ";
                             $remove = "<a class = 'removeUser glyphicon glyphicon-trash' data-id=".$value['id']." data-fname=".$value['firstname']." href = '#' title = 'Delete this user.'></a>";
                         }else{
                             $update = "<span class = 'label label-primary'>Logged In";
