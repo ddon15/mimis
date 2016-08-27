@@ -82,7 +82,6 @@
                               <textarea class="form-control" rows="5" id="comment" name = "message"></textarea>
                           </div>
                           
-                       
                           <div class="form-group submit">
                             <button type="submit" class="btn btn-default" name="btn-leave" id="btn-message">
                             <span class="glyphicon glyphicon-log-in"></span> &nbsp; Send Message

@@ -20,10 +20,12 @@ class Notification
         $query = "SELECT  (
                         SELECT COUNT(*)
                         FROM   overtime
+                        WHERE status=3
                         ) AS count1,
                         (
                         SELECT COUNT(*)
                         FROM   work_leave
+                        WHERE status=3
                         ) AS count2
                 FROM    dual";
         $stmt = $this->conn->prepare($query);
@@ -38,9 +40,9 @@ class Notification
     }
     public function getNotificationList(){
 
-        $query = "SELECT id, user_id, dateCreated, 'overtime' as table_name, status FROM overtime
+        $query = "SELECT id, user_id, reason, dateCreated, 'overtime' as table_name, status FROM overtime
                   UNION
-                  SELECT id, user_id, dateCreated, 'Leave' as table_name, status  FROM work_leave";
+                  SELECT id, user_id, reason, dateCreated, 'Leave' as table_name, status  FROM work_leave";
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();

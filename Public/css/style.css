@@ -1,3 +1,9 @@
+img.app-logo {
+    height: 40px;
+    position: relative;
+    bottom: 10px;
+    left: 15px;
+}
 html {
 	background: rgb(236, 239, 241);
 }
@@ -473,4 +479,32 @@ a.view {
  table.table.table-striped.requestview tr, 
   table.table.table-striped.requestview th {
     text-align: center;
+}
+.media.notification .media-body:hover {
+    cursor: pointer;
+    background: rgb(239, 243, 245);
+
+}
+.media.notification .media-body {
+    padding: 10px 0 0 15px;
+    border-top: 1px solid #eff3f5;
+}
+.media-body span.btn-link {
+        float: right;
+    position: relative !important;
+    left: -50px !important;
+    color: #fff;
+    background: #5cb85c;
+    width: 145px;
+        text-decoration: none;
+    padding: 5px;
+    border-radius: 3px;
+}
+.media-body span.btn-link span{
+    top: 8px;
+}
+.media-body p.timelogs {
+    color: #999;
+    font-size: 12px;
+    font-style: italic;
 }

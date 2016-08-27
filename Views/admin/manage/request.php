@@ -29,7 +29,7 @@
             <h1>Request Management</h1>
             <ul class="nav nav-tabs menu">
                 <li class="overTimeTabMenu active"><a data-toggle="tab"  href="#">List of Request</a></li>
-                <li class = "leaveTabMenu"><a data-toggle="tab" href="#">Create Message</a></li>
+                <li class = "fileOt"><a data-toggle="tab" href="#">File OT to Employee</a></li>
             </ul>
         </div>
             <div class="main">
@@ -37,6 +37,7 @@
                   <div id="overTimeContainer" class="tab-pane fade in active">
                     <h4>View all request from employees</h4>
                     <br>
+                    
                   <table class="table table-striped requestview">
                       <thead>
                           <tr>
