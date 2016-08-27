@@ -298,3 +298,27 @@ function processAdminNavigationOnClick(element) {
          }else $('.'+clickElements[i]).addClass("active");  
     }
 }
+
+// Approved submit
+$('table.requestview tr td.action a').on("click",function(e){
+    var doctrineConfigurationPath = '/conf/doctrine/';
+    e.preventDefault();
+    var _getId = $(this).data('id');
+    var _getTable = $(this).data('table');
+
+    var data = [];
+        data['id'] = _getId;
+        data['table'] = _getTable;
+        data['toProcess'] = "approved";
+
+console.log("this is data ",data);
+    $.ajax({
+        url: baseUriDomain+doctrineConfigurationPath+'request.repositoryManager.php',
+        type: 'GET',
+        data: {requestData: data},
+        // dataType: 'json',
+        success: function(response){
+            console.log(response);
+        }
+    });
+});

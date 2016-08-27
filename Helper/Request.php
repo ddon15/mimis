@@ -52,4 +52,10 @@ class Request{
     	var_dump($diff);
     	echo $estimatedTime;
     }
+     public function getDateTime(){
+        include_once 'User.php';
+
+               $user = new User();
+        return $user->getDateTime();
+    }
 }

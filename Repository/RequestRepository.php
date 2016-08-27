@@ -41,14 +41,16 @@ class RequestRepository
                     # transforms
                     $startDate    = $req->dateDataTransformer($data[3]['value']);
                     $endDate      = $req->dateDataTransformer($data[4]['value']);
+                    $dateCeated = $req->getDateTime();
 
-                    $query = "INSERT INTO ".$table." SET user_id=:uid, reason=:reason, start_leave=:start_leave, end_leave=:end_leave, leave_type_id=:leave_type_id, status=:status";
+                    $query = "INSERT INTO ".$table." SET user_id=:uid, reason=:reason, start_leave=:start_leave, end_leave=:end_leave, dateCreated=:dateCreated, leave_type_id=:leave_type_id, status=:status";
                     $stmt = $this->conn->prepare($query);
 
                     $stmt->bindParam(":uid", $data[1]['value']);
                     $stmt->bindParam(":reason", $data[2]['value']);
                     $stmt->bindParam(":start_leave", $startDate);
                     $stmt->bindParam(":end_leave", $endDate);
+                    $stmt->bindParam(":dateCreated", $dateCeated);
                     $stmt->bindParam(":leave_type_id", $data[0]['value']);
                     $stmt->bindParam(":status", $status);
 
@@ -69,7 +71,9 @@ class RequestRepository
         }
     }
     public function sendOvertimeRequest($data){
-            
+            echo "<pre>";
+                var_dump($data);
+            echo "</pre>";
         foreach ($data as $key => $getNameToProcess) {
             if ($getNameToProcess['name'] == "toProcess") {
                if ($getNameToProcess['value'] == "overtime") {
@@ -78,18 +82,20 @@ class RequestRepository
 
                         $newDate    = $req->dateDataTransformer($data[4]['value']);
                         $startTime  = $req->timeDataTransformer($data[2]['value']);
-                        $status     = $req::OT_NEWLY_SENT;
+                        $dateCeated = $req->getDateTime();
+                        $status     = $req::REQUEST_NEWLY_SENT;
                   
                         $table = $req->table_names['overtime'];
 
-                        $query = "INSERT INTO ".$table." SET user_id=:uid, reason_or_project=:reason_or_project, estimate_time=:estimate_time, date=:date, Overtime_start=:Overtime_start, status=:status";
+                        $query = "INSERT INTO ".$table." SET user_id=:uid, reason=:reason, estimate_time=:estimate_time, overtime_date=:overtime_date, overtime_start=:overtime_start, dateCreated=:dateCreated, status=:status";
                         $stmt = $this->conn->prepare($query);
 
                         $stmt->bindParam(":uid", $data[5]['value']);
-                        $stmt->bindParam(":reason_or_project", $data[1]['value']);
+                        $stmt->bindParam(":reason", $data[1]['value']);
                         $stmt->bindParam(":estimate_time", $data[0]['value']);
-                        $stmt->bindParam(":date", $newDate);
-                        $stmt->bindParam(":Overtime_start", $startTime);
+                        $stmt->bindParam(":overtime_date", $newDate);
+                        $stmt->bindParam(":overtime_start", $startTime);
+                        $stmt->bindParam(":dateCreated", $dateCeated);
                         $stmt->bindParam(":status", $status);
 
                         $ret = ($stmt->execute()) ? true : false ;
@@ -107,6 +113,13 @@ class RequestRepository
                 }else return false;
             }        
         }
+    }
+    public function approvedRequest($data){
+        // var_dump($data);
+        return false;
+        // foreach ($data as $key => $requestToProcess) {
+        //     var_dump($requestToProcess)
+        // }
     }
     public function getLeaveTypes(){
             $query = "SELECT * FROM " .$this->model->table_names['leave_type'];

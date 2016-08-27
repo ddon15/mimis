@@ -77,7 +77,7 @@
                                       <td>".$name."</td>
                                       <td>".$value['dateCreated']."</td>
                                       <td>".$status."</td>
-                                      <td style = 'text-align:right;' class = 'action'><a class = 'approved' href = '#'> <h6 class = 'glyphicon glyphicon-ok'></h6> approved</a> | <a class = 'disapproved' href = '#'><h6 class = 'glyphicon glyphicon-remove'></h6> disapproved</a> | <a class = 'view' href = '#'><h6 class = 'glyphicon glyphicon-eye-open'></h6> view</a></td>
+                                      <td style = 'text-align:right;' class = 'action'><a class = 'approved' data-id = '".$value['id']."' data-table = '".$value['table_name']."' href = '#'> <h6 class = 'glyphicon glyphicon-ok'></h6> approved</a> | <a class = 'disapproved' data-id = '".$value['id']."' data-table = '".$value['table_name']."' href = '#'><h6 class = 'glyphicon glyphicon-remove'></h6> disapproved</a> | <a class = 'view' data-id = '".$value['id']."' data-table = '".$value['table_name']."' href = '#'><h6 class = 'glyphicon glyphicon-eye-open'></h6> view</a></td>
                                   </tr>
                               ";
                            }

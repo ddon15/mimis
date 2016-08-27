@@ -12,4 +12,7 @@ $returnOTResponse = array('request_ot' => $sendOTReq);
 $sendLeaveReq = $requestRepository->sendLeaveRequest($request);
 $returnLeaveResponse = array('request_leave' => $sendLeaveReq);
 
-echo json_encode(array($returnOTResponse, $returnLeaveResponse));
+$approvedReq = $requestRepository->approvedRequest($request);
+$returnApprovedReq = array('approved_request' => $approvedReq);
+
+echo json_encode(array($returnOTResponse, $returnLeaveResponse, $returnApprovedReq));
