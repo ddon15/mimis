@@ -27,6 +27,47 @@ class RequestRepository
         $db             = new Database();
         $this->conn     = $db->getConnection();  
     }
+    public function disapprovedRequest($data){
+        $table = ($data[1]['value'] == "Leave") ? "work_leave" : $data[1]['value'] ;
+        $id = $data[0]['value'];
+        $uid = $data[4]['value'];
+
+        $logName = "";
+        if($table == "work_leave") {
+            $logName = LOG::LEAVE_LOG;
+        }else if($table == "overtime"){
+            $logName = LOG::OVERTIME_LOG;
+        }else $logName = LOG::USER_LOG;
+
+        foreach ($data as $key => $getNameToProcess) {
+            if ($getNameToProcess['name'] == "toProcess") {
+               if ($getNameToProcess['value'] == "disapproved") {
+
+                    $req = $this->model;
+                    $status = $req::REQUEST_DISAPPROVED;
+
+                    $query = "UPDATE ".$table." SET status=:status WHERE id=:id";
+                    $stmt = $this->conn->prepare($query);
+
+                    $stmt->bindParam(":id", $id);
+                    $stmt->bindParam(":status", $status);
+                    
+                    $ret = ($stmt->execute()) ? true : false ;
+
+                    $logArray = [
+                            'activity' => $logName,
+                            'user_id' => $uid,
+                            'log_process' => 'remove'
+                        ];
+                    $LogRepository = new LogRepository();
+                    $LogRepository->createLogs($logArray);
+
+                    return $ret;
+               }
+            }
+        }
+        return false;
+    }
     public function approvedRequest($data){
         $table = ($data[1]['value'] == "Leave") ? "work_leave" : $data[1]['value'] ;
         $id = $data[0]['value'];

@@ -76,8 +76,9 @@
                                       <td>".$value['table_name']."</td>
                                       <td>".$name."</td>
                                       <td>".$value['dateCreated']."</td>
-                                      <td>".$status."</td>
-                                      <td style = 'text-align:right;' class = 'action'><a class = 'approved' data-uid = '".$_GET['id']."' data-id = '".$value['id']."' data-table = '".$value['table_name']."' href = '#'> <h6 class = 'glyphicon glyphicon-ok'></h6> approved</a> | <a class = 'disapproved' data-id = '".$value['id']."' data-table = '".$value['table_name']."' data-uid = '".$_GET['id']."' href = '#'><h6 class = 'glyphicon glyphicon-remove'></h6> disapproved</a> | <a class = 'view' data-id = '".$value['id']."' data-uid = '".$_GET['id']."' data-table = '".$value['table_name']."' href = '#'><h6 class = 'glyphicon glyphicon-eye-open'></h6> view</a></td>
+                                      <td class = 'reqStatus ".$value['table_name'].$value['id']."'>".$status."</td>
+                                      <td style = 'text-align:right;' class = 'action'></button><img class = 'ajaxLoader ".$value['table_name'].$value['id']."' src='../../../Public/images/loader.gif'/>
+<a class = 'approved' data-uid = '".$_GET['id']."' data-id = '".$value['id']."' data-table = '".$value['table_name']."'  href = '#'> <h6 class = 'glyphicon glyphicon-ok'></h6> approved</a> | <a class = 'disapproved' data-id = '".$value['id']."' data-table = '".$value['table_name']."' data-uid = '".$_GET['id']."' href = '#'><h6 class = 'glyphicon glyphicon-remove'></h6> disapproved</a> | <a class = 'view' data-id = '".$value['id']."' data-uid = '".$_GET['id']."' data-table = '".$value['table_name']."' href = '#'><h6 class = 'glyphicon glyphicon-eye-open'></h6> view</a></td>
                                   </tr>
                               ";
                            }

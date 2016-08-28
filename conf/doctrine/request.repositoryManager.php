@@ -15,4 +15,7 @@ $returnLeaveResponse = array('request_leave' => $sendLeaveReq);
 $approvedReq = $requestRepository->approvedRequest($request);
 $returnApprovedReq = array('approved_request' => $approvedReq);
 
-echo json_encode(array($returnOTResponse, $returnLeaveResponse, $returnApprovedReq));
+$disapprovedReq = $requestRepository->disapprovedRequest($request);
+$returnDisapprovedReq = array('disapproved_request' => $disapprovedReq);
+
+echo json_encode(array($returnOTResponse, $returnLeaveResponse, $returnApprovedReq, $returnDisapprovedReq));

@@ -508,3 +508,9 @@ a.view {
     font-size: 12px;
     font-style: italic;
 }
+body.adminDashboard .requestview img.ajaxLoader {
+        height: 20px;
+    position: absolute;
+    left: 905px;
+    margin-top: 7px;
+}

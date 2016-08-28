@@ -138,43 +138,74 @@ _requestOTForm.on("submit", function(e){
     });
 });
 
+
+/* FUNCTION FOR APPROVED OR DISAPPROVED */
 // Approved submit
-$('table.requestview tr td.action a').on("click",function(e){
-    var doctrineConfigurationPath = '/conf/doctrine/';
+$('table.requestview tr td.action a.approved').on("click",function(e){
     e.preventDefault();
-    var _getId = $(this).data('id');
-    var _getTable = $(this).data('table');
-    var _getUID = $(this).data('uid');
+    var element = $(this);
+    var response = element.attr('class');
 
-    var data = {
-        0 : {
-            'name': 'id',
-            'value': _getId
-        },
-        1 : {
-            'name': 'table',
-            'value': _getTable
-        },
-        3 : {
-            'name': 'toProcess',
-            'value': 'approved'
-        },
-        4: {
-            'name': 'user_id',
-            'value': _getUID
-        }
+    runAdminResponse(response, element);
 
+});
+//DISAPPROVED  submit
+$('table.requestview tr td.action a.disapproved').on("click",function(e){
+    e.preventDefault();
+    var element = $(this);
+    var response = element.attr('class');
+
+    runAdminResponse(response, element);
+});
+function runAdminResponse(_response, _element){
+    //compose
+    var loaderElement = _element.siblings('img');
+    var loader = loaderElement[0].className.replace(" ",".");
+    var statusElement = _element.parent().siblings('.reqStatus');
+    var status = statusElement[0].className.replace(" ",".");
+
+    //initialize
+    status = $("."+status);
+    loader = $("."+loader);
+
+    loader.show();
+
+    var doctrineFilePath = '/conf/doctrine/request.repositoryManager.php';
+    var data = { 
+        0 : {'name': 'id','value': _element.data('id')},
+        1 : {'name': 'table','value': _element.data('table')},
+        3 : {'name': 'toProcess','value': _response},
+        4 : {'name': 'user_id','value': _element.data('uid')}
     };
     $.ajax({
-        url: baseUriDomain+doctrineConfigurationPath+'request.repositoryManager.php',
+        url: baseUriDomain+doctrineFilePath,
         type: 'GET',
         data: {requestData: data},
         dataType: 'json',
         success: function(response){
-            console.log(response);
+            getLastStatus = statusElement.find('h6').html();
+            
+            loader.hide();
+
+            if(_response == "approved" && response[2].approved_request == true) {
+                status.html("<h6 class='label label-primary'>Approved</h6>"); 
+            }else if(_response == "disapproved" && response[3].disapproved_request == true){
+                status.html("<h6 class='label label-danger'>Disappoved</h6>"); 
+            }else{
+                console.log("Something did not work properly");
+            }
+
+            _notification = $('li.navAdminNoti span.badge');
+            notificationCount = _notification.html();
+
+            if(getLastStatus == "New"){
+                notificationCount = notificationCount - 1;
+                _notification.html(notificationCount);
+            }
         }
     });
-});
+}
+/* DONE APPROVED OR DISAPPROVED */
 
 /// EMPLOYEE
 $('.navReq').on("click", function(e){
