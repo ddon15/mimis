@@ -27,6 +27,47 @@ class RequestRepository
         $db             = new Database();
         $this->conn     = $db->getConnection();  
     }
+    public function approvedRequest($data){
+        $table = ($data[1]['value'] == "Leave") ? "work_leave" : $data[1]['value'] ;
+        $id = $data[0]['value'];
+        $uid = $data[4]['value'];
+
+        $logName = "";
+        if($table == "work_leave") {
+            $logName = LOG::LEAVE_LOG;
+        }else if($table == "overtime"){
+            $logName = LOG::OVERTIME_LOG;
+        }else $logName = LOG::USER_LOG;
+
+        foreach ($data as $key => $getNameToProcess) {
+            if ($getNameToProcess['name'] == "toProcess") {
+               if ($getNameToProcess['value'] == "approved") {
+
+                    $req = $this->model;
+                    $status = $req::REQUEST_APPROVED;
+
+                    $query = "UPDATE ".$table." SET status=:status WHERE id=:id";
+                    $stmt = $this->conn->prepare($query);
+
+                    $stmt->bindParam(":id", $id);
+                    $stmt->bindParam(":status", $status);
+                    
+                    $ret = ($stmt->execute()) ? true : false ;
+
+                    $logArray = [
+                            'activity' => $logName,
+                            'user_id' => $uid,
+                            'log_process' => 'approve'
+                        ];
+                    $LogRepository = new LogRepository();
+                    $LogRepository->createLogs($logArray);
+
+                    return $ret;
+               }
+            }
+        }
+        return false;
+    }
     public function sendLeaveRequest($data){
 
         foreach ($data as $key => $getNameToProcess) {
@@ -71,9 +112,7 @@ class RequestRepository
         }
     }
     public function sendOvertimeRequest($data){
-            echo "<pre>";
-                var_dump($data);
-            echo "</pre>";
+
         foreach ($data as $key => $getNameToProcess) {
             if ($getNameToProcess['name'] == "toProcess") {
                if ($getNameToProcess['value'] == "overtime") {
@@ -113,13 +152,6 @@ class RequestRepository
                 }else return false;
             }        
         }
-    }
-    public function approvedRequest($data){
-        // var_dump($data);
-        return false;
-        // foreach ($data as $key => $requestToProcess) {
-        //     var_dump($requestToProcess)
-        // }
     }
     public function getLeaveTypes(){
             $query = "SELECT * FROM " .$this->model->table_names['leave_type'];

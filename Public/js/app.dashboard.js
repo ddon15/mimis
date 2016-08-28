@@ -138,6 +138,44 @@ _requestOTForm.on("submit", function(e){
     });
 });
 
+// Approved submit
+$('table.requestview tr td.action a').on("click",function(e){
+    var doctrineConfigurationPath = '/conf/doctrine/';
+    e.preventDefault();
+    var _getId = $(this).data('id');
+    var _getTable = $(this).data('table');
+    var _getUID = $(this).data('uid');
+
+    var data = {
+        0 : {
+            'name': 'id',
+            'value': _getId
+        },
+        1 : {
+            'name': 'table',
+            'value': _getTable
+        },
+        3 : {
+            'name': 'toProcess',
+            'value': 'approved'
+        },
+        4: {
+            'name': 'user_id',
+            'value': _getUID
+        }
+
+    };
+    $.ajax({
+        url: baseUriDomain+doctrineConfigurationPath+'request.repositoryManager.php',
+        type: 'GET',
+        data: {requestData: data},
+        dataType: 'json',
+        success: function(response){
+            console.log(response);
+        }
+    });
+});
+
 /// EMPLOYEE
 $('.navReq').on("click", function(e){
     e.preventDefault();
@@ -299,26 +337,3 @@ function processAdminNavigationOnClick(element) {
     }
 }
 
-// Approved submit
-$('table.requestview tr td.action a').on("click",function(e){
-    var doctrineConfigurationPath = '/conf/doctrine/';
-    e.preventDefault();
-    var _getId = $(this).data('id');
-    var _getTable = $(this).data('table');
-
-    var data = [];
-        data['id'] = _getId;
-        data['table'] = _getTable;
-        data['toProcess'] = "approved";
-
-console.log("this is data ",data);
-    $.ajax({
-        url: baseUriDomain+doctrineConfigurationPath+'request.repositoryManager.php',
-        type: 'GET',
-        data: {requestData: data},
-        // dataType: 'json',
-        success: function(response){
-            console.log(response);
-        }
-    });
-});
