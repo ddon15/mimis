@@ -2,17 +2,17 @@
 
 include '../Repository/SmsGateway.php';
 
-// $smsGateway = new SmsGateway('joyjanetwins@gmail.com', 'joyjane');
+$smsGateway = new SmsGateway('joyjanetwins@gmail.com', 'joyjane');
+$deviceID = 28113;
 
-// $deviceID = 28113;
-// $number = '+639195532617';
-// $message = 'Testing!';
+$number = '+639195532617';
+$message = 'Testing!';
 
-$smsGateway = new SmsGateway('mardz_zuinky@yahoo.com', 'mariden20');
+// $smsGateway = new SmsGateway('mardz_zuinky@yahoo.com', 'mariden20');
 
-$deviceID = 28186;
-$number = '+639330010744';
-$message = 'Hello Marda! Your requested overtime for tomorrow has been approved.';
+// $deviceID = 28186;
+// $number = '+639330010744';
+// $message = 'Hello Marda! Your requested overtime for tomorrow has been approved.';
 
 // $options = [];
 $options = [

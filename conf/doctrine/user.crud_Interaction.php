@@ -20,5 +20,4 @@ $removeUser = $userRepository->removeUserById($request);
 $returnRemovingUserById = array('user_removeBy_Id' => $removeUser);
 
 // //Count Features
-// $userRepository->countAllUsers();
 echo json_encode(array($returnCheckAdminPassword,$returnAuthenticationProcess,$returnCreatingUser, $returnRemovingUserById));

@@ -19,6 +19,7 @@ class UserRepository
         include_once '../../Helper/User.php';
         include_once '../../Helper/Log.php';
         include_once '../../conf/connection.php';
+        include_once '../../api/SendSMS.php';
        
         $this->model    = new User();
         $db             = new Database();
@@ -78,19 +79,19 @@ class UserRepository
             $date = $user->getDateTime();
             $status = $user::REGISTERED;
 
-            $query = "INSERT INTO ".$this->model->table_name." SET firstname=:fname, middlename=:middle, lastname=:lname, email=:email, username=:username, password=:pword, dateCreated=:dateCreated, dateModified=:dateModified, user_type=:user_type, status=:status";
+            $query = "INSERT INTO ".$this->model->table_name." SET firstname=:fname, middlename=:middle, lastname=:lname, email=:email, mobile_no=:mobile_no, username=:username, password=:pword, dateCreated=:dateCreated, dateModified=:dateModified, user_type=:user_type, status=:status";
             $stmt = $this->conn->prepare($query);
             
             if(!is_null($data[0]) && (int)$data[0]){
                  $stmt->bindParam(":id", $data[0]);
                  $stmt->bindParam(":fname", $data[1]);$stmt->bindParam(":middle", $data[2]);$stmt->bindParam(":lname", $data[3]);
-                $stmt->bindParam(":email", $data[4]); $stmt->bindParam(":username",$data[5]);$stmt->bindParam(":pword", $data[6]);
+                $stmt->bindParam(":email", $data[4]);$stmt->bindParam(":mobile_no", $data[4]); $stmt->bindParam(":username",$data[5]);$stmt->bindParam(":pword", $data[6]);
                 $stmt->bindParam(":dateCreated", $date);$stmt->bindParam(":dateModified",$date);$stmt->bindParam(":user_type",$data[9]);
                 $stmt->bindParam(":status",$status);
             }else{
                  // $stmt->bindParam(":id", null);
                 $stmt->bindParam(":fname", $data[0]);$stmt->bindParam(":middle", $data[1]);$stmt->bindParam(":lname", $data[2]);
-                $stmt->bindParam(":email", $data[3]); $stmt->bindParam(":username",$data[4]);$stmt->bindParam(":pword", $data[5]);
+                $stmt->bindParam(":email", $data[3]);$stmt->bindParam(":mobile_no", $data[4]); $stmt->bindParam(":username",$data[5]);$stmt->bindParam(":pword", $data[6]);
                 $stmt->bindParam(":dateCreated", $date);$stmt->bindParam(":dateModified",$date);$stmt->bindParam(":user_type",$data[8]);
                 $stmt->bindParam(":status",$status);
             }
@@ -98,6 +99,12 @@ class UserRepository
 
             $ret = ($stmt->execute()) ? true : false ;
             // $lastId = $this->conn->lastInsertId();
+
+            $sendSms = new SendSMS();
+
+            $sendSms->setNumber($data[4]);
+            $sendSms->setMessage("You have been registered by the admin. You can now login your account; email(".$data[3].") : password(".$data[6]."), Thank You!");
+            $sendSms->sendSMS();
 
             $log = new Log();
             $query2 = "INSERT INTO log SET activity_log_id=:log_id, user_whoCreate_id=:user_whoCreate_id, dateCreated=:dateCreated, description=:description";

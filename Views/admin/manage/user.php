@@ -66,10 +66,15 @@
                         <span>Last Name</span>
                         <input type="text" class="form-control" placeholder="Last Name" name="lastname" id="user_lastname" />
                     </div>
-                     <div class="form-group">
+                    <div class="form-group">
                         <div class = "err-email error-message"></div>
                         <span>Email</span>
                         <input type="text" class="form-control" placeholder="Email" name="email" id="user_email" />
+                    </div>
+                    <div class="form-group">
+                        <div class = "err-mobileno error-message"></div>
+                        <span>Mobile No.</span>
+                        <input type="text" class="form-control" placeholder="Mobile" name="mobileno" id="user_mobileno" />
                     </div>
                     <div class="form-group">
                         <div class = "err-username error-message"></div>
@@ -311,6 +316,11 @@
                         <div class = "err-email error-message"></div>
                         <span>Email</span>
                         <input type="text" class="form-control" placeholder="Email" name="email" id="user_email" />
+                    </div>
+                    <div class="form-group">
+                        <div class = "err-mobileno error-message"></div>
+                        <span>Mobile No.</span>
+                        <input type="text" class="form-control" placeholder="Mobile" name="mobileno" id="user_mobileno" />
                     </div>
                     <div class="form-group">
                         <div class = "err-username error-message"></div>

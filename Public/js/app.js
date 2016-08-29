@@ -98,13 +98,13 @@ _registrationForm.on("submit", function(e){
 			$(getDataValidated[1]).each(function(e){
 				_data.push(this.value);
 			});
-
 			$.ajax({
 				url: baseUriDomain+'/conf/doctrine/user.crud_Interaction.php',
 				type: 'GET',
 				data: {userData: _data},
 				dataType: 'json',
 				success: function(response){
+					console.log(response);
 					for(var data in response) {
 						if(response[data].user_creating_new == false) {
 							showFailed();

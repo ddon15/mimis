@@ -149,6 +149,12 @@ $('a.view').on("click",function(e){
 
 
 });
+// notification
+var _notification = $('li.navAdminNoti span.badge');
+var notificationCount = _notification.html();
+if(notificationCount < 1){
+    _notification.hide();
+}
 // Approved submit
 $('table.requestview tr td.action a.approved').on("click",function(e){
     e.preventDefault();
@@ -244,11 +250,11 @@ function runAdminResponse(_response, _element, statusElement, status, loader){
                 console.log("Something did not work properly");
             }
 
-            _notification = $('li.navAdminNoti span.badge');
-            notificationCount = _notification.html();
-
             if(getLastStatus == "New"){
                 notificationCount = notificationCount - 1;
+                if(notificationCount < 1){
+                    _notification.hide();
+                }
                 _notification.html(notificationCount);
             }
         }
