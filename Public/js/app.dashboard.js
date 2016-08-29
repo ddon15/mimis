@@ -140,13 +140,45 @@ _requestOTForm.on("submit", function(e){
 
 
 /* FUNCTION FOR APPROVED OR DISAPPROVED */
+// View
+$('a.view').on("click",function(e){
+    e.preventDefault();
+    var element = $(this);
+        element.siblings('div#myPopUpDiv').show();
+        element.siblings('.popup').show();
+
+
+});
 // Approved submit
 $('table.requestview tr td.action a.approved').on("click",function(e){
     e.preventDefault();
     var element = $(this);
     var response = element.attr('class');
 
-    runAdminResponse(response, element);
+     //compose
+    var loaderElement = element.siblings('img');
+    var loader = loaderElement[0].className.replace(" ",".");
+    var statusElement = element.parent().siblings('.reqStatus');
+    var status = statusElement[0].className.replace(" ",".");
+
+    runAdminResponse(response, element, statusElement, status, loader);
+
+});
+$('.popup.singleViewRequest a.singleviewApproved').on("click",function(e){
+    e.preventDefault();
+
+    var element = $(this);
+    var response = 'approved';
+
+     //compose
+    var loaderElement = element.siblings('img');
+    var loader = loaderElement[0].className.replace(" ",".");
+    
+    var getSymLink = element.parents('.popup.singleViewRequest').siblings('a.approved');
+    var statusElement = getSymLink.parent().siblings('.reqStatus');
+    var status = statusElement[0].className.replace(" ",".");
+
+    runAdminResponse(response, element, statusElement, status, loader);
 
 });
 //DISAPPROVED  submit
@@ -155,15 +187,32 @@ $('table.requestview tr td.action a.disapproved').on("click",function(e){
     var element = $(this);
     var response = element.attr('class');
 
-    runAdminResponse(response, element);
-});
-function runAdminResponse(_response, _element){
     //compose
-    var loaderElement = _element.siblings('img');
+    var loaderElement = element.siblings('img');
     var loader = loaderElement[0].className.replace(" ",".");
-    var statusElement = _element.parent().siblings('.reqStatus');
+    var statusElement = element.parent().siblings('.reqStatus');
     var status = statusElement[0].className.replace(" ",".");
 
+    runAdminResponse(response, element, statusElement, status, loader);
+});
+$('.popup.singleViewRequest a.singleviewDisapproved').on("click",function(e){
+    e.preventDefault();
+
+    var element = $(this);
+    var response = 'disapproved';
+
+     //compose
+    var loaderElement = element.siblings('img');
+    var loader = loaderElement[0].className.replace(" ",".");
+    
+    var getSymLink = element.parents('.popup.singleViewRequest').siblings('a.disapproved');
+    var statusElement = getSymLink.parent().siblings('.reqStatus');
+    var status = statusElement[0].className.replace(" ",".");
+
+    runAdminResponse(response, element, statusElement, status, loader);
+
+});
+function runAdminResponse(_response, _element, statusElement, status, loader){
     //initialize
     status = $("."+status);
     loader = $("."+loader);
@@ -184,7 +233,7 @@ function runAdminResponse(_response, _element){
         dataType: 'json',
         success: function(response){
             getLastStatus = statusElement.find('h6').html();
-            
+
             loader.hide();
 
             if(_response == "approved" && response[2].approved_request == true) {

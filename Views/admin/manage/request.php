@@ -77,8 +77,43 @@
                                       <td>".$name."</td>
                                       <td>".$value['dateCreated']."</td>
                                       <td class = 'reqStatus ".$value['table_name'].$value['id']."'>".$status."</td>
-                                      <td style = 'text-align:right;' class = 'action'></button><img class = 'ajaxLoader ".$value['table_name'].$value['id']."' src='../../../Public/images/loader.gif'/>
-<a class = 'approved' data-uid = '".$_GET['id']."' data-id = '".$value['id']."' data-table = '".$value['table_name']."'  href = '#'> <h6 class = 'glyphicon glyphicon-ok'></h6> approved</a> | <a class = 'disapproved' data-id = '".$value['id']."' data-table = '".$value['table_name']."' data-uid = '".$_GET['id']."' href = '#'><h6 class = 'glyphicon glyphicon-remove'></h6> disapproved</a> | <a class = 'view' data-id = '".$value['id']."' data-uid = '".$_GET['id']."' data-table = '".$value['table_name']."' href = '#'><h6 class = 'glyphicon glyphicon-eye-open'></h6> view</a></td>
+                                      <td style = 'text-align:right;' class = 'action'>
+                                      <img class = 'ajaxLoader ".$value['table_name'].$value['id']."' src='../../../Public/images/loader.gif'/>
+<a class = 'approved' data-uid = '".$_GET['id']."' data-id = '".$value['id']."' data-table = '".$value['table_name']."'  href = '#'> 
+    <h6 class = 'glyphicon glyphicon-ok'></h6> approved</a> | 
+<a class = 'disapproved' data-id = '".$value['id']."' data-table = '".$value['table_name']."' data-uid = '".$_GET['id']."' href = '#'>
+    <h6 class = 'glyphicon glyphicon-remove'></h6> disapproved</a> | 
+<a class = 'view' data-id = '".$value['id']."' data-uid = '".$_GET['id']."' data-table = '".$value['table_name']."' href = '#'>
+    <h6 class = 'glyphicon glyphicon-eye-open'></h6> view</a>
+
+     <div id='myPopUpDiv' class = 'fade singleViewRequestPopUpDiv' style = 'display:none'></div>
+     <div class='popup singleViewRequest'>
+                <span class='glyphicon glyphicon-remove'></span>
+                <div class='title'>".$name." ".$value['table_name']." Request</div>
+                <div class='content'>
+                    <span class='query' hidden></span>
+                    <div class = 'id'>
+                        <b># ".$value['id']."</b>
+                    </div>
+                    <div class = 'requested'>
+                        <b>Requested :</b>  ".$value['table_name']."
+                    </div>
+                    <div class = 'dateReq'>
+                        <b>Date Requested :</b> ".$value['dateCreated']."
+                    </div>
+                     <div class = 'reason'>
+                        <b>Reason for requested ".$value['table_name']." :</b> ".$value['reason']."
+                    </div>
+                    <div class = 'action'>
+                        <img class = 'ajaxLoader ".$value['table_name'].$value['id']."' src='../../../Public/images/loader.gif'/>
+<a class = 'singleviewApproved' data-uid = '".$_GET['id']."' data-id = '".$value['id']."' data-table = '".$value['table_name']."'  href = '#'> 
+    <h6 class = 'glyphicon glyphicon-ok'></h6> approved</a> | 
+<a class = 'singleviewDisapproved' data-id = '".$value['id']."' data-table = '".$value['table_name']."' data-uid = '".$_GET['id']."' href = '#'>
+    <h6 class = 'glyphicon glyphicon-remove'></h6> disapproved</a>
+                    </div>
+                </div>
+           </div>
+</td>
                                   </tr>
                               ";
                            }
@@ -86,6 +121,8 @@
                       ?>
                       </tbody>
                   </table>
+           
+           
                   </div>
                   <div id="leaveContainer" class="tab-pane fade">
                     <h4>Create Message</h4>
