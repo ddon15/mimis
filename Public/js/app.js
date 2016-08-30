@@ -75,12 +75,9 @@ _loginForm.on("submit", function(e){
 						//checking the status if not verified
 						if(_return[3] == 2){
 							if (!confirm("Your account was not verified yet, Do you want to verify your account now?")){
-						      return false;
-						      window.location.href = "employee/dashboard.php?id="+_return[2];
-						    }
-							window.location.href = "validation.php?type=employee&&id="+_return[2];
-						}
-						window.location.href = "employee/dashboard.php?id="+_return[2];
+						       window.location.href = "employee/dashboard.php?id="+_return[2];
+						    }else{window.location.href = "validation.php?type=employee&&id="+_return[2];}
+						}else{ window.location.href = "employee/dashboard.php?id="+_return[2];}
 					}else{
 						errEl.hide();
 						var userId = _return[2];
@@ -88,12 +85,9 @@ _loginForm.on("submit", function(e){
 						//checking the status if not verified
 						if(_return[3] == 2){
 							if (!confirm("Your account was not verified yet, Do you want to verify your account now?")){
-						      return false;
-						      window.location.href = "admin/dashboard.php?id="+_return[2];
-						    }
-							window.location.href = "validation.php?type=admin&&id="+_return[2];
-						}
-						window.location.href = "admin/dashboard.php?id="+_return[2];
+						       window.location.href = "admin/dashboard.php?id="+_return[2];;
+						    }else{window.location.href = "validation.php?type=admin&&id="+_return[2];}
+						}else{window.location.href = "admin/dashboard.php?id="+_return[2];}
 					}
 				}
 			});
@@ -101,7 +95,6 @@ _loginForm.on("submit", function(e){
 		}else{
 			console.log("naa error");
 		}
-
 });
 
 // This is for registration form validation
