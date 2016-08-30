@@ -219,5 +219,18 @@ class UserRepository
         return $stmt;
         // return $totalUsers;
     }
+    public function verifyUserAccount($validateData){
+        if($validateData[0] == 'validateAccount'){
+            $id =   $validateData[1];
+            $query = "UPDATE ". $this->model->table_name." SET status=:status WHERE id=:id";
+            $stmt = $this->conn->prepare($query);
 
+            $status = USER::VERIFIED_ACTIVE;
+            $stmt->bindParam(":id", $id);
+            $stmt->bindParam(":status", $status);
+            
+            $ret = ($stmt->execute()) ? true : false ;
+            return $ret;
+        }
+    }
 }

@@ -16,7 +16,6 @@ class SendSMS
      * Build Dependencies
      */
     public function __construct(){
-        // include '../Repository/SmsGateway.php';
         require_once dirname(__FILE__).'\../Repository/SmsGateway.php';
 
         $this->regMail = "joyjanetwins@gmail.com";

@@ -66,6 +66,11 @@
                         <input type="text" class="form-control" placeholder="Email" name="email" id="user_email" />
                     </div>
                     <div class="form-group">
+                        <div class = "err-mobileno error-message"></div>
+                        <span>Mobile No.</span>
+                        <input type="text" class="form-control" placeholder="Mobile" name="mobileno" id="user_mobileno" />
+                    </div>
+                    <div class="form-group">
                         <div class = "err-username error-message"></div>
                         <span>Username</span>
                         <input type="text" class="form-control" placeholder="Username" name="username" id="user_username" />

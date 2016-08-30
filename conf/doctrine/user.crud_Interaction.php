@@ -19,5 +19,8 @@ $returnCreatingUser = array('user_creating_new' => $creatingUser);
 $removeUser = $userRepository->removeUserById($request);
 $returnRemovingUserById = array('user_removeBy_Id' => $removeUser);
 
+$verifyAccount = $userRepository->verifyUserAccount($request);
+$returnVerificationAccount = array('user_verify_account' => $verifyAccount);
+
 // //Count Features
-echo json_encode(array($returnCheckAdminPassword,$returnAuthenticationProcess,$returnCreatingUser, $returnRemovingUserById));
+echo json_encode(array($returnCheckAdminPassword,$returnAuthenticationProcess,$returnCreatingUser, $returnRemovingUserById, $returnVerificationAccount));

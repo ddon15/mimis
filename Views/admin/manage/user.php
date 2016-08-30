@@ -235,6 +235,7 @@
                     </tr>
                 </thead>
                 <tbody>
+
                 <?php 
                     foreach($userRepository->displayAllUser() as $key => $value) {
                         $status = '';

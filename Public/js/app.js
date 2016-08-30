@@ -70,12 +70,29 @@ _loginForm.on("submit", function(e){
 						errEl.show();
 					}else if(_return[1] == "anonymous_user"){
 						errEl.hide();
+						var userId = _return[2];
+
+						//checking the status if not verified
 						if(_return[3] == 2){
-							alert("Your account was not verified yet, Go to you account settings to verify your account!");
+							if (!confirm("Your account was not verified yet, Do you want to verify your account now?")){
+						      return false;
+						      window.location.href = "employee/dashboard.php?id="+_return[2];
+						    }
+							window.location.href = "validation.php?type=employee&&id="+_return[2];
 						}
 						window.location.href = "employee/dashboard.php?id="+_return[2];
 					}else{
 						errEl.hide();
+						var userId = _return[2];
+						
+						//checking the status if not verified
+						if(_return[3] == 2){
+							if (!confirm("Your account was not verified yet, Do you want to verify your account now?")){
+						      return false;
+						      window.location.href = "admin/dashboard.php?id="+_return[2];
+						    }
+							window.location.href = "validation.php?type=admin&&id="+_return[2];
+						}
 						window.location.href = "admin/dashboard.php?id="+_return[2];
 					}
 				}
@@ -192,4 +209,37 @@ var employmentInformationElement = $('.glyphicon.glyphicon-object-align-horizont
     parent.find("#employmentDetails").toggle(1000);
     console.log(parent.siblings());
     parent.siblings().find("#personalDetails").toggle(1000);
+});
+$('a.validateAccount').on('click',function(e){
+	
+	var element = $(this);
+	var loader = element.siblings('.ajaxLoader');
+
+	loader.show();	
+	var data = {
+		0: 'validateAccount',
+		1: element.data('id'),
+		2: element.data('type')
+	};
+	$.ajax({
+		url: baseUriDomain+'/conf/doctrine/user.crud_Interaction.php',
+		type: 'GET',
+		data: {userData: data},
+		dataType: 'json',
+		success: function(response){
+			if(response[4].user_verify_account == true){
+				loader.hide();
+				$('.validateAccount .message').html("<span class = 'list-group-item list-group-item-success'>Your account was successfully validated!</span>");
+				$('.validateAccount .message').show();
+				setTimeout(function(){
+					loader.show();
+					$('.validateAccount .message').html("<span class = 'list-group-item list-group-item-success'>We are now redirecting you to your home page dashboard.</span>");
+				}, 3000);
+				setTimeout(function(){	
+					 window.location.href = element.data('type')+"/dashboard.php?id="+element.data('id');
+				}, 7000);
+			}
+		}
+	});
+
 });

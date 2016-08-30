@@ -116,6 +116,10 @@ div#footer .content {
 #mainContainer .logo img {
 	width: 200px;
 }
+#mainContainer .logo img.mimi {
+    width: 400px;
+    padding: 30px 0;
+}
 #mainContainer .logo {
 	   /* position: relative; */
 	/* top: -396px; */
@@ -550,4 +554,36 @@ body.adminDashboard .requestview .popup.singleViewRequest img.ajaxLoader {
     left: 0;
     margin: 0;
     height: 30px;
+}
+.popup.validateAccount {
+    width: 600px;
+    overflow: hidden;
+    height: 270px;
+    left: 450px;
+    top: 100px;
+}
+.popup.validateAccount .validateButton {
+    text-align: center;
+}
+.popup.validateAccount .validateButton a.validateAccount {
+    width: 185px;
+    padding: 8px 20px;
+    margin-top: 45px;
+    font-size: 22px;
+        border: none;
+}
+.popup.validateAccount .caption{
+   font-size: 18px;
+    line-height: 2; 
+}
+
+.popup.validateAccount .validateButton a.validateAccount span.glyphicon.glyphicon-ok {
+    font-size: 25px;
+    float: left;
+}
+.popup.validateAccount .validateButton img.ajaxLoader {
+    position: absolute;
+    left: 150px;
+    height: 40px;
+    margin-top: 50px;
 }

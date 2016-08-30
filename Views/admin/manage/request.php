@@ -57,10 +57,13 @@
                            foreach ($list as $key => $value) {
 
                               $name = '';
-                              $queryName = $userRepository->findUserById($value['user_id']);
+                              $queryName = $userRepository->findUserById($_GET['id']);
                               foreach($queryName as $row){
+                                  // var_dump($row['firstname']);
                                  $name = $row['firstname']." ".$row['lastname'];
+
                               }
+                              
                               $status = '';
                               if($value['status'] == 3)  {
                                   $status = "<h6 class='label label-success'>New</h6>";

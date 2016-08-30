@@ -10,7 +10,7 @@
 	<body class = "login">
 		<div class="header">
 			<div class="content">
-				<h1><span>M</span>ango <span>I</span>nteractive <span>M</span>anagement <span>I</span>nformation <span>S</span>ystem </h1>
+				
 			</div>
             <div id="custom-search-input">
                 <div class="input-group col-md-12">
@@ -25,7 +25,7 @@
 		</div>
 		<div id="mainContainer">
 			<div class="logo">
-				<img src="../Public/images/logo.png"/>
+				<img class = "mimi" src="../Public/images/mimii.png"/>
 			</div>
 			<div class="loginForm">
 				<h1>Login</h1>
