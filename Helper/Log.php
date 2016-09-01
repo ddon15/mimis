@@ -18,11 +18,13 @@ class Log{
 
     public $activity_table_name = "activity_log";
 
-    public function getOvertime() {
+    public function getOvertime($name = null) {
         $overtime = array(
                 'send' => 'Send overtime request to admin.',
                 'approve' => 'approving your overtime request.',
-                'remove' => 'disapproved your overtime request'
+                'remove' => 'disapproved your overtime request',
+                'admin_send' => 'Admin filed Over Time one of the employee as required on given schedule.'
+                // 'admin_send' => 'GoodDay '.$name.' you are required to overtime this schedule, The admin already filed an OT for you.'
             );
         $this->overtime = $overtime;
 

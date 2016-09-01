@@ -2,6 +2,7 @@
     include_once '../../Repository/UserRepository.php';
     include_once '../../Repository/LogRepository.php';
     include_once '../../conf/connection.php';
+    include_once '../../Helper/Notification.php';
     $db = new Database();
     $conn = $db->getConnection();  
     $logRepository = new LogRepository();
@@ -16,6 +17,8 @@
       <link href="../../Public/lib/dashboard.css" rel="stylesheet">
       <link href="../../public/css/style.css" rel="stylesheet" />
       <link href="../../public/lib/search.css" rel="stylesheet" />
+      <link rel="stylesheet" href="../../../Public/lib/wickedpicker.css">
+<link rel="stylesheet" href="../../../Public/lib/datepicker.css">
 
       <link rel="icon" href="../../Public/images/logo.png">
   </head>
@@ -59,7 +62,12 @@
                     <li class = "navReq"><a href="#"><span class = "glyphicon glyphicon-share-alt"></span> Manage Request</a></li>
                    <!--  <li class = "navRequirements"><a href="#"><span class = "glyphicon glyphicon-check"></span> Manage Requirements</a></li> -->
                     <li class = "navMessages"><a href="" ><span class = "glyphicon glyphicon-envelope"></span> Messages</a></li>
-                    <li class = "navNoti"><a href="#"><span class = "glyphicon glyphicon-globe"></span> Notification </a></li>
+                    <li class = "navNoti"><a href="#"><span class = "glyphicon glyphicon-globe"></span> Notification <span class="notification badge">
+                       <?php
+                          $notification = new Notification();
+                          echo $notification->getEmployeeNotificationCount($_GET['id']);
+                     ?> 
+                    </span></a></li>
                     <li class = "navMyAccount"><a href="" ><span class = "glyphicon glyphicon-user"></span> My Account</a></li>
                   </ul>
                   <ul class="nav nav-sidebar manageGroup">
@@ -166,9 +174,9 @@
                         </div>
                     </div>
                      <?php
-                          include_once "logs.php";
+                          // include_once "logs.php";
                           include_once "messages.php";
-                          include_once "notification.php";
+                          include_once "manage/notification.php";
                           include_once "manage/request.php";
                           include_once "manage/account.php";
                       ?>
@@ -177,5 +185,46 @@
         </div>
     </div>   
     <script src="../../Public/js/app.dashboard.js"></script>
+    <script src="../../../Public/lib/wickedpicker.js"></script>    
+<script src="../../../Public/lib/datepicker.js"></script>    
+<script type="text/javascript">
+     function date_time(id)
+                            {
+                                date = new Date;
+                                year = date.getFullYear();
+                                month = date.getMonth();
+                                months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'December');
+                                d = date.getDate();
+                                day = date.getDay();
+                                days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                h = date.getHours();
+                                if(h<10)
+                                {
+                                        h = "0"+h;
+                                }
+                                m = date.getMinutes();
+                                if(m<10)
+                                {
+                                        m = "0"+m;
+                                }
+                                s = date.getSeconds();
+                                if(s<10)
+                                {
+                                        s = "0"+s;
+                                }
+                                result = ''+days[day]+' '+months[month]+' '+d+' '+year+' <span class = "time">'+h+':'+m+':'+s+'</span>';
+                                document.getElementById(id).innerHTML = result;
+                                setTimeout('date_time("'+id+'");','1000');
+                                return true;
+                            }
+                            window.onload = date_time('date_time');
+
+        $('#startTime').wickedpicker({now: '4:00', twentyFour: false, title:
+            'Set Time', showSeconds: true});
+        $('#endTime').wickedpicker({now: '8:16', twentyFour: false, title:
+            'Set Time', showSeconds: true});
+
+        $('[data-toggle="datepicker"]').datepicker();
+</script>         
   </body>
 </html>

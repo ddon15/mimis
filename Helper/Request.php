@@ -22,7 +22,6 @@ class Request{
         return $this->table_names;
     }
     public function dateDataTransformer($date){
-    		// var_dump($date);exit;
     	$explodeData = explode("/",$date);
     	$dateComposer = $explodeData[2]."-".$explodeData[0]."-".$explodeData[1];
 

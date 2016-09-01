@@ -1,6 +1,6 @@
 <?php 
     require_once dirname(__FILE__).'\../../../Repository/RequestRepository.php';
-    // include_once dirname(__FILE__).'\../../../Repository/LogRepository.php';
+    include_once dirname(__FILE__).'\../../../Helper/Notification.php';
     include_once dirname(__FILE__).'\../../../conf/connection.php';
 
     $db = new Database();
@@ -10,8 +10,7 @@
     $userRepository = new UserRepository();
 
 ?>
-<link rel="stylesheet" href="../../../Public/lib/wickedpicker.css">
-<link rel="stylesheet" href="../../../Public/lib/datepicker.css">
+
 <div class="requestContainer" hidden>
     <div class="headeremployee">
         <div>
@@ -32,15 +31,16 @@
             <ul class="nav nav-tabs menu">
                 <li class="overTimeTabMenu active"><a data-toggle="tab"  href="#">Over Time</a></li>
                 <li class = "leaveTabMenu"><a data-toggle="tab" href="#">Leave</a></li>
-                <li class = "excuseToAbsentTabMenu"><a data-toggle="tab" href="#">Request Response</a></li>
+                <li class = "requestResponseTabMenu"><a data-toggle="tab" href="#">Request Response</a></li>
             </ul>
         </div>
             <div class="main">
                 <div class="tab-content page">
-                  <div id="overTimeContainer" class="tab-pane fade in active">
+                    <div id="overTimeContainer" class="tab-pane fade in active">
                     <h4>Create Overtime Schedule</h4>
                     <br>
                     <div class = "otForm">
+                      <div class="message"></div>
                       <form class="form-ot" method="post" id="ot-form">
                           <div class="auth error-message showError" hidden>
                           </div>
@@ -74,6 +74,7 @@
                     <h4>Create Leave Schedule</h4>
                     <br>
                     <div class = "leaveForm">
+                      <div class="message"></div>
                       <form class="form-leave" method="post" id="leave-form">
                           <div class="auth error-message showError" hidden>
                           </div>
@@ -107,84 +108,53 @@
                           <div class="form-group submit">
                             <button type="submit" class="btn btn-default" name="btn-leave" id="btn-leave">
                             <span class="glyphicon glyphicon-log-in"></span> &nbsp; Send Request
-                            </button>
+                            </button><img class = "ajaxLoader" src="../../../Public/images/loader.gif"/>
                           </div>  
                         </form>
                     </div>
                   </div> 
-                  </div>
                   <div id="responseContainer" class="tab-pane fade">
                      <br>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Request Type</th>
-                                    <th>Responsed by </th>
-                                    <th>Responsed Date</th>
-                                    <th style = 'text-align:right'>action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                             <tr>
-                                    <td>3</td>
-                                    <td>Over Time</td>
-                                    <td>Admin </td>
-                                    <td>23/5/44</td>
-                                    <td style = 'text-align:right'>Remove</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Leave</td>
-                                    <td>Rose</td>
-                                    <td>23/5/44</td>
-                                    <td style = 'text-align:right'>Removed</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                     <h4>View all response</h4>
+                        <div class="responseRequest">
+                        <?php
+                            $notification = new Notification();
+                            $data = $notification->getEmployeeNotificationList($_GET['id']);
+                            foreach ($data as $key => $value) {
+                            
+                            $name = '';
+                            $res = '';
+
+                            if($value['status'] == 1){
+                              $res = "<span class = 'label label-primary'>Approved</span>";
+                            }else{
+                              $res = "<span class = 'label label-danger'>Dispproved</span>";
+                            }
+                                foreach($userRepository->findUserById($value['responsed_by']) as $row){
+                                   $name = $row['firstname']." ".$row['lastname'];
+                                }
+
+                                echo '
+                                     <div class="media">
+                                        <div class="media-left">
+                                          <a href="#">
+                                            <img class="media-object" src="../../Public/images/no-image.jpg" style = "width:64px;height:64px;" alt="...">
+                                          </a>
+                                        </div>
+                                        <div class="media-body">
+                                          <h4 class="media-heading">'.$res." ".$value['table_name'].'</h4>
+                                              You have filed this request on '.$value['dateCreated'].' for the reason of "'.$value['reason'].'", So '.$name.' responded it '.$res.'.
+
+                                        </div>
+                                      </div>
+                                ';
+                            }
+
+                        ?>
+                         
+                        </div>  
                   </div>
                 </div>
             </div>     
-    </div>
-</div>      
-<script src="../../../Public/lib/wickedpicker.js"></script>    
-<script src="../../../Public/lib/datepicker.js"></script>    
-<script type="text/javascript">
-     function date_time(id)
-                            {
-                                date = new Date;
-                                year = date.getFullYear();
-                                month = date.getMonth();
-                                months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'December');
-                                d = date.getDate();
-                                day = date.getDay();
-                                days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-                                h = date.getHours();
-                                if(h<10)
-                                {
-                                        h = "0"+h;
-                                }
-                                m = date.getMinutes();
-                                if(m<10)
-                                {
-                                        m = "0"+m;
-                                }
-                                s = date.getSeconds();
-                                if(s<10)
-                                {
-                                        s = "0"+s;
-                                }
-                                result = ''+days[day]+' '+months[month]+' '+d+' '+year+' <span class = "time">'+h+':'+m+':'+s+'</span>';
-                                document.getElementById(id).innerHTML = result;
-                                setTimeout('date_time("'+id+'");','1000');
-                                return true;
-                            }
-                            window.onload = date_time('date_time');
-
-        $('#startTime').wickedpicker({now: '4:00', twentyFour: false, title:
-            'Set Time', showSeconds: true});
-        $('#endTime').wickedpicker({now: '8:16', twentyFour: false, title:
-            'Set Time', showSeconds: true});
-
-        $('[data-toggle="datepicker"]').datepicker();
-</script>         
+    </div>  
+</div>

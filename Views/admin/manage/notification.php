@@ -28,13 +28,13 @@
         <div class="top">
             <h1>Notifications Management</h1>
             <ul class="nav nav-tabs menu">
-                <li class="notificationTabMenu active"><a data-toggle="tab"  href="#">List of notifications</a></li>
-                <li class = "createMessageTabMenu"><a data-toggle="tab" href="#">Create Message</a></li>
+                <li class="notificationListTabMenu active"><a data-toggle="tab"  href="#">List of notifications</a></li>
+                <li class = "createMessageNotificationTabMenu"><a data-toggle="tab" href="#">Create Message</a></li>
             </ul>
         </div>
             <div class="main">
                 <div class="tab-content page">
-                  <div id="overTimeContainer" class="tab-pane fade in active">
+                  <div id="notificationListContainer" class="tab-pane fade in active">
                     <h4>View all notifications from employees</h4>
                     <br>
                       <?php
@@ -74,14 +74,11 @@
                         }
     
                       ?>
-                      </tbody>
-                  </table>
                   </div>
-                  <div id="leaveContainer" class="tab-pane fade">
-                    <h4>Create Message</h4>
+                  <div id="createMessageNotificationContainer" class="tab-pane fade">
+                   <h4>Create Message</h4>
                     <br>
-
-                    <!-- <div class = "leaveForm">
+                    <div class = "leaveForm">
                       <form class="form-message" method="post" id="message-form">
                           <div class="auth error-message showError" hidden>
                           </div>
@@ -102,7 +99,8 @@
                             </button>
                           </div>  
                         </form>
-                    </div> -->
+                    
+                  </div> 
                   </div> 
                   </div>
                 </div>

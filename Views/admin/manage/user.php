@@ -10,7 +10,6 @@
     $userRepository = new UserRepository();
 
 ?>
- <link href="../../Public/lib/mypopup.css" rel="stylesheet" />
 <div class="userContainerAdmin" hidden>
     <div class="headeradmin">
         <div>
@@ -31,13 +30,14 @@
             <ul class="nav nav-tabs menu">
                 <li role="presentation" class="tab userList active"><a href="#">User list</a></li>
                 <li role="presentation" class = "tab userLogs"><a href="#">User logs</a></li>
-                <li role="presentation" class = ""><a href="#">Messages</a></li>
+                <li role="presentation" class = "tab createMessageToUserTabMenu"><a href="#">Create Message</a></li>
             </ul>
         </div>
             <div class="main">
                     <!-- POP DIV -->
     <div id="myPopUpDiv" class = "fade updatePopUpDiv" style = "display:none"></div>
     <div class="popup updateForm">
+    <div class="message"></div>
         <span class="glyphicon glyphicon-remove"></span>
         <div class="title">Update</div>
         <div class="content">
@@ -188,6 +188,34 @@
         </div>
    </div>
    <!-- end of popup -->
+   <!-- create message -->
+   <div class="createMessageToUserContainer">
+        <h4>Create Message</h4>
+                    <br>
+                    <div class = "leaveForm">
+                      <form class="form-message" method="post" id="message-form">
+                          <div class="auth error-message showError" hidden>
+                          </div>
+                          <div class="form-group">
+                            <div class = "err-email error-message"></div>
+                             <label for="estimatedTime">To</label>
+                          </div>
+                          <div class="form-group">
+                              <label for="comment">Message:</label>
+                               <input type="text" class="form-control" name="user_id" value="<?php echo $_GET['id'];?>" style = "display:none"/>
+                              <textarea class="form-control" rows="5" id="comment" name = "message"></textarea>
+                          </div>
+                          
+                       
+                          <div class="form-group submit">
+                            <button type="submit" class="btn btn-default" name="btn-leave" id="btn-message">
+                            <span class="glyphicon glyphicon-log-in"></span> &nbsp; Send Message
+                            </button>
+                          </div>  
+                        </form>
+                    
+                  </div> 
+    </div>
     <!-- user logs -->
     <div class="userLogsContainer">
         <?php
@@ -290,6 +318,7 @@
     <!-- create new user -->
     <div class="createNewUserContainer">
         <h1>Register</h1>
+        <div class="message"></div>
                 <form class="form-registration" method="post" id="register-form"><br>
                 <div class="glyphicon glyphicon-user personal">
                     <span class = "forPersonalDetails">Personal Information</span>
@@ -421,6 +450,7 @@
                             I agree and accept the <a href = "#">terms</a> and <a href = "#">policy</a> based on stated facts.
                     </div> -->
                     <div class="form-group submit">
+                    <img class = "ajaxLoader" src="../../../Public/images/loader.gif"/>
                         <button type="submit" class="btn btn-default" name="btn-register" id="btn-register">
                         <span class="glyphicon glyphicon-save"></span> &nbsp; Save
                         </button> 
@@ -431,4 +461,3 @@
       </div>     
 </div>
 
- <script src="../../Public/js/app.js"></script>

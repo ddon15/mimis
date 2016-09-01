@@ -14,7 +14,8 @@ var baseUriDomain = window.location.origin;
 
 //show/hides of createnewuser, logs and listuser
   $('.userLogsContainer').hide();
-  $('.createNewUserContainer').hide(); 
+  $('.createNewUserContainer').hide();
+  $('.createMessageToUserContainer').hide(); 
 var tab_createNewUser = $('a.label.label-primary.createNewUser');
     tab_createNewUser.on("click", function(e){
         e.preventDefault();
@@ -22,6 +23,7 @@ var tab_createNewUser = $('a.label.label-primary.createNewUser');
         $(this).addClass("active");
         $('.userListContainer').hide();
         $('.userLogsContainer').hide();
+          $('.createMessageToUserContainer').hide(); 
         $('.createNewUserContainer').show(); 
 
     });
@@ -31,6 +33,7 @@ var tab_userLogs = $('li.tab.userLogs');
         $(this).addClass("active");
         $('.userListContainer').hide();
         $('.createNewUserContainer').hide(); 
+        $('.createMessageToUserContainer').hide(); 
         $('.userLogsContainer').show();
     });
  var tab_userList = $('li.tab.userList');
@@ -39,8 +42,20 @@ var tab_userLogs = $('li.tab.userLogs');
         $(this).addClass("active");
         $('.userLogsContainer').hide();
         $('.createNewUserContainer').hide(); 
+          $('.createMessageToUserContainer').hide(); 
         $('.userListContainer').show();
     });
+ var tab_createMessageToUser = $('li.tab.createMessageToUserTabMenu');
+    tab_createMessageToUser.on("click", function(e){
+        $(this).siblings().removeClass("active");
+        $(this).addClass("active");
+        $('.userLogsContainer').hide();
+        $('.createNewUserContainer').hide(); 
+        $('.userListContainer').hide();
+          $('.createMessageToUserContainer').show(); 
+        
+    });
+    // 
 
 $('.editUser ').each(function(){
     $(this).click(function(e){
@@ -105,16 +120,26 @@ function showModal(){
 var _requestLeaveForm = $('form#leave-form');
     _requestLeaveForm.on("submit", function(e){
         e.preventDefault();
-            console.log("submit is working!");
+            
         var formDataArray = $(this).serializeArray();
-        console.log(formDataArray);
+       
+       var _loader = $(this).find('.ajaxLoader');
+        _loader.show();
         $.ajax({
                     url: baseUriDomain+'/conf/doctrine/request.repositoryManager.php',
                     type: 'GET',
                     data: {requestData: formDataArray},
                     dataType: 'json',
                     success: function(response){
-                        console.log(response);
+                         var msg = $('.leaveForm .message');
+                            for(var key in response){
+                                if(response[key].request_leave != true){
+                                     msg.html('<div class="alert alert-danger" role="alert">Sending leave request to admin, failed!</div>');
+                                }
+                                 msg.html('<div class="alert alert-success" role="alert">Sending leave request to admin, success!</div>');
+                                 _loader.hide();
+                                  msg.show();
+                            }
                     }
                 });
 });
@@ -132,8 +157,41 @@ _requestOTForm.on("submit", function(e){
         data: {requestData: formDataArray},
         dataType: 'json',
         success: function(response){
-            console.log(response);
-            _loader.hide();
+            var msg = $('.otForm .message');
+            for(var key in response){
+                if(response[key].request_ot != true){
+                     msg.html('<div class="alert alert-danger" role="alert">Sending overtime request to admin, failed!</div>');
+                }
+                 msg.html('<div class="alert alert-success" role="alert">Sending overtime request to admin, success!</div>');
+                 _loader.hide();
+                  msg.show();
+            }
+        }
+    });
+});
+var _requestOTFormAdmin = $('form#ot-admin-form');
+_requestOTFormAdmin.on("submit", function(e){
+    e.preventDefault();
+    var doctrineConfigurationPath = '/conf/doctrine/';
+    var _loader = $(this).find('.ajaxLoader');
+        _loader.show();
+    var formDataArray = $(this).serializeArray();
+
+    $.ajax({
+        url: baseUriDomain+doctrineConfigurationPath+'request.repositoryManager.php',
+        type: 'GET',
+        data: {requestData: formDataArray},
+        dataType: 'json',
+        success: function(response){
+            var msg = $('.otFormAdmin .message');
+            for(var key in response){
+                if(response[key].request_ot != true){
+                     msg.html('<div class="alert alert-danger" role="alert">Filing overtime to employee failed.</div>');
+                }
+                 msg.html('<div class="alert alert-success" role="alert">You have successfully filed overtime to employee.</div>');
+                 _loader.hide();
+                  msg.show();
+            }
         }
     });
 });
@@ -263,50 +321,50 @@ function runAdminResponse(_response, _element, statusElement, status, loader){
 /* DONE APPROVED OR DISAPPROVED */
 
 /// EMPLOYEE
-$('.navReq').on("click", function(e){
-    e.preventDefault();
-    processNavigationOnClick(this);
-    });
-$('.navEmpDashPage').on("click", function(e){
-    e.preventDefault();
-    processNavigationOnClick(this);
-    });
-$('.navRequirements').on("click", function(e){
-    e.preventDefault();
-     processNavigationOnClick(this);
-    });
+//sidebar
+$('.navEmpDashPage').on("click", function(e){ e.preventDefault(); processNavigationOnClick(this); });
+$('.navReq').on("click", function(e){ e.preventDefault(); processNavigationOnClick(this); });
+$('.navMessages').on("click", function(e){ e.preventDefault(); processNavigationOnClick(this); });
+$('.navNoti').on("click", function(e){ e.preventDefault(); processNavigationOnClick(this); });
+$('.navMyAccount').on("click", function(e){ e.preventDefault(); processNavigationOnClick(this); });
 
-$('.navNoti').on("click", function(e){
-    e.preventDefault();
-    processNavigationOnClick(this);
-    });
+// $('.navRequirements').on("click", function(e){ e.preventDefault(); processNavigationOnClick(this); });
+// $('.navReports').on("click", function(e){ e.preventDefault(); processNavigationOnClick(this); });
 
-$('.navReports').on("click", function(e){
-    e.preventDefault();
-    processNavigationOnClick(this);
-    });
+//tab menu
+$('.usersWithReqTabMenu').on("click", function(e){ e.preventDefault(); tabMenus(this); });
+$('.createMessageRequirementsTabMenu').on("click", function(e){ e.preventDefault(); tabMenus(this); });
 
-$('.navMyAccount').on("click", function(e){
-    e.preventDefault();
-    processNavigationOnClick(this);
-    });
+$('.overTimeTabMenu').on("click", function(e){ e.preventDefault(); tabMenus(this); });
+$('.leaveTabMenu').on("click", function(e){ e.preventDefault(); tabMenus(this); });
+$('.requestResponseTabMenu').on("click", function(e){ e.preventDefault(); tabMenus(this); });
 
+$('.notificationListTabMenu').on("click", function(e){ e.preventDefault(); tabMenus(this); });
+$('.createMessageNotificationTabMenu').on("click", function(e){ e.preventDefault(); tabMenus(this); });
+$('.fileOttoEmpTabMenu').on("click", function(e){ e.preventDefault(); tabMenus(this); });
+$('.requestListTabMenu').on("click", function(e){ e.preventDefault(); tabMenus(this); });
 
-$('.overTimeTabMenu').on("click", function(e){
-    e.preventDefault();
-    requestTabMenu(this);
-    });
-$('.leaveTabMenu').on("click", function(e){
-    e.preventDefault();
-    requestTabMenu(this);
-    });
-$('.excuseToAbsentTabMenu').on("click", function(e){
-    e.preventDefault();
-    requestTabMenu(this);
-    });
-function requestTabMenu(element){
-    var menuClass = ["overTimeTabMenu", "leaveTabMenu", "excuseToAbsentTabMenu" ];
-    var tabMenuPages = ["overTimeContainer", "leaveContainer", "responseContainer"];
+function tabMenus(element){
+    var menuClass = [
+               "usersWithReqTabMenu", "createMessageRequirementsTabMenu", //requirements
+               "overTimeTabMenu", "leaveTabMenu", "requestResponseTabMenu", //request
+               // this field is reserve for uer
+                "notificationListTabMenu", "createMessageNotificationTabMenu", //notification
+                //  this is for reports
+                //  this is for account
+                /*some tab menu on admin */
+                 "requestListTabMenu", "fileOttoEmpTabMenu"
+            ];
+    var tabMenuPages = [
+                "usersWithRequirementsContainer", "createMessageRequirementsContainer",
+                "overTimeContainer", "leaveContainer", "responseContainer",
+               // this field is reserve for user
+                "notificationListContainer", "createMessageNotificationContainer",
+                // this is for reports
+                //  this is for account
+                "requestListContainer", "fileOttoEmpContainer"
+
+            ];
 
     var _convertToArrayElement = $(element);
     var getClassName = _convertToArrayElement[0]['className'];
@@ -314,25 +372,51 @@ function requestTabMenu(element){
     var getIndex = menuClass.indexOf(getClassName);
 
     for (i = 0; i < tabMenuPages.length; i++) {
-        if(i != getIndex){
-            $('#'+tabMenuPages[i]).hide();
-            $('#'+tabMenuPages[i]).removeClass('in active');
-        }else{
-             $('span.breadCrumd').html(getClassName); 
-             $('#'+tabMenuPages[i]).show(); 
-             $('#'+tabMenuPages[i]).addClass('in active');
+        if(i == getIndex){
+            $('span.breadCrumd').html(getClassName); 
+            $('#'+tabMenuPages[i]).show(); 
+            $('#'+tabMenuPages[i]).addClass('in active');
 
+            $('#'+tabMenuPages[i]).siblings().hide();
+            $('#'+tabMenuPages[i]).siblings().removeClass('in active');
         }
+        // }else{
+        //       $('#'+tabMenuPages[i]).hide();
+        //     $('#'+tabMenuPages[i]).removeClass('in active');
+        // }
+        // if(i != getIndex){
+        //     $('#'+tabMenuPages[i]).hide();
+        //     // console.log("hide pages : "+tabMenuPages[i]);
+        //     // $('#'+tabMenuPages[i]).removeClass('in active');
+        // }else{
+        //      $('span.breadCrumd').html(getClassName); 
+        //      // $('#'+tabMenuPages[i]).addClass('in active');
+        //      $('#'+tabMenuPages[i]).show(); 
+        //     console.log("show menu pages : "+tabMenuPages[i]);
+        // }
     }
      for (i = 0; i < menuClass.length; i++) { 
-         if(menuClass[i] != getClassName){
-               $('.'+menuClass[i]).removeClass("in active");  
-         }else $('.'+menuClass[i]).addClass("in active");  
+         if(menuClass[i] == getClassName){
+                $('.'+menuClass[i]).addClass("in active");  
+                $('.'+menuClass[i]).siblings().removeClass("in active");  
+         }
+         // if(menuClass[i] != getClassName){
+         //       $('.'+menuClass[i]).removeClass("in active");  
+         // }else{
+         //    $('.'+menuClass[i]).addClass("in active");  
+         // }
     }
 }
 function processNavigationOnClick(element) {
-    var clickElements = ["navEmpDashPage", "navReq", "navRequirements", "navNoti", "navReports", "navMyAccount", "navLogout", "navMessages"];
-    var pageContainer = ["dashboardContainer", "requestContainer", "requirementsContainer", "notificationContainer", "reportContainer", "accountContainer", "logoutContainer", "messagesContainer"];
+    console.log(element);
+    var clickElements = [
+            "navEmpDashPage", "navReq", "navMessages", 
+            "navNoti", "navMyAccount"
+        ];
+    var pageContainer = [
+            "dashboardContainer", "requestContainer", "messagesContainer",
+            "notificationContainer", "myAccountContainer"
+        ];
 
     var _convertToArrayElement = $(element);
     var getClassName = _convertToArrayElement[0]['className'];
@@ -341,7 +425,12 @@ function processNavigationOnClick(element) {
     // var checkIfExist = (getIndex != -1) ? true : false ;
 
     for (i = 0; i < pageContainer.length; i++) {
+        // if(i == getIndex){
+        //      $('.'+pageContainer[i]).show();
+        //      $('.'+pageContainer[i]).siblings().hide();
+        // }
         if(i != getIndex){
+
             $('.'+pageContainer[i]).hide();
         }else $('.'+pageContainer[i]).show();
     }
@@ -353,43 +442,19 @@ function processNavigationOnClick(element) {
 }
 
 //ADmin
-$('.navAdminDashPage').on("click", function(e){
-    e.preventDefault();
-    processAdminNavigationOnClick(this);
-    });
-$('.navAdminRequirements').on("click", function(e){
-    e.preventDefault();
-    processAdminNavigationOnClick(this);
-    });
-$('.navAdminReq').on("click", function(e){
-    e.preventDefault();
-     processAdminNavigationOnClick(this);
-    });
-
-$('.navAdminUsers').on("click", function(e){
-    e.preventDefault();
-    processAdminNavigationOnClick(this);
-    });
-
-$('.navAdminNoti').on("click", function(e){
-    e.preventDefault();
-    processAdminNavigationOnClick(this);
-    });
-
-$('.navAdminReports').on("click", function(e){
-    e.preventDefault();
-    processAdminNavigationOnClick(this);
-    }); 
-$('.navAdminMyAccount').on("click", function(e){
-    e.preventDefault();
-    processAdminNavigationOnClick(this);
-    });
+$('.navAdminDashPage').on("click", function(e){ e.preventDefault(); processAdminNavigationOnClick(this); });
+$('.navAdminRequirements').on("click", function(e){ e.preventDefault(); processAdminNavigationOnClick(this); });
+$('.navAdminReq').on("click", function(e){ e.preventDefault(); processAdminNavigationOnClick(this); });
+$('.navAdminUsers').on("click", function(e){ e.preventDefault(); processAdminNavigationOnClick(this); });
+$('.navAdminNoti').on("click", function(e){ e.preventDefault(); processAdminNavigationOnClick(this); });
+$('.navAdminReports').on("click", function(e){ e.preventDefault(); processAdminNavigationOnClick(this); });
+$('.navAdminMyAccount').on("click", function(e){ e.preventDefault(); processAdminNavigationOnClick(this); });
 
 function processAdminNavigationOnClick(element) {
     var clickElements = [
                             "navAdminDashPage", 
-                            "navAdminRequirements", 
-                            "navAdminReq", 
+                            "navAdminRequirements",
+                            "navAdminReq",
                             "navAdminUsers", 
                             "navAdminNoti", 
                             "navAdminReports", 
@@ -397,8 +462,8 @@ function processAdminNavigationOnClick(element) {
                         ];
     var pageContainer = [
                             "dashboardContainerAdmin", 
-                            "requirementsContainerAdmin", 
-                            "requestContainerAdmin", 
+                            "requirementsContainerAdmin",
+                            "requestContainerAdmin",
                             "userContainerAdmin", 
                             "notificationContainerAdmin", 
                             "reportsContainerAdmin", 
@@ -407,19 +472,81 @@ function processAdminNavigationOnClick(element) {
 
     var _convertToArrayElement = $(element);
     var getClassName = _convertToArrayElement[0]['className'];
-
+console.log("class name : "+getClassName);
+// console.log(getIndex);
     var getIndex = clickElements.indexOf(getClassName);
     // var checkIfExist = (getIndex != -1) ? true : false ;
 
-    for (i = 0; i < pageContainer.length; i++) {
+    for (i = 0; i < pageContainer.length; i++) {   
         if(i != getIndex){
             $('.'+pageContainer[i]).hide();
-        }else $('.'+pageContainer[i]).show();
+            console.log("hide page : "+pageContainer[i]);
+        }else{
+            $('.'+pageContainer[i]).show(); console.log("show page : "+pageContainer[i]);
+        } 
     }
     for (i = 0; i < clickElements.length; i++) { 
          if(clickElements[i] != getClassName){
                $('.'+clickElements[i]).removeClass("active");  
-         }else $('.'+clickElements[i]).addClass("active");  
+         }else{
+            $('.'+clickElements[i]).addClass("active");  
+         } 
     }
 }
+// //custom
+ var tab_empOT = $('li.overTimeTabMenu');
+    tab_empOT.on("click", function(e){
+        $(this).siblings().removeClass("in active");
+        $(this).addClass("in active");
+          $('div#overTimeContainer').addClass("in active"); 
+          $('div#overTimeContainer').siblings().removeClass("in active"); 
+          $('div#overTimeContainer').show(); 
+    });
+ var tab_empLeave = $('li.leaveTabMenu');
+    tab_empLeave.on("click", function(e){
+        $(this).siblings().removeClass("in active");
+        $(this).addClass("in active");
+          $('div#leaveContainer').addClass("in active"); 
+          $('div#leaveContainer').siblings().removeClass("in active"); 
+          $('div#leaveContainer').show(); 
+    });
+//done
+
+
+$('#accountedit-form').on('submit',function(e){
+     e.preventDefault(); 
+
+    var loader = $('div.btn img.loader');
+        loader.show();
+        var formDataArray = $(this).serializeArray();
+            data = ['accountEdit',formDataArray];
+
+     $.ajax({
+            url: baseUriDomain+'/conf/doctrine/user.crud_Interaction.php',
+            type: 'GET',
+            data: {userData: data},
+            dataType: 'json',
+            success: function(response){
+                var _html;
+                for(var data in response) {
+                    if(response[data].user_accountsetting_update == true) {
+                        loader.hide();
+                        _html = '<div class="alert alert-success" style ="font-size: 14px;padding: 10px;" role="alert">Your account was successfully updated!</div>';
+                        $('.details .message').html(_html);
+                    }else{
+                         _html = '<div class="alert alert-warning" style ="font-size: 14px;padding: 10px;" role="alert">Updating your account failed!</div>';
+                        $('.details .message').html(_html);
+                        loader.hide();
+                    }
+                }
+            }
+        });
+
+});
+﻿
+﻿//change pass link
+$('a.changepass-show-link').on('click', function(e){
+    e.preventDefault();
+ $( ".changepass-show" ).toggle();
+});
 

@@ -100,6 +100,8 @@ _loginForm.on("submit", function(e){
 // This is for registration form validation
 _registrationForm.on("submit", function(e){
 	e.preventDefault();
+	 var _loader = $(this).find('.ajaxLoader');
+        _loader.show();
 
 	var getDataValidated = validateForm(this);
 		getError = getDataValidated[0];
@@ -114,14 +116,17 @@ _registrationForm.on("submit", function(e){
 				data: {userData: _data},
 				dataType: 'json',
 				success: function(response){
-					console.log(response);
-					for(var data in response) {
-						if(response[data].user_creating_new == false) {
-							showFailed();
-						}else if(response[data].user_creating_new == true){
-							showSuccess();
-						}
-					}
+					var msg = $('.createNewUserContainer .message');
+		            for(var key in response){
+		                if(response[key].user_creating_new != true){
+		                     msg.html('<div class="alert alert-danger" role="alert">Saving new user, failed!</div>');
+		                     showFailed();
+		                }
+		                 msg.html('<div class="alert alert-success" role="alert">Saving new user, success!</div>');
+		                 showSuccess();
+		                 _loader.hide();
+		                  msg.show();
+		            }
 				}
 			});
 

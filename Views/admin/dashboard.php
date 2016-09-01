@@ -17,6 +17,9 @@
       <link href="../../Public/lib/dashboard.css" rel="stylesheet">
       <link href="../../public/css/style.css" rel="stylesheet" />
       <link href="../../public/lib/search.css" rel="stylesheet" />
+       <link href="../../Public/lib/mypopup.css" rel="stylesheet" />
+       <link rel="stylesheet" href="../../../Public/lib/wickedpicker.css">
+<link rel="stylesheet" href="../../../Public/lib/datepicker.css">
 
       <link rel="icon" href="../../Public/images/logo.png">
   </head>
@@ -71,7 +74,7 @@
                   </ul>
                   <ul class="nav nav-sidebar manageGroup">
                     
-                    <li class = "navAdminMyAccount"><a href="" ><span class = "glyphicon glyphicon-user"></span> My Account</a></li>
+                    <li class = "navAdminMyAccount"><a href="#" ><span class = "glyphicon glyphicon-user"></span> My Account</a></li>
                     <li class = "navAdminLogout"><a href="" ><span class = "glyphicon glyphicon-off"></span> Logout</a></li>
                   </ul>
             </div>  
@@ -172,18 +175,62 @@
                         </div>
                     </div>
                      <?php
-                          include_once "manage/report.php";
-                          include_once "monitor/logs.php";
-                          include_once "manage/notification.php";
-                          include_once "manage/request.php";
                           include_once "manage/requirements.php";
-                          include_once "manage/account.php";
+                          include_once "manage/request.php";
                           include_once "manage/user.php";
+                          include_once "manage/notification.php";
+                          include_once "manage/report.php";
+                          
+                          include_once "manage/account.php";
+                         
+                          include_once "monitor/logs.php";
                       ?>
                 </div>
             </div>
         </div>
     </div>   
     <script src="../../Public/js/app.dashboard.js"></script>
+     <script src="../../Public/js/app.js"></script>
+     <script src="../../../Public/lib/wickedpicker.js"></script>    
+<script src="../../../Public/lib/datepicker.js"></script>    
+<script type="text/javascript">
+     function date_time(id)
+                            {
+                                date = new Date;
+                                year = date.getFullYear();
+                                month = date.getMonth();
+                                months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'December');
+                                d = date.getDate();
+                                day = date.getDay();
+                                days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                h = date.getHours();
+                                if(h<10)
+                                {
+                                        h = "0"+h;
+                                }
+                                m = date.getMinutes();
+                                if(m<10)
+                                {
+                                        m = "0"+m;
+                                }
+                                s = date.getSeconds();
+                                if(s<10)
+                                {
+                                        s = "0"+s;
+                                }
+                                result = ''+days[day]+' '+months[month]+' '+d+' '+year+' <span class = "time">'+h+':'+m+':'+s+'</span>';
+                                document.getElementById(id).innerHTML = result;
+                                setTimeout('date_time("'+id+'");','1000');
+                                return true;
+                            }
+                            window.onload = date_time('date_time');
+
+        $('#startTime').wickedpicker({now: '4:00', twentyFour: false, title:
+            'Set Time', showSeconds: true});
+        $('#endTime').wickedpicker({now: '8:16', twentyFour: false, title:
+            'Set Time', showSeconds: true});
+
+        $('[data-toggle="datepicker"]').datepicker();
+</script>         
   </body>
 </html>

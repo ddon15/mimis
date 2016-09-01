@@ -28,44 +28,17 @@
         <div class="top">
             <h1>requirements Management</h1>
             <ul class="nav nav-tabs menu">
-                <li class="overTimeTabMenu active"><a data-toggle="tab"  href="#">List of Request</a></li>
-                <li class = "leaveTabMenu"><a data-toggle="tab" href="#">Create Message</a></li>
+                <li class="usersWithReqTabMenu active"><a data-toggle="tab"  href="#">User's list</a></li>
+                <li class = "createMessageRequirementsTabMenu"><a data-toggle="tab" href="#">Create Message</a></li>
             </ul>
         </div>
             <div class="main">
                 <div class="tab-content page">
-                  <div id="overTimeContainer" class="tab-pane fade in active">
-                    <h4>View all request from employees</h4>
-                    <br>
-                  <table class="table table-striped">
-                      <thead>
-                          <tr>
-                              <th>#</th>
-                              <th>Request Type</th>
-                              <th>Requested By</th>
-                              <th>Requested Date</th>
-                              <th style = 'text-align:right'>action</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                       <tr>
-                              <td>3</td>
-                              <td>Over Time</td>
-                              <td>Mardelences </td>
-                              <td>23/5/44</td>
-                              <td style = 'text-align:right'>approved | disapproved | View Details</td>
-                          </tr>
-                          <tr>
-                              <td>1</td>
-                              <td>Leave</td>
-                              <td>Rose</td>
-                              <td>23/5/44</td>
-                              <td style = 'text-align:right'>approved | disapproved | View Details</td>
-                          </tr>
-                      </tbody>
-                  </table>
+                  <div id="usersWithRequirementsContainer" class="tab-pane fade in active">
+                    <h4>List of all users with their requirements</h4>
+                   requirements
                   </div>
-                  <div id="leaveContainer" class="tab-pane fade">
+                  <div id="createMessageRequirementsContainer" class="tab-pane fade">
                     <h4>Create Message</h4>
                     <br>
                     <div class = "leaveForm">
@@ -82,15 +55,17 @@
                               <textarea class="form-control" rows="5" id="comment" name = "message"></textarea>
                           </div>
                           
+                       
                           <div class="form-group submit">
                             <button type="submit" class="btn btn-default" name="btn-leave" id="btn-message">
                             <span class="glyphicon glyphicon-log-in"></span> &nbsp; Send Message
                             </button>
                           </div>  
                         </form>
-                    </div>
+                    
                   </div> 
                   </div>
                 </div>
             </div>     
     </div>
+  </div>

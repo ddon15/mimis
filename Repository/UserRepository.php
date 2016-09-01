@@ -32,8 +32,11 @@ class UserRepository
             $query = "SELECT * FROM " . $this->model->table_name . " WHERE email=:email AND password=:password";
             $stmt = $this->conn->prepare($query);
 
+            //temporary trappings for account setting update
+            $dataOne = (!is_array($data[1])) ? $data[1] : '' ;
+
             $stmt->bindParam(":email", $data[0]);
-            $stmt->bindParam(":password", $data[1]);
+            $stmt->bindParam(":password", $dataOne);
             $stmt->execute();
 
             foreach($stmt as $row) {
@@ -89,8 +92,11 @@ class UserRepository
                 $stmt->bindParam(":dateCreated", $date);$stmt->bindParam(":dateModified",$date);$stmt->bindParam(":user_type",$data[9]);
                 $stmt->bindParam(":status",$status);
             }else{
+                 //temporary trappings for account setting update
+                 $dataOne = (!is_array($data[1])) ? $data[1] : '' ;
+
                  // $stmt->bindParam(":id", null);
-                $stmt->bindParam(":fname", $data[0]);$stmt->bindParam(":middle", $data[1]);$stmt->bindParam(":lname", $data[2]);
+                $stmt->bindParam(":fname", $data[0]);$stmt->bindParam(":middle", $dataOne);$stmt->bindParam(":lname", $data[2]);
                 $stmt->bindParam(":email", $data[3]);$stmt->bindParam(":mobile_no", $data[4]); $stmt->bindParam(":username",$data[5]);$stmt->bindParam(":pword", $data[6]);
                 $stmt->bindParam(":dateCreated", $date);$stmt->bindParam(":dateModified",$date);$stmt->bindParam(":user_type",$data[8]);
                 $stmt->bindParam(":status",$status);
@@ -220,7 +226,7 @@ class UserRepository
         // return $totalUsers;
     }
     public function verifyUserAccount($validateData){
-        if($validateData[0] == 'validateAccount'){
+        if(isset($validateData[0]) && $validateData[0] == 'validateAccount'){
             $id =   $validateData[1];
             $query = "UPDATE ". $this->model->table_name." SET status=:status WHERE id=:id";
             $stmt = $this->conn->prepare($query);
@@ -232,5 +238,42 @@ class UserRepository
             $ret = ($stmt->execute()) ? true : false ;
             return $ret;
         }
+    }
+    public function updateAccountInfo($accountData){
+        if(isset($accountData[0]) && $accountData[0] == "accountEdit"){
+            $allData = $accountData[1];
+
+            $password = '';
+            $includePass = '';
+            $token = false;
+            if(isset($allData[7]) && $allData[7]['value'] != ""){
+                if($allData[7]['value'] == $allData[8]['value']){
+                    $password = $allData[7]['value'];
+                    $includePass = 'password=:password,';
+                    $token = true;
+                }else{
+                    $password = $password;
+                }
+            }
+            $query = "UPDATE ". $this->model->table_name."
+            SET firstname=:firstname, lastname=:lastname, email=:email, username=:username, ".$includePass." mobile_no=:mobile_no
+            WHERE id=:id";
+            $stmt = $this->conn->prepare($query);
+
+            if($token == true){
+                $stmt->bindParam(":password", $password);
+            }
+           
+            $stmt->bindParam(":id", $allData[0]['value']);
+            $stmt->bindParam(":firstname", $allData[1]['value']);
+            $stmt->bindParam(":lastname", $allData[2]['value']);
+            $stmt->bindParam(":email", $allData[3]['value']);
+            $stmt->bindParam(":username", $allData[4]['value']);
+            $stmt->bindParam(":mobile_no", $allData[5]['value']);
+            
+            $ret = ($stmt->execute()) ? true : false ;
+            return $ret;
+        }
+        return false;
     }
 }

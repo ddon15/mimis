@@ -83,6 +83,7 @@ button#btn-login, button#btn-register {
 	width: 100%;
 	background: rgb(52, 73, 94);
 	color: #fff;
+        padding: 10px;
 }
 .form-group.submit a {
 	text-decoration: none;
@@ -358,6 +359,9 @@ a.label.label-primary.createNewUser {
 .notificationContainerAdmin .main div#overTimeContainer > .media.notification:nth-child(3) {
     margin-top: 50px;
 }
+.notificationContainerAdmin .main div#overTimeContainer > .media.notification {
+    margin-top: 0;
+}
 .mainContainer.employee .requestStatistics .main {
     padding-bottom: 100px;
 }
@@ -399,7 +403,8 @@ a.label.label-primary.createNewUser {
     height: 273px;
     overflow-x: hidden;
 }
-#overTimeContainer span#date_time span.time {
+#overTimeContainer span#date_time span.time,
+#fileOttoEmpContainer span#date_time span.time {
 	background: rgb(52, 73, 94);
     color: #fff;
     padding: 7px;
@@ -407,7 +412,9 @@ a.label.label-primary.createNewUser {
     position: relative;
     left: 5px;
 }
-#overTimeContainer span#date_time {
+#overTimeContainer span#date_time,
+#fileOttoEmpContainer span#date_time
+ {
     color: rgb(52, 73, 94);
     position: relative;
     padding: 6px 0;
@@ -417,17 +424,33 @@ a.label.label-primary.createNewUser {
 }
 div#overTimeContainer input#estimatedTime, 
 div#overTimeContainer input#startTime, 
-div#overTimeContainer input#endTime {
+div#overTimeContainer input#endTime,
+div#fileOttoEmpContainer input#estimatedTime, 
+div#fileOttoEmpContainer input#startTime, 
+div#fileOttoEmpContainer input#endTime
+ {
     width: 70px;
 }
-div#overTimeContainer input#otdate {
+div#overTimeContainer input#otdate,
+div#fileOttoEmpContainer input#otdate
+ {
     width: 170px;
 }
 div#overTimeContainer input#startTime, div#overTimeContainer input#endTime,
-div#overTimeContainer input#otdate {
+div#overTimeContainer input#otdate,
+div#fileOttoEmpContainer input#startTime, div#fileOttoEmpContainer input#endTime,
+div#fileOttoEmpContainer input#otdate {
     float: left;
     /*margin-right: 15px;*/
     margin-right: 105px;
+}
+div#fileOttoEmpContainer select#empName {
+    width: 345px;
+}
+div#fileOttoEmpContainer button#btn-ot-admin {
+    background: rgb(52, 73, 94);
+    color: #fff;
+    padding: 10px;
 }
 /*div#overTimeContainer span {
     position: absolute;
@@ -443,10 +466,10 @@ div#overTimeContainer input#otdate {
     color: #fff;
     width: 155px;
 }
-body.admin li.notifications{
+li.notifications{
 	border-right:3px solid #f13d3d;
 }
-body.admin li.notifications span.badge {
+li.notifications span.badge {
     background: #f13d3d;
     float: right;
     position: relative;
@@ -472,11 +495,11 @@ img.ajaxLoader {
     left: 10px;
     display: none;
 }
-li.navAdminNoti span.notification {
+li span.notification {
     position: relative;
     left: 20px;
 }
-li.navAdminNoti span.badge {
+li span.badge {
     padding: 4px 10px;
     background-color: #ff3c38;
 }
@@ -586,4 +609,167 @@ body.adminDashboard .requestview .popup.singleViewRequest img.ajaxLoader {
     left: 150px;
     height: 40px;
     margin-top: 50px;
+}
+div#fileOttoEmpContainer {
+    opacity: 10;
+}
+.otFormAdmin .form-group .form-control, .form-group button{
+    padding: 0;
+}
+.myAccountContainerAdmin img.profilePic,
+.myAccountContainer img.profilePic {
+    width: 400px;
+}
+.myAccountContainerAdmin .main .tab-content.page,
+.myAccountContainer .main .tab-content.page {
+    font-size: 20px;
+    line-height: 2;
+}
+/*.myAccountContainerAdmin .main form{
+    width: 1100px;
+    margin: 0 auto;
+}*/
+.myAccountContainerAdmin .main form input,
+.myAccountContainer .main form input {
+    border: none;
+    padding: 2px 20px;
+    border-radius: 3px;
+    width: 510px;
+    position: relative;
+    right: 65px;
+
+    padding-left: 95px;
+}
+.main form input[name='firstName'] {
+    width: 145px;
+    padding: 2px 0 2px 95px;
+    z-index: 55555;
+}
+.main form input[name="email"] {
+    right: 128px;
+        padding-left: 165px;
+}
+.main form input[name="username"] {
+    right: 95px;
+        padding-left: 135px;
+}
+.main form input[name="mobileNo"] {
+    right: 98px;
+     padding-left: 135px;
+}
+.main form span.glyphicon.glyphicon-pencil.username {
+    left: -130px;
+}
+.main form span.glyphicon.glyphicon-pencil.email {
+    left: -163px;
+}
+.main span.glyphicon.glyphicon-pencil.name {
+    left: 235px;
+}
+.main span.glyphicon.glyphicon-pencil.moblieno {
+    left: 500px;
+    top: -41px;
+}
+.myAccountContainerAdmin .main form input.btn.btn-primary,
+.myAccountContainer .main form input.btn.btn-primary {
+    position: absolute;
+    width: 10%;
+    padding: 5px 0;
+        margin-top: -10px;
+}
+.myAccountContainerAdmin .main,
+.myAccountContainer .main{
+    padding-top: 70px !important;
+}
+.accounttype {
+    line-height: 6.5;
+    font-size: 33px;
+}
+.main form input[name='lastName']:hover ~ input[name='firstName'],
+.main form input[name='firstName']:hover ~ input[name='lastName'],
+.myAccountContainerAdmin .main form input:hover,
+.myAccountContainer .main form input:hover {
+      background-color: rgb(195, 203, 222);
+     color:#333;
+        -webkit-transition: background-color 1000ms linear;
+        -moz-transition: background-color 1000ms linear;
+        -o-transition: background-color 1000ms linear;
+        -ms-transition: background-color 1000ms linear;
+        transition: background-color 1000ms linear;
+}/*
+.myAccountContainerAdmin .main form input:hover{
+     background-color: rgb(195, 203, 222);
+     color:#333;
+        -webkit-transition: background-color 1000ms linear;
+        -moz-transition: background-color 1000ms linear;
+        -o-transition: background-color 1000ms linear;
+        -ms-transition: background-color 1000ms linear;
+        transition: background-color 1000ms linear;
+}*/
+.changePass span.glyphicon.glyphicon-cog {
+    font-size: 14px;
+    margin-right: 3px;
+    color: rgb(52, 73, 94);
+}
+.changePass a {
+    font-size: 15px;
+    color: rgb(52, 73, 94);
+    text-decoration: none;
+}
+.myAccountContainerAdmin .main form span.glyphicon-pencil,
+.myAccountContainer .main form span.glyphicon-pencil{
+
+position: relative;
+    left: -30px;
+    color: #fff;
+}
+.myAccountContainerAdmin .main form > div,
+.myAccountContainer .main form > div {
+    float: left;
+    margin-right: 15px;
+}
+.myAccountContainerAdmin .main form input[name="lastName"],
+.myAccountContainer .main form input[name="lastName"] {
+    position: absolute;
+    right: 303px;
+    padding-left: 148px;
+    /* background: none; */
+    text-align: left;
+    width: 505px;
+}
+.myAccountContainerAdmin .main form span.label,
+.myAccountContainer .main form span.label{
+    color: #333;
+    font-size: 18px;
+    font-family: sans-serif;
+    font-weight: 600;
+    position: relative;
+    padding: 9px 0px 9px 18px;
+    left: 15px;
+    z-index: 999999;
+
+}
+.changePass .changepass-show{
+position: absolute;
+    display: none;
+    width: 365px;
+    padding: 20px 0;
+    background: #f7f8fb;
+    border-bottom: 2px solid #e2e5ec;
+}
+.changepass-show input:hover {
+    background: #fff !important;
+}
+.changePass .changepass-show input {
+    border: 1px solid rgb(195, 203, 222) !important;
+    background: #fff;
+    width: 315px !important;
+    font-size: 13px;
+    margin-left: 90px;
+}
+div.btn img.loader {
+    width: 20px;
+    position: absolute;
+    right: 190px;
+    display: none;
 }

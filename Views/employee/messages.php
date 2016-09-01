@@ -1,78 +1,38 @@
 <?php 
-    // include_once '../../../Repository/UserRepository.php';
-    // include_once '../../../Repository/LogRepository.php';
-    // include_once '../../../conf/connection.php';
-    // $db = new Database();
-    // $conn = $db->getConnection();  
-    // $logRepository = new LogRepository();
-    // $userRepository = new UserRepository();
+    require_once dirname(__FILE__).'\../../Repository/UserRepository.php';
+    include_once dirname(__FILE__).'\../../conf/connection.php';
+
+    $db = new Database();
+    $conn = $db->getConnection();  
+    $userRepository = new UserRepository();
+
 ?>
 <div class="messagesContainer" hidden>
-    <div class="headeremployee">
+    <div class="headeradmin">
         <div>
-             <h4>Notification</h4>
+              <?php
+                    $id = $userRepository->findUserById($_GET['id']);
+                    foreach($id as $row){
+                        echo "<h4>Welcome ". $row['firstname']." ".$row['lastname']."!</h4>";
+                    }
+               ?> 
              <div class="bread-crumb">
-               Dashboard > Notification 
+               Dashboard > Messages<span class="breadCrumd"></span>
              </div>
         </div>
     </div>
-    <div class="dashboardStatistics">
+    <div class="requestStatistics">
         <div class="top">
-            <h1>Notification</h1>
+            <h1>Messages</h1>
+           <!--  <ul class="nav nav-tabs menu">
+                <li class="usersWithReqTabMenu active"><a data-toggle="tab"  href="#">User's list</a></li>
+                <li class = "createMessageTabMenu"><a data-toggle="tab" href="#">Create Message</a></li>
+            </ul> -->
         </div>
-            <div class="main">
-                <div>
-                    <div class="count">154</div>
-                    <div class="name">Organizations</div>
-                    <div class="footer">
-                      More info <span class = "glyphicon glyphicon-circle-arrow-right"></span>
-                    </div>
-                </div>
-                <div>
-                    <div class="count">
-                    23
-                    </div>
-                    <div class="name">Registered Employees</div>
-                    <div class="footer">
-                      More info <span class = "glyphicon glyphicon-circle-arrow-right"></span>
-                    </div>
-                </div>
-                <div>
-                   <div class="count">
-                    43
-                    </div>
-                    <div class="name">Verified Users</div>
-                    <div class="footer">
-                       More info <span class = "glyphicon glyphicon-circle-arrow-right"></span>
-                    </div>
-                </div>  
-                <div>
-                   <div class="count">
-                      <span> 
-                     4</span>
-                      <span>
-                     2
-                      </span>
-                    </div>
-                    <div class="name"><span>Admin Users </span><span> Employee Users</span></div>
-                    <div class="footer">
-                      More info <span class = "glyphicon glyphicon-circle-arrow-right"></span>
-                    </div>
-               </div>
-            </div>      
-            <div class="mainBottom">
-                <div class="recentActivities">
-                    <ul class="list-group">
-                      <li class="list-group-item headerAct">Recent Activities</li>
-                      <li>
-                          <div><b>test</b></div>
-                          <div><span>test</span></div>
-                      </li>
-                    </ul>
-                </div>
-                <div class="sampl">
-                  test
-                </div>
+        <div class="main">
+            <div class="tab-content page">
+                    this is messages
             </div>
-    </div>
+        </div>
+    </div>     
 </div>
