@@ -773,3 +773,37 @@ div.btn img.loader {
     right: 190px;
     display: none;
 }
+input#fileToUpload {
+    position: absolute;
+    z-index: 99999;
+    left: 10px;
+    display: none;
+    padding: 0;
+    width: 120px;
+}
+table.requirementsList td {
+    text-align: center;
+}
+table.requirementsList span.glyphicon.glyphicon-ok {
+    color: #3c763d;
+}
+.editRequirements.label.label-primary,
+.saveRequirements.label.label-success {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+table.requirementsList tbody.list td input,
+.saveRequirements.label.label-success {
+    display: none;
+}
+ul.lackOfReq li.title {
+    font-size: 18px;
+    font-weight: 600;
+    background: lightgoldenrodyellow;
+}
+ul.lackOfReq li {
+    list-style: none;
+    line-height: 2.5;
+    border-bottom: 1px solid gainsboro;
+    font-size: 15px;
+}

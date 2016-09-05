@@ -34,14 +34,16 @@
         </div>
         <div class="main">
             <div class="tab-content page">
-                <form method = 'get' id = 'accountedit-form'>
+                <form method = 'get' id = 'accountedit-form' enctype='multipart/form-data'>
+                <input type='file' name='fileToUpload' id='fileToUpload'>
                     <?php
                         $user = $userRepository->findUserById($_GET['id']);
                         foreach($user as $row){
                           $type = ($row['user_type'] == 1) ? "Admin" : "Employee";
                             echo "
                             <div class = 'pic'>
-                                <img class='profilePic' src='../../Public/images/no-image.jpg'><br><br>
+                                <img class='profilePic' src='../../Public/images/no-image.jpg'>
+                                    
                             </div>
                             <div class ='details'>
                                 <span class = 'message'></span>

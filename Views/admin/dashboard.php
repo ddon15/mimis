@@ -16,6 +16,8 @@
       <link href="../../Lib/js/bootstrap/dist/css/bootstrap.css" rel="stylesheet" media="screen" />
       <link href="../../Public/lib/dashboard.css" rel="stylesheet">
       <link href="../../public/css/style.css" rel="stylesheet" />
+      <link href="../../public/css/build.css" rel="stylesheet" />
+      <!-- <link href="../../Public/fonts/font-awesome.css" rel="stylesheet" /> -->
       <link href="../../public/lib/search.css" rel="stylesheet" />
        <link href="../../Public/lib/mypopup.css" rel="stylesheet" />
        <link rel="stylesheet" href="../../../Public/lib/wickedpicker.css">
@@ -40,10 +42,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">Dashboard</a></li>
-              <li><a href="#">Settings</a></li>
-              <li><a href="#">Profile</a></li>
-              <li><a href="#">Help</a></li>
+              <li><a href="../../views/admin/dashboard.php?id=<?php echo $_GET['id']; ?>">Dashboard</a></li> 
+              <li><a href="../../views/admin/account.php">Profile</a></li>
           </ul>
 
           <form class="navbar-form navbar-right">
@@ -75,7 +75,7 @@
                   <ul class="nav nav-sidebar manageGroup">
                     
                     <li class = "navAdminMyAccount"><a href="#" ><span class = "glyphicon glyphicon-user"></span> My Account</a></li>
-                    <li class = "navAdminLogout"><a href="" ><span class = "glyphicon glyphicon-off"></span> Logout</a></li>
+                    <li class = "navAdminLogout"><a href="#"  ><span class = "glyphicon glyphicon-off"></span> Logout</a></li>
                   </ul>
             </div>  
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

@@ -9,6 +9,12 @@ var baseUriDomain = window.location.origin;
     }
     console.log(baseUriDomain);
 
+$('li.navAdminLogout').on('click', function(e){
+    e.preventDefault();
+    window.location.href = baseUriDomain;
+});
+
+
 // $('.navManageUser')
 /** USER MANAGEMENT **/
 
@@ -65,7 +71,7 @@ $('.editUser ').each(function(){
 
         var _update = $('.update');
         var data = $(this).parent().siblings();
-           console.log(data);
+           // console.log(data);
 
         _update.find("input#user_id").val(data[0].innerText);
         _update.find("input#user_firstname").val(data[3].innerText);
@@ -380,31 +386,12 @@ function tabMenus(element){
             $('#'+tabMenuPages[i]).siblings().hide();
             $('#'+tabMenuPages[i]).siblings().removeClass('in active');
         }
-        // }else{
-        //       $('#'+tabMenuPages[i]).hide();
-        //     $('#'+tabMenuPages[i]).removeClass('in active');
-        // }
-        // if(i != getIndex){
-        //     $('#'+tabMenuPages[i]).hide();
-        //     // console.log("hide pages : "+tabMenuPages[i]);
-        //     // $('#'+tabMenuPages[i]).removeClass('in active');
-        // }else{
-        //      $('span.breadCrumd').html(getClassName); 
-        //      // $('#'+tabMenuPages[i]).addClass('in active');
-        //      $('#'+tabMenuPages[i]).show(); 
-        //     console.log("show menu pages : "+tabMenuPages[i]);
-        // }
     }
      for (i = 0; i < menuClass.length; i++) { 
          if(menuClass[i] == getClassName){
                 $('.'+menuClass[i]).addClass("in active");  
                 $('.'+menuClass[i]).siblings().removeClass("in active");  
          }
-         // if(menuClass[i] != getClassName){
-         //       $('.'+menuClass[i]).removeClass("in active");  
-         // }else{
-         //    $('.'+menuClass[i]).addClass("in active");  
-         // }
     }
 }
 function processNavigationOnClick(element) {
@@ -425,10 +412,6 @@ function processNavigationOnClick(element) {
     // var checkIfExist = (getIndex != -1) ? true : false ;
 
     for (i = 0; i < pageContainer.length; i++) {
-        // if(i == getIndex){
-        //      $('.'+pageContainer[i]).show();
-        //      $('.'+pageContainer[i]).siblings().hide();
-        // }
         if(i != getIndex){
 
             $('.'+pageContainer[i]).hide();
@@ -472,7 +455,7 @@ function processAdminNavigationOnClick(element) {
 
     var _convertToArrayElement = $(element);
     var getClassName = _convertToArrayElement[0]['className'];
-console.log("class name : "+getClassName);
+// console.log("class name : "+getClassName);
 // console.log(getIndex);
     var getIndex = clickElements.indexOf(getClassName);
     // var checkIfExist = (getIndex != -1) ? true : false ;
@@ -480,9 +463,9 @@ console.log("class name : "+getClassName);
     for (i = 0; i < pageContainer.length; i++) {   
         if(i != getIndex){
             $('.'+pageContainer[i]).hide();
-            console.log("hide page : "+pageContainer[i]);
+            // console.log("hide page : "+pageContainer[i]);
         }else{
-            $('.'+pageContainer[i]).show(); console.log("show page : "+pageContainer[i]);
+            $('.'+pageContainer[i]).show();
         } 
     }
     for (i = 0; i < clickElements.length; i++) { 
@@ -550,3 +533,51 @@ $('a.changepass-show-link').on('click', function(e){
  $( ".changepass-show" ).toggle();
 });
 
+$('.edit').on('click', function(){
+    var el = $(this);
+
+    var btnEdit = el[0].className.split(" ");
+
+    var tr = $("."+btnEdit[0]).parents("tr");
+        
+    tr.find('span.glyphicon.glyphicon-edit').hide();
+    tr.find('input').show();
+    el.hide();
+    el.siblings('.save').show();  
+});
+$('.save').on('click', function(){
+    var loader =  $(this).siblings('img.loader');
+        loader.show();
+
+    var el = $(this);
+    var btnEdit = el[0].className.split(" ");
+    var tr = $("."+btnEdit[0]).parents("tr");
+    tr.find('span.glyphicon.glyphicon-saved').show();
+
+    
+  
+    _inpuTs = tr.find('input');
+
+    var dataObj = [];
+    var n = 0;
+    for (var i = n; i <= 10; i++) {
+        dataObj.push((_inpuTs[i]['checked'] == true) ? 1 : 0);
+    }
+    dataObj[11] = _inpuTs[11]['defaultValue'];
+     $.ajax({
+            url: baseUriDomain+'/conf/doctrine/requirements.repositoryManager.php',
+            type: 'GET',
+            data: {requirementsData: dataObj},
+            dataType: 'json',
+            success: function(response){
+                for(var data in response) {
+                    setInterval(loader.hide(), 3000);
+                }
+            }
+        });
+
+    tr.find('input').hide();
+    el.hide();
+    el.siblings('.edit').show();
+
+});

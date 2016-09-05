@@ -76,11 +76,21 @@ class UserRepository
     *  Creating of User(s)     *
     *-------------------------*/
     public function createNewUser($data){
+        
         if(is_array($data)){
             $user = $this->model;
 
             $date = $user->getDateTime();
             $status = $user::REGISTERED;
+
+            $position = (isset($data[11])) ? $data[11] : '' ; 
+            $empType = (isset($data[12])) ? $data[12] : '' ; 
+
+            $empDetails = $this->saveEmploymentDetails($position, $empType);  //position and empType
+
+            // foreach ($empDetails as $key => $value) {
+            //     var_dump($value);
+            // }
 
             $query = "INSERT INTO ".$this->model->table_name." SET firstname=:fname, middlename=:middle, lastname=:lname, email=:email, mobile_no=:mobile_no, username=:username, password=:pword, dateCreated=:dateCreated, dateModified=:dateModified, user_type=:user_type, status=:status";
             $stmt = $this->conn->prepare($query);
@@ -129,6 +139,22 @@ class UserRepository
         }
         
         return false;
+    }
+    public function saveEmploymentDetails($position, $empType){
+        $table = 'employment_details';
+
+        $query = "INSERT INTO ".$table." SET position_id=:position_id, employment_type_id=:employment_type_id, create_at=:create_at, update_at=:update_at";
+        $stmt = $this->conn->prepare($query);
+
+        $user = $this->model;
+        $date = $user->getDateTime();
+
+        $stmt->bindParam(":position_id",$position);
+        $stmt->bindParam(":employment_type_id",$empType);
+        $stmt->bindParam(":create_at",$date);
+        $stmt->bindParam(":update_at",$date);
+
+        return ($stmt->execute()) ? true : false ;
     }
 
     /*=========================*

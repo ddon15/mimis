@@ -1,12 +1,12 @@
 <?php 
     require_once dirname(__FILE__).'\../../../Repository/RequestRepository.php';
-    // include_once dirname(__FILE__).'\../../../Repository/LogRepository.php';
+    include_once dirname(__FILE__).'\../../../Repository/RequirementsRepository.php';
     include_once dirname(__FILE__).'\../../../conf/connection.php';
 
     $db = new Database();
     $conn = $db->getConnection();  
     $requestRepository = new RequestRepository();
-    // $logRepository = new LogRepository();
+    $requirementsRepository = new RequirementsRepository();
     $userRepository = new UserRepository();
 
 ?>
@@ -34,15 +34,46 @@
         </div>
         <div class="main">
             <div class="tab-content page">
-                <!--   <div id="usersWithRequirementsContainer" class="tab-pane fade in active">
-                    <h4>List of all users with their requirements</h4>
-                   requirements
-                  </div>
-                  <div id="createMessageContainer" class="tab-pane fade">
-                    <h4>Create Message</h4>
-                    <br>
-                    
-                  </div>  -->
+              <ul class="lackOfReq">
+
+                  <li class = "title">Lack of Requirements Report</li>
+                      <?php
+                          $completeRequirements = 11;
+
+                           foreach ($requirementsRepository->getUserLackReq() as $key => $value) {
+
+                              $count1 = ($value['sss_id'] != 0) ? 1 : 0 ;
+                              $count2 = ($value['pagibig_id'] != 0) ? 1 : 0 ;
+                              $count3 = ($value['tin_no'] != 0) ? 1 : 0 ;
+                              $count4 = ($value['medical'] != 0) ? 1 : 0 ;
+                              $count5 = ($value['tor'] != 0) ? 1 : 0 ;
+                              $count6 = ($value['cert_of_emp'] != 0) ? 1 : 0 ;
+                              $count7 = ($value['form2316'] != 0) ? 1 : 0 ;
+                             $count8 = ($value['nbi'] != 0) ? 1 : 0 ;
+                             $count9 = ($value['phil_health_no'] != 0) ? 1 : 0 ;
+                             $count10 = ($value['bert_cert'] != 0) ? 1 : 0 ;
+                             $count11 = ($value['nso'] != 0) ? 1 : 0 ; 
+
+
+                              $totalRequirements = $count1 + $count2 + $count3 + $count4 + $count5 + $count6 + $count7 + $count8 + $count9 + $count10 + $count11;
+
+
+                              $data = $userRepository->findUserById($value['user_id']);
+                              foreach($data as $row){
+                                  $name = $row['firstname']." ".$row['lastname'];
+                                  if($totalRequirements < $completeRequirements) {
+                                      echo "
+
+                                              <li> " .$name. " </li>
+
+                                      ";       
+                                  }
+                              }
+
+                           }
+
+                      ?>
+                  </ul>
               </div>
             </div>
         </div>     

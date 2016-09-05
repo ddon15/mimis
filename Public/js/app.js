@@ -196,7 +196,7 @@ var personalInformationElement = $('.glyphicon.glyphicon-user.personal');
     
     var parent = $(this).parent();
     parent.find("#personalDetails").toggle(1000);
-    console.log(parent.siblings());
+    // console.log(parent.siblings());
     parent.siblings().find("#employmentDetails").toggle(1000);
 });
 var employmentInformationElement = $('.glyphicon.glyphicon-object-align-horizontal.employment');
@@ -205,7 +205,7 @@ var employmentInformationElement = $('.glyphicon.glyphicon-object-align-horizont
     
     var parent = $(this).parent();
     parent.find("#employmentDetails").toggle(1000);
-    console.log(parent.siblings());
+    // console.log(parent.siblings());
     parent.siblings().find("#personalDetails").toggle(1000);
 });
 $('a.validateAccount').on('click',function(e){
