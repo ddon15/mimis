@@ -21,4 +21,7 @@ $returnApprovedReq = array('approved_request' => $approvedReq);
 $disapprovedReq = $requestRepository->disapprovedRequest($request);
 $returnDisapprovedReq = array('disapproved_request' => $disapprovedReq);
 
-echo json_encode(array($returnOTResponse, $returnLeaveResponse, $returnApprovedReq, $returnDisapprovedReq, $returnOTAdminResponse));
+$removeNotificationFromList = $requestRepository->removeNotificationFromList($request);
+$returnRemoveNotificationFromList = array('remove_from_list' => $removeNotificationFromList);
+
+echo json_encode(array($returnOTResponse, $returnLeaveResponse, $returnApprovedReq, $returnDisapprovedReq, $returnOTAdminResponse, $returnRemoveNotificationFromList));

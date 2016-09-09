@@ -532,16 +532,17 @@ a.view {
     padding: 10px 0 0 15px;
     border-top: 1px solid #eff3f5;
 }
-.media-body span.btn-link {
-        float: right;
+.media-body span.btn-remove {
+    float: right;
     position: relative !important;
     left: -50px !important;
     color: #fff;
-    background: #5cb85c;
-    width: 145px;
-        text-decoration: none;
-    padding: 5px;
-    border-radius: 3px;
+    text-decoration: none;
+    padding: 4px 4.5px 5px 5px;
+    border-radius: 15px;
+}
+.media-body span.btn-remove:hover {
+    background: #d87878;
 }
 /*.media-body span.btn-link span{
     top: 8px;
@@ -616,9 +617,10 @@ div#fileOttoEmpContainer {
 .otFormAdmin .form-group .form-control, .form-group button{
     padding: 0;
 }
-.myAccountContainerAdmin img.profilePic,
-.myAccountContainer img.profilePic {
+.myAccountContainerAdmin img.profilePicAccountPreview,
+.myAccountContainer img.profilePicAccountPreview {
     width: 400px;
+        height: 330px;
 }
 .myAccountContainerAdmin .main .tab-content.page,
 .myAccountContainer .main .tab-content.page {
@@ -775,11 +777,24 @@ div.btn img.loader {
 }
 input#fileToUpload {
     position: absolute;
-    z-index: 99999;
-    left: 10px;
     display: none;
-    padding: 0;
-    width: 120px;
+}
+button#btn-uploadImage {
+    display: none;
+}
+a.glyphicon.glyphicon-camera.fileTopLoadIcon, a.glyphicon.glyphicon-upload.fileTopLoadSave {
+    position: absolute;
+    left: 25px;
+    top: 260px;
+
+    padding: 5px 10px;
+    border: 1px solid;
+    border-radius: 3px;
+}
+a.glyphicon.glyphicon-upload.fileTopLoadSave {
+    display: none; 
+    top: 260px;
+    left: 70px;
 }
 table.requirementsList td {
     text-align: center;
@@ -796,10 +811,12 @@ table.requirementsList tbody.list td input,
 .saveRequirements.label.label-success {
     display: none;
 }
+ul.lackOfReq {
+    padding: 0;
+}
 ul.lackOfReq li.title {
     font-size: 18px;
     font-weight: 600;
-    background: lightgoldenrodyellow;
 }
 ul.lackOfReq li {
     list-style: none;
@@ -807,3 +824,45 @@ ul.lackOfReq li {
     border-bottom: 1px solid gainsboro;
     font-size: 15px;
 }
+table.lackOfReq {
+    width: 100%;
+        margin-top: -10px;
+}
+table.lackOfReq thead tr th:first-child {
+    width: 250px;
+    padding: 7px 0;
+}
+table.lackOfReq tbody tr td {
+    padding: 5px 0;
+}
+span.label.label-primary.printPage {
+    font-size: 12px;
+    padding: 10px;
+    float: right;
+    right: 20px;
+    background: rgb(52, 73, 94);
+    position: relative;
+        cursor: pointer;
+}
+table.lackOfReq thead tr {
+    border-bottom: 1px solid #dcdcdc;
+    background: #e6e6fa;
+}
+.empLackOfRequirements {
+    padding: 20px;
+        border-bottom: 1px solid gainsboro;
+}
+.empLackOfRequirements h5 {
+       padding: 10px 0;
+    background: rgb(52, 73, 94);
+    font-weight: 600;
+    padding-left: 10px;
+    color: #fff;
+}
+img.loaderImage {
+                        position: absolute;
+                        height: 40px;
+                        left: 115px;
+                        margin-top: 5px;
+                        display: none;
+                    }

@@ -17,18 +17,31 @@ class RequirementsRepository
     public function __construct(){
 
         include_once '../../conf/connection.php';
-        include_once '../../Helper/User.php';
+        include_once 'UserRepository.php';
 
         $this->model = "requirements";
 
         $db             = new Database();
         $this->conn     = $db->getConnection();  
 
-        $user = new User();
+        $userRepository = new UserRepository();
+    }
+    public function setUserToRequirementsList($request) {
+      $saving = false;
+        if(!is_array($request)){
+            $query = "INSERT INTO $this->model SET user_id=:user_id";
+            $stmt = $this->conn->prepare($query);
+
+            $stmt->bindParam(":user_id", $request);
+            $saving = ($stmt->execute()) ? true : false ;
+        }
+       
+        return ($saving == true) ? [true, $request] : $saving;
     }
     public function updateRequirements($request){
 
-        $query = "UPDATE ".$this->model." 
+      if(is_array($request)){
+            $query = "UPDATE ".$this->model." 
                   SET sss_id=:sss_id,
                       pagibig_id=:pagibig_id,
                       tin_no=:tin_no,
@@ -57,6 +70,7 @@ class RequirementsRepository
         $stmt->bindParam(":user_id", $request[11]);
         
         return ($stmt->execute()) ? true : false ;
+      }
     }
     public function displayAllUserNotOnRequirementsList(){
       $query = "

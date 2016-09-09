@@ -39,7 +39,7 @@
                   <style type="text/css">
                     a.btn-setReqNewUser.btn.btn-info {
     padding: 5 20px;
-    padding-top: 8px;
+    padding-top: 7px;
 }
 select.setReqNewUser.form-control {
     width: 200px;
@@ -91,51 +91,76 @@ table.table.requirementsList img.loader {
                                         </tr>
                                     </thead>
                                     <tbody class = "list">
+                                    <tr class="reatimeAdd alert alert-success" style="display:none;">
+                                       <td colspan="14">New User added to the requirements list. Newly added will be show when page is reloading.</td>
+                                    </tr>
                                     <?php
 
-                                        foreach ($requirementsRepository->displayUsersWithRequirements() as $key => $value) {
-                                      
-                                          $sss = ($value['sss_id']==1)?'<span class = "glyphicon glyphicon-ok"></span>':'';
-                                          $pagibig = ($value['pagibig_id']==1)?'<span class = "glyphicon glyphicon-ok"></span>':'';
-                                          $tin = ($value['tin_no']==1)?'<span class = "glyphicon glyphicon-ok"></span>':'';
-                                          $med = ($value['medical']==1)?'<span class = "glyphicon glyphicon-ok"></span>':'';
-                                          $tor = ($value['tor']==1)?'<span class = "glyphicon glyphicon-ok"></span>':'';
-                                          $coe = ($value['cert_of_emp']==1)?'<span class = "glyphicon glyphicon-ok"></span>':'';
-                                          $form2316 = ($value['form2316']==1)?'<span class = "glyphicon glyphicon-ok"></span>':'';
-                                          $nbi = ($value['nbi']==1)?'<span class = "glyphicon glyphicon-ok"></span>':'';
-                                          $phealth = ($value['phil_health_no']==1)?'<span class = "glyphicon glyphicon-ok"></span>':'';
-                                          $bcert = ($value['bert_cert']==1)?'<span class = "glyphicon glyphicon-ok"></span>':'';
-                                          $nso = ($value['nso']==1)?'<span class = "glyphicon glyphicon-ok"></span>':'';
-                                            echo "
+          foreach ($requirementsRepository->displayUsersWithRequirements() as $key => $value) {
+        
+            $sss = ""; $sssChecked = "";
+          if($value['sss_id']==1){ $sss = '<span class = "glyphicon glyphicon-ok"></span>';$sssChecked = "checked"; }
+            
+            $pagibig = "";$pagibigChecked = '';
+          if($value['pagibig_id']==1){ $pagibig = '<span class = "glyphicon glyphicon-ok"></span>'; $pagibigChecked = 'checked';}
 
-                                                <tr class = 'dataRequirementsList ".$value['id']."'>
-                                                      <td>".$value['id']."</td>
-                                                      <td>".$value['firstname']." ".$value['lastname']."</td>
-                                                      <td>".$sss." <input type = 'checkbox' name = 'sss'></td>
-                                                      <td>".$pagibig." <input type = 'checkbox' name = 'pagibig' ></td>
-                                                      <td>".$tin."<input type = 'checkbox' name = 'tin'  ></td>
-                                                      <td>".$med."<input type = 'checkbox' name = 'med'  ></td>
-                                                      <td>".$tor."<input type = 'checkbox' name = 'tor'  ></td>
-                                                      <td>".$coe."<input type = 'checkbox' name = 'coe'  ></td>
-                                                      <td>".$form2316."<input type = 'checkbox' name = 'form2316' ></td>
-                                                      <td>".$nbi."<input type = 'checkbox' name = 'nbi'  ></td>
-                                                      <td>".$phealth."<input type = 'checkbox' name = 'phealth' ></td>
-                                                      <td>".$bcert."<input type = 'checkbox' name = 'bcert'  ></td>
-                                                      <td>".$nso."<input type = 'checkbox' name = 'nso' ></td>
-                                                       <td style = 'display:none;'><input type = 'text' name = 'user_id' value = ".$value['id']." ></td>
-                                                      <td>
-                                                          <div class ='editRequirements".$value['id']."  edit label label-primary'>
-                                                                  <span class = 'glyphicon glyphicon-edit'></span> Edit
-                                                          </div>
-                                                          <img class = 'loader' src = '../../../Public/images/loader.gif'>
-                                                          <div class ='saveRequirements".$value['id']." save label label-success' style='display:none;'>
+            $tin = ""; $tinChecked = '';
+          if($value['tin_no']==1){ $tin ='<span class = "glyphicon glyphicon-ok"></span>';$tinChecked = 'checked';}
 
-                                                              <span class = 'glyphicon glyphicon-saved'></span> Save
-                                                          </div>
-                                                      </td>
-                                                </tr>
-                                            ";
-                                        }
+            $med = "";  $medChecked = "";
+          if($value['medical']==1){ $med = '<span class = "glyphicon glyphicon-ok"></span>';$medChecked = "checked";}
+
+            $tor = "";$torChecked = "";
+          if($value['tor']==1){ $tor ='<span class = "glyphicon glyphicon-ok"></span>';$torChecked = "checked";}
+            
+            $coe = "";$coeChecked = "";
+          if($value['cert_of_emp']==1){ $coe ='<span class = "glyphicon glyphicon-ok"></span>';$coeChecked = "checked";}
+            
+            $form2316 = "";$form2316Checked = "";
+          if($value['form2316']==1){ $form2316 ='<span class = "glyphicon glyphicon-ok"></span>';$form2316Checked = "checked";}
+            
+            $nbi = "";$nbiChecked = "";
+          if($value['nbi']==1){ $nbi ='<span class = "glyphicon glyphicon-ok"></span>';$nbiChecked = "checked";}
+            
+            $phealth = "";$phealthChecked = "";
+          if($value['phil_health_no']==1){ $phealth ='<span class = "glyphicon glyphicon-ok"></span>';$phealthChecked = "checked";}
+            
+            $bcert = "";$bcertChecked = "";
+          if($value['bert_cert']==1){ $bcert ='<span class = "glyphicon glyphicon-ok"></span>';$bcertChecked = "checked";}
+            
+            $nso = "";$nsoChecked = "";
+            if($value['nso']==1){ $nso ='<span class = "glyphicon glyphicon-ok"></span>';$nsoChecked = "checked";}
+            
+              echo "
+
+                  <tr class = 'dataRequirementsList ".$value['id']."'>
+                        <td>".$value['id']."</td>
+                        <td>".$value['firstname']." ".$value['lastname']."</td>
+                        <td>".$sss." <input type = 'checkbox' name = 'sss' ". $sssChecked ."></td>
+                        <td>".$pagibig." <input type = 'checkbox' name = 'pagibig' ". $pagibigChecked ."></td>
+                        <td>".$tin."<input type = 'checkbox' name = 'tin'  ". $tinChecked ."></td>
+                        <td>".$med."<input type = 'checkbox' name = 'med'  ". $medChecked ."></td>
+                        <td>".$tor."<input type = 'checkbox' name = 'tor'  ". $torChecked ."></td>
+                        <td>".$coe."<input type = 'checkbox' name = 'coe'  ". $coeChecked ."></td>
+                        <td>".$form2316."<input type = 'checkbox' name = 'form2316' ". $form2316Checked ."></td>
+                        <td>".$nbi."<input type = 'checkbox' name = 'nbi'  ". $nbiChecked ."></td>
+                        <td>".$phealth."<input type = 'checkbox' name = 'phealth' ". $phealthChecked ."></td>
+                        <td>".$bcert."<input type = 'checkbox' name = 'bcert'  ". $bcertChecked ."></td>
+                        <td>".$nso."<input type = 'checkbox' name = 'nso' ". $nsoChecked ."></td>
+                         <td style = 'display:none;'><input type = 'text' name = 'user_id' value = ".$value['id']." ></td>
+                        <td>
+                            <div class ='editRequirements".$value['id']."  edit label label-primary'>
+                                    <span class = 'glyphicon glyphicon-edit'></span> Edit
+                            </div>
+                            <img class = 'loader' src = '../../../Public/images/loader.gif'>
+                            <div class ='saveRequirements".$value['id']." save label label-success' style='display:none;'>
+
+                                <span class = 'glyphicon glyphicon-saved'></span> Save
+                            </div>
+                        </td>
+                  </tr>
+              ";
+          }
 
                                     ?>
                                     </tbody>

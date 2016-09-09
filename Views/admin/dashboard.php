@@ -1,12 +1,14 @@
 <?php 
     include_once '../../Repository/UserRepository.php';
     include_once '../../Repository/LogRepository.php';
+    include_once '../../Repository/MediaRepository.php';
     include_once '../../conf/connection.php';
     include_once '../../Helper/Notification.php';
     $db = new Database();
     $conn = $db->getConnection();  
     $logRepository = new LogRepository();
     $userRepository = new UserRepository();
+    $mediaRepository = new MediaRepository();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +27,12 @@
 
       <link rel="icon" href="../../Public/images/logo.png">
   </head>
-  <body class = "adminDashboard">=
+  <body class = "adminDashboard">
+  <style type="text/css">
+    .mainContainer > div {
+    margin-top: 30px;
+}
+  </style>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -56,7 +63,17 @@
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <div class = "profile">
-                     <img class = "profilePic" src = "../../Public/images/no-image.jpg">
+                     <?php
+                          //Profile Pic image query
+                          $ProfilePicImage = "<img class='profilePic' src='../../Public/images/no-image.jpg' style = 'width:190px;height:124px;'>";
+                          $mid = $mediaRepository->findMediaById($_GET['id']);
+                          foreach ($mid as $key => $value) {
+                             if(count($value['user_id'])>0){
+                                 $ProfilePicImage = "<img class='profilePic' src='../../Uploads/".$value['name']."' style = 'width:190px;height:124px;'>";
+                             }else{ $ProfilePicImage = $ProfilePicImage; }
+                          }
+                          echo $ProfilePicImage;
+                     ?>
                 </div>
                   <ul class="nav nav-sidebar">
                     <li class="navAdminDashPage active"><a href="#"><span class = "glyphicon glyphicon-tasks"></span> Admin Dashboard<span class="sr-only">(current)</span></a></li>

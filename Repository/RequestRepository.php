@@ -29,10 +29,30 @@ class RequestRepository
         $db             = new Database();
         $this->conn     = $db->getConnection();  
     }
+    public function removeNotificationFromList($request) {
+        $getId = (isset($request['id']) && $request['id'] != null) ? $request['id'] : '' ;
+        $table = '';
+        if(isset($request['table'])){
+            if(!is_array($request['table']) && $request['table'] == "Leave"){
+                $table = "work_leave";
+            }else $table = $request['table'];
+        }
+
+        $query = "DELETE FROM ".$table." WHERE id=:id";
+            $stmt  = $this->conn->prepare($query);
+            $stmt->bindParam(":id", $getId);
+
+            return ($stmt->execute()) ? true : false ;
+    }
     public function disapprovedRequest($data){
-        $table = ($data[1]['value'] == "Leave") ? "work_leave" : $data[1]['value'] ;
-        $id = $data[0]['value'];
-        $uid = $data[4]['value'];
+        $table = '';
+        if(isset($data[1]['value'])){
+            if(!is_array($data[1]['value']) && $data[1]['value'] == "Leave"){
+                $table = "work_leave";
+            }else $table = $data[1]['value'];
+        }
+        $id = (isset($data[0]['value'])) ? $data[0]['value'] : '';
+        $uid = (isset($data[4]['value'])) ? $data[4]['value'] : '';
 
         $logName = "";
         if($table == "work_leave") {
@@ -42,7 +62,7 @@ class RequestRepository
         }else $logName = LOG::USER_LOG;
 
         foreach ($data as $key => $getNameToProcess) {
-            if ($getNameToProcess['name'] == "toProcess") {
+            if (isset($getNameToProcess['name']) && $getNameToProcess['name'] == "toProcess") {
                if ($getNameToProcess['value'] == "disapproved") {
 
                     $req = $this->model;
@@ -94,9 +114,14 @@ class RequestRepository
         return false;
     }
     public function approvedRequest($data){
-        $table = ($data[1]['value'] == "Leave") ? "work_leave" : $data[1]['value'] ;
-        $id = $data[0]['value'];
-        $uid = $data[4]['value'];
+        $table = '';
+        if(isset($data[1]['value'])){
+            if(!is_array($data[1]['value']) && $data[1]['value'] == "Leave"){
+                $table = "work_leave";
+            }else $table = $data[1]['value'];
+        }
+        $id = (isset($data[0]['value'])) ? $data[0]['value'] : '' ;
+        $uid = (isset($data[4]['value'])) ? $data[4]['value'] : '' ;
 
         $logName = "";
         if($table == "work_leave") {
@@ -106,7 +131,7 @@ class RequestRepository
         }else $logName = LOG::USER_LOG;
 
         foreach ($data as $key => $getNameToProcess) {
-            if ($getNameToProcess['name'] == "toProcess") {
+            if (isset($getNameToProcess['name']) && $getNameToProcess['name'] == "toProcess") {
                if ($getNameToProcess['value'] == "approved") {
 
                     $req = $this->model;
@@ -169,7 +194,7 @@ class RequestRepository
     public function sendLeaveRequest($data){
 
         foreach ($data as $key => $getNameToProcess) {
-            if ($getNameToProcess['name'] == "toProcess") {
+            if (isset($getNameToProcess['name']) && $getNameToProcess['name'] == "toProcess") {
                if ($getNameToProcess['value'] == "leave") {
 
                      # initialize helpers
@@ -216,7 +241,7 @@ class RequestRepository
         $transactByAdmin = (isset($data[0]) && $data[0]['name'] == 'empName') ? true : false ;
 
         foreach ($data as $key => $getNameToProcess) {
-            if ($getNameToProcess['name'] == "toProcess") {
+            if (isset($getNameToProcess['name']) && $getNameToProcess['name'] == "toProcess") {
                if ($getNameToProcess['value'] == "overtime") {
 
                         $req = $this->model;

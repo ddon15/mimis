@@ -34,46 +34,72 @@
         </div>
         <div class="main">
             <div class="tab-content page">
-              <ul class="lackOfReq">
+                <ul class = "lackOfReq">
+                    <li class = "title">Day-to-day generated report</li>
+                </ul>
 
-                  <li class = "title">Lack of Requirements Report</li>
-                      <?php
-                          $completeRequirements = 11;
+              <span class = "label label-primary printPage"><span class= "glyphicon glyphicon-print"></span> Print All Lacked of Requirements</span>
+              <div class = "empLackOfRequirements">
+                  <h5>Employee's lacked of requirements </h5>
+                  <table class="lackOfReq">
+                      <thead>
+                          <tr>
+                              <th>Name</th>
+                              <th>Requirements lacked</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <?php
+                              $completeRequirements = 11;
 
-                           foreach ($requirementsRepository->getUserLackReq() as $key => $value) {
+                               foreach ($requirementsRepository->getUserLackReq() as $key => $value) {
 
-                              $count1 = ($value['sss_id'] != 0) ? 1 : 0 ;
-                              $count2 = ($value['pagibig_id'] != 0) ? 1 : 0 ;
-                              $count3 = ($value['tin_no'] != 0) ? 1 : 0 ;
-                              $count4 = ($value['medical'] != 0) ? 1 : 0 ;
-                              $count5 = ($value['tor'] != 0) ? 1 : 0 ;
-                              $count6 = ($value['cert_of_emp'] != 0) ? 1 : 0 ;
-                              $count7 = ($value['form2316'] != 0) ? 1 : 0 ;
-                             $count8 = ($value['nbi'] != 0) ? 1 : 0 ;
-                             $count9 = ($value['phil_health_no'] != 0) ? 1 : 0 ;
-                             $count10 = ($value['bert_cert'] != 0) ? 1 : 0 ;
-                             $count11 = ($value['nso'] != 0) ? 1 : 0 ; 
-
-
-                              $totalRequirements = $count1 + $count2 + $count3 + $count4 + $count5 + $count6 + $count7 + $count8 + $count9 + $count10 + $count11;
+                                  $count1 = ($value['sss_id'] != 0) ? 1 : 'SSS ID' ;
+                                  $count2 = ($value['pagibig_id'] != 0) ? 1 : 'Pagibig ID' ;
+                                  $count3 = ($value['tin_no'] != 0) ? 1 : 'TIN No.';
+                                  $count4 = ($value['medical'] != 0) ? 1 : 'Medical Certificate' ;
+                                  $count5 = ($value['tor'] != 0) ? 1 : 'Transcript of Record' ;
+                                  $count6 = ($value['cert_of_emp'] != 0) ? 1 : 'Certificate of Employment' ;
+                                  $count7 = ($value['form2316'] != 0) ? 1 : 'Form 2316' ;
+                                  $count8 = ($value['nbi'] != 0) ? 1 : 'NBI Clearance' ;
+                                  $count9 = ($value['phil_health_no'] != 0) ? 1 : 'PhilHealt No.' ;
+                                  $count10 = ($value['bert_cert'] != 0) ? 1 : 'Birth Certificate' ;
+                                  $count11 = ($value['nso'] != 0) ? 1 : 'NSO' ; 
 
 
-                              $data = $userRepository->findUserById($value['user_id']);
-                              foreach($data as $row){
-                                  $name = $row['firstname']." ".$row['lastname'];
-                                  if($totalRequirements < $completeRequirements) {
-                                      echo "
+                                  $totalRequirements = $count1 + $count2 + $count3 + $count4 + $count5 + $count6 + $count7 + $count8 + $count9 + $count10 + $count11;
 
-                                              <li> " .$name. " </li>
-
-                                      ";       
+                                  $data = $userRepository->findUserById($value['user_id']);
+                                  foreach($data as $row){
+                                      $name = $row['firstname']." ".$row['lastname'];
+                                      if($totalRequirements < $completeRequirements) {
+                                          echo "
+                                              <tr>
+                                                  <td> " .$name. " </td>
+                                                  <td> "
+                                                      ."<span class = 'label label-danger'>".$count1."</span> "
+                                                      ."<span class = 'label label-danger'>".$count2."</span> "
+                                                      ."<span class = 'label label-danger'>".$count3."</span> "
+                                                      ."<span class = 'label label-danger'>".$count4."</span> "
+                                                      ."<span class = 'label label-danger'>".$count5."</span> "
+                                                      ."<span class = 'label label-danger'>".$count6."</span> "
+                                                      ."<span class = 'label label-danger'>".$count7."</span> "
+                                                      ."<span class = 'label label-danger'>".$count8."</span> "
+                                                      ."<span class = 'label label-danger'>".$count9."</span> "
+                                                      ."<span class = 'label label-danger'>".$count10."</span> "
+                                                      ."<span class = 'label label-danger'>".$count11."</span> ".
+                                                  "</td>
+                                              </tr>
+                                          ";       
+                                      }
                                   }
-                              }
 
-                           }
+                               }
 
-                      ?>
-                  </ul>
+                          ?>
+                          </tbody>
+                      </table>
+                  </div>
               </div>
             </div>
         </div>     

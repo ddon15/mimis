@@ -7,7 +7,24 @@ var baseUriDomain = window.location.origin;
     }else{
         baseUriDomain = baseUriDomain+'/Capstone';
     }
-    console.log(baseUriDomain);
+    
+    var checkUploadTrue = window.location.search.replace("?","");
+
+        checkUploadTrue = checkUploadTrue.split("&");
+        checkUploadTrue = checkUploadTrue[0];
+        if(typeof checkUploadTrue && checkUploadTrue == "uploadImage=true"){
+            $('li.navEmpDashPage').removeClass('active');
+            $('.dashboardContainer').hide();
+
+            $('li.navMyAccount').addClass('active');
+            $('.myAccountContainer').show();
+
+            $('li.navAdminDashPage').removeClass('active');
+            $('.dashboardContainerAdmin').hide();
+
+            $('li.navAdminMyAccount').addClass('active');
+            $('.myAccountContainerAdmin').show();
+        }
 
 $('li.navAdminLogout').on('click', function(e){
     e.preventDefault();
@@ -540,7 +557,8 @@ $('.edit').on('click', function(){
 
     var tr = $("."+btnEdit[0]).parents("tr");
         
-    tr.find('span.glyphicon.glyphicon-edit').hide();
+    tr.find('span.glyphicon.glyphicon-edit').show();
+    tr.find('span.glyphicon.glyphicon-ok').hide();
     tr.find('input').show();
     el.hide();
     el.siblings('.save').show();  
@@ -571,13 +589,131 @@ $('.save').on('click', function(){
             dataType: 'json',
             success: function(response){
                 for(var data in response) {
-                    setInterval(loader.hide(), 3000);
+                   loader.hide();
                 }
             }
         });
 
     tr.find('input').hide();
+    tr.find('span.glyphicon.glyphicon-ok').show();
     el.hide();
+    el.siblings().show();
     el.siblings('.edit').show();
-
 });
+// set user to requirement list
+$('a.btn-setReqNewUser.btn').on('click',function(e){
+   e.preventDefault();
+   var selected = $(this).siblings('.setReqNewUser').val();
+
+    $.ajax({
+            url: baseUriDomain+'/conf/doctrine/requirements.repositoryManager.php',
+            type: 'GET',
+            data: {requirementsData: selected},
+            dataType: 'json',
+            success: function(response){
+                for(var data in response) {
+                    var create = response[data].create;
+                    for(var key in create){
+                        if(create[key] == true){
+                            $('tr.reatimeAdd').show();
+                        }
+                        // console.log("this is data "+);
+                    }
+                }
+            }
+        });
+});
+var lacking = $('table.lackOfReq').find('tbody tr td:last-child');
+    lacking.each(function(){
+    span = $(this).find('span.label.label-danger');
+        span.each(function(){
+           if($(this).html() == 1){
+              $(this).remove();
+           }
+        });
+    });
+$('span.printPage').on('click',function(e){
+   e.preventDefault();
+
+    w=window.open();
+        w.document.write($('.empLackOfRequirements').html());
+        w.print();
+    w.close();
+});
+$('.fileTopLoadIcon').on('click', function(e){
+     $('input#fileToUpload').trigger('click',function(e){
+          e.preventDefault();
+    });
+});
+
+ $('input#fileToUpload').on('change',function(){
+    var preview = document.querySelector('img.profilePicAccountPreview'); //selects the query named img
+    var file    = document.querySelector('input#fileToUpload').files[0]; //sames as here
+    var reader  = new FileReader();
+
+    reader.onloadend = function () {
+        preview.src = reader.result;
+        }
+
+    if (file) {
+        reader.readAsDataURL(file); //reads the data as a URL
+        $('input#fileToUpload').hide();
+        $('.fileTopLoadSave').show();
+
+        var myFormData = new FormData();
+        $('.fileTopLoadSave').on('click',function(e){
+            e.preventDefault();
+            $('img.loaderImage').show();
+            var userId = $(this).data('id');
+            var data = {
+                'name': file.name,
+                'size': file.size,
+                'type': file.type,
+                'lastModifiedToken': file.lastModified,
+                'user_id': userId
+            };
+            $.ajax({
+                url: baseUriDomain+'/conf/doctrine/media.repositoryManager.php',
+                type: 'GET',
+                data: {mediaData: data},
+                dataType: 'json',
+                success: function(response){
+                    console.log(response);
+                    for(var data in response) {
+                        if(response[data].media_upload == true){
+                            console.log(response[data].media_upload);
+                            $('#btn-uploadImage').trigger('click');
+                            
+                            // $('.navAdminMyAccount').addClass('active');
+                            // $('.myAccountContainerAdmin').show();
+                        }
+                    }
+                }
+            });
+        });
+    } else {
+    preview.src = "";
+    }
+});
+
+var btnRemoveNoti = $('.media-body').find('span.btn-remove');
+    btnRemoveNoti.on('click',function(e){
+        e.preventDefault();
+        var vm = $(this);
+        
+        var data = {
+               'id': vm.data('id'),
+               'table': vm.data('table')
+            };
+        $.ajax({
+                url: baseUriDomain+'/conf/doctrine/request.repositoryManager.php',
+                type: 'GET',
+                data: {requestData: data},
+                dataType: 'json',
+                success: function(response){
+                    console.log(response);
+                    vm.parents('.media.notification').remove();
+                }
+            });
+    
+    });

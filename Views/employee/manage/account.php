@@ -1,14 +1,22 @@
 <?php 
     require_once dirname(__FILE__).'\../../../Repository/RequestRepository.php';
-    // include_once dirname(__FILE__).'\../../../Repository/LogRepository.php';
+    include_once dirname(__FILE__).'\../../../Repository/MediaRepository.php';
     include_once dirname(__FILE__).'\../../../conf/connection.php';
 
     $db = new Database();
     $conn = $db->getConnection();  
     $requestRepository = new RequestRepository();
-    // $logRepository = new LogRepository();
+    $mediaRepository = new MediaRepository();
     $userRepository = new UserRepository();
 
+    //query of profile pic image
+    $ProfilePicImageAccount = "<img class='profilePicAccountPreview' src='../../Public/images/no-image.jpg'>";
+    $mid = $mediaRepository->findMediaById($_GET['id']);
+    foreach ($mid as $key => $value) {
+       if(count($value['user_id'])>0){
+           $ProfilePicImageAccount = "<img class='profilePicAccountPreview' src='../../Uploads/".$value['name']."'>";
+       }else{ $ProfilePicImageAccount = $ProfilePicImageAccount;}
+    }
 ?>
 <div class="myAccountContainer" hidden>
     <div class="headeradmin">
@@ -34,6 +42,15 @@
         </div>
         <div class="main">
             <div class="tab-content page">
+                <form action="../../../Helper/media_temp.php?type=employee&id=<?php echo $_GET['id'];?>" method="post" id = "uploadImageAccount" name="uploadImageAccount" enctype="multipart/form-data">
+                    <input type="file" name="pic" id='fileToUpload' data-filename = "image.jpg"/>
+                    <a href="#" class = "glyphicon glyphicon-upload fileTopLoadSave" data-id = <?php echo $_GET['id']; ?> ></a>
+                    <a href="#" class = "glyphicon glyphicon-camera fileTopLoadIcon" ></a>
+
+                    <img class = 'loaderImage' src = '../../../Public/images/loader.gif'>
+                    <button type="submit" name="btn-upload" id="btn-uploadImage">upload</button>
+                </form>
+
                 <form method = 'get' id = 'accountedit-form'>
                     <?php
                         $user = $userRepository->findUserById($_GET['id']);
@@ -41,7 +58,7 @@
                           $type = ($row['user_type'] == 1) ? "Admin" : "Employee";
                             echo "
                             <div class = 'pic'>
-                                <img class='profilePic' src='../../Public/images/no-image.jpg'><br><br>
+                                ".$ProfilePicImageAccount."
                             </div>
                             <div class ='details'>
                                 <span class = 'message'></span>
