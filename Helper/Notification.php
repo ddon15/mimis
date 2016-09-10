@@ -86,9 +86,9 @@ class Notification
     }
     public function getNotificationList(){
 
-        $query = "SELECT id, user_id, reason, dateCreated, 'overtime' as table_name, status FROM overtime
+        $query = "SELECT id, user_id, reason, dateCreated, overtime_start as 'start', overtime_end as 'end', 'overtime' as table_name, status FROM overtime
                   UNION
-                  SELECT id, user_id, reason, dateCreated, 'Leave' as table_name, status  FROM work_leave";
+                  SELECT id, user_id, reason, dateCreated, start_leave as 'start', end_leave as 'end', 'Leave' as table_name, status  FROM work_leave";
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();

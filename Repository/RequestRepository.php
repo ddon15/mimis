@@ -293,7 +293,7 @@ class RequestRepository
                                             $adminname = $admin['firstname']." ".$admin['lastname'];   
                                        }
                                     }
-                                    $message = "Hello ".$empname. " You have bee required to overtime on this schedule ".$data[5]['value'].". ".$adminname."[admin] already filed for your overtime schedule and automatically approved. Thanks.";
+                                    $message = "Hello ".$empname. " You have been required to overtime on this schedule ".$data[5]['value'].". ".$adminname."[admin] already filed for your overtime schedule and automatically approved. Thanks.";
                                     
                                     $sms = new SendSMS();
                                 

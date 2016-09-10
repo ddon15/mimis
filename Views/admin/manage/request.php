@@ -101,6 +101,9 @@
                     <div class = 'requested'>
                     <b>Requested :</b>  ".$value['table_name']."
                     </div>
+                     <div class = 'requested_span'>
+                    <b>Start ".$value['table_name'].":</b>  ".$value['start']." <b> End ".$value['table_name'].":</b>  ".$value['end']."
+                    </div>
                     <div class = 'dateReq'>
                     <b>Date Requested :</b> ".$value['dateCreated']."
                     </div>
